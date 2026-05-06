@@ -172,12 +172,12 @@ def sort_files(df: pd.DataFrame, nifti_map: dict, label_dirs: dict) -> dict:
         summary[label] += 1
 
     if not_found:
-        print(f"\n  ⚠️  Could not match {len(not_found)} Image IDs to files.")
+        print(f"\n   Could not match {len(not_found)} Image IDs to files.")
         print(f"      First 10: {not_found[:10]}")
         print(f"      Normal if you haven't downloaded all ADNI images yet.")
 
     if skipped:
-        print(f"\n  ℹ️   Skipped {len(skipped)} already-existing files (re-run safe).")
+        print(f"\n   Skipped {len(skipped)} already-existing files (re-run safe).")
 
     return summary
 
@@ -198,9 +198,7 @@ def print_summary(summary: dict, output_dir: str):
 def main():
     args = parse_args()
 
-    print("=" * 55)
     print(" Alzheimer's MRI Preprocessing - Step 1: Compile & Sort")
-    print("=" * 55)
 
     df         = load_metadata(args.csv)
     nifti_map  = discover_nifti_files(args.nifti_dir)
