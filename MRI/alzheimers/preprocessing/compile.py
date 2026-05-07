@@ -1,13 +1,31 @@
 """
-compile.py - step 1 of preprocessing pipeline for Alzheimer's MRI data
+compile.py - Step 1 of Alzheimer's MRI Preprocessing Pipeline
 
-what it does:
-reads ADNI metadata CSV files
-matches each NIfTI file to its class label (CN, MCI, AD)
-copies each file into a new sorted subdirectory (CN, MCI, AD) in data/sorted
-generates summary of no.of files sorted per class
+What it does:
+    Reads ADNI_NIfTI.csv 
+    Reads ADNIMERGE.csv   
+    Joins them on Subject ID to get a label for each image you downloaded
+    Matches each NIfTI file to its label (CN, MCI, AD)
+    Copies files into data/sorted/{AD,MCI,CN}/
+    Prints a summary
 
-metadata source: ADNIMERGE.csv
+Why two CSVs:
+    ADNI_NIfTI.csv knows WHICH images you downloaded and their Image IDs
+    ADNIMERGE.csv  knows the DIAGNOSIS for each subject
+    Neither alone is sufficient — joining them gives label per image
+
+Expected file locations:
+    mri/alzheimers/data/raw/collection.csv   ← rename ADNI_NIfTI.csv to this
+    mri/alzheimers/data/raw/metadata.csv     ← ADNIMERGE.csv
+    mri/alzheimers/data/raw/*.nii.gz         ← converted NIfTI files
+
+ADNIMERGE label normalisation:
+    CN        → CN
+    MCI       → MCI
+    LMCI      → MCI
+    EMCI      → MCI
+    Dementia  → AD
+    AD        → AD
 """
 
 import os
@@ -16,18 +34,21 @@ import shutil
 import pandas as pd
 from pathlib import Path
 
-DEFAULT_CSV_PATH   = "mri/alzheimers/data/raw/metadata.csv"
-DEFAULT_NIFTI_DIR  = "mri/alzheimers/data/raw"
-DEFAULT_OUTPUT_DIR = "mri/alzheimers/data/sorted"
+DEFAULT_COLLECTION_CSV = "mri/alzheimers/data/raw/collection.csv"
+DEFAULT_ADNIMERGE_CSV  = "mri/alzheimers/data/raw/metadata.csv"
+DEFAULT_NIFTI_DIR      = "mri/alzheimers/data/raw"
+DEFAULT_OUTPUT_DIR     = "mri/alzheimers/data/sorted"
 
 VALID_LABELS = ["AD", "MCI", "CN"]
 
-# ADNIMERGE column names
-COL_SUBJECT_ID = "PTID"
-COL_IMAGE_ID   = "IMAGEUID"
-COL_LABEL      = "DX_bl"
+# ADNI_NIfTI.csv columns
+COL_COLLECTION_IMAGE_ID  = "Image Data ID"   # e.g. I238622
+COL_COLLECTION_SUBJECT   = "Subject"         # e.g. 002_S_0295
 
-# Map ADNIMERGE diagnosis strings → pipeline labels
+# ADNIMERGE.csv columns
+COL_MERGE_SUBJECT        = "PTID"            # e.g. 002_S_0295
+COL_MERGE_LABEL          = "DX_bl"           # baseline diagnosis
+
 LABEL_MAP = {
     "CN":       "CN",
     "MCI":      "MCI",
@@ -40,80 +61,107 @@ LABEL_MAP = {
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Sort ADNI NIfTI files into class based subdirectories"
+        description="Sort ADNI NIfTI files into class-based subdirectories."
     )
-    parser.add_argument("--csv",        type=str, default=DEFAULT_CSV_PATH)
-    parser.add_argument("--nifti_dir",  type=str, default=DEFAULT_NIFTI_DIR)
-    parser.add_argument("--output_dir", type=str, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--collection_csv", type=str, default=DEFAULT_COLLECTION_CSV,
+                        help="Path to ADNI_NIfTI.csv (IDA collection export).")
+    parser.add_argument("--adnimerge_csv",  type=str, default=DEFAULT_ADNIMERGE_CSV,
+                        help="Path to ADNIMERGE.csv.")
+    parser.add_argument("--nifti_dir",      type=str, default=DEFAULT_NIFTI_DIR)
+    parser.add_argument("--output_dir",     type=str, default=DEFAULT_OUTPUT_DIR)
     return parser.parse_args()
 
 
-def load_metadata(csv_path: str) -> pd.DataFrame:
-    print(f"\n[1/5] Loading metadata from: {csv_path}")
-
+def load_collection(csv_path: str) -> pd.DataFrame:
+    print(f"\n[1/6] Loading collection CSV: {csv_path}")
     if not os.path.exists(csv_path):
         raise FileNotFoundError(
-            f"CSV not found at '{csv_path}'.\n"
-            f"Download ADNIMERGE.csv from IDA portal:\n"
-            f"  Download → Study Data → ADNIMERGE\n"
-            f"Place it at:\n"
-            f"  R26-DS-015/mri/alzheimers/data/raw/metadata.csv"
+            f"Collection CSV not found at '{csv_path}'.\n"
+            f"Rename your ADNI_NIfTI.csv to collection.csv and place it at:\n"
+            f"  R26-DS-015/mri/alzheimers/data/raw/collection.csv"
         )
-
     df = pd.read_csv(csv_path)
-    print(f"      Metadata loaded. Total records: {len(df)}")
-    print(f"      Columns: {list(df.columns)}")
+    print(f"      Loaded {len(df)} rows.")
 
-    # Verify required columns exist
-    for col in [COL_SUBJECT_ID, COL_IMAGE_ID, COL_LABEL]:
+    for col in [COL_COLLECTION_IMAGE_ID, COL_COLLECTION_SUBJECT]:
         if col not in df.columns:
             raise ValueError(
-                f"Column '{col}' not found in CSV.\n"
-                f"Available columns: {list(df.columns)}\n"
-                f"Update the COL_* constants at the top of this script."
+                f"Column '{col}' not found in collection CSV.\n"
+                f"Available: {list(df.columns)}"
             )
 
-    # Normalise IMAGEUID to string so we can build "I<number>" keys
-    df[COL_IMAGE_ID] = df[COL_IMAGE_ID].apply(
-        lambda x: f"I{int(float(x))}" if pd.notna(x) else None
+    # Normalise Image ID — strip quotes/whitespace, ensure "I" prefix
+    df[COL_COLLECTION_IMAGE_ID] = df[COL_COLLECTION_IMAGE_ID].astype(str).str.strip().str.strip('"')
+    df[COL_COLLECTION_SUBJECT]  = df[COL_COLLECTION_SUBJECT].astype(str).str.strip().str.strip('"')
+    return df[[COL_COLLECTION_IMAGE_ID, COL_COLLECTION_SUBJECT]]
+
+
+def load_adnimerge(csv_path: str) -> pd.DataFrame:
+    print(f"\n[2/6] Loading ADNIMERGE: {csv_path}")
+    if not os.path.exists(csv_path):
+        raise FileNotFoundError(
+            f"ADNIMERGE not found at '{csv_path}'.\n"
+            f"Download ADNIMERGE.csv from IDA → Download → Study Data → ADNIMERGE\n"
+            f"Place it at: R26-DS-015/mri/alzheimers/data/raw/metadata.csv"
+        )
+    df = pd.read_csv(csv_path, low_memory=False)
+    print(f"      Loaded {len(df)} rows.")
+
+    for col in [COL_MERGE_SUBJECT, COL_MERGE_LABEL]:
+        if col not in df.columns:
+            raise ValueError(
+                f"Column '{col}' not found in ADNIMERGE.\n"
+                f"Available: {list(df.columns)}"
+            )
+
+    df[COL_MERGE_SUBJECT] = df[COL_MERGE_SUBJECT].astype(str).str.strip()
+
+    # Keep only one row per subject (baseline) — ADNIMERGE has multiple visits
+    df = df[[COL_MERGE_SUBJECT, COL_MERGE_LABEL]].drop_duplicates(
+        subset=COL_MERGE_SUBJECT, keep="first"
     )
-
-    # Normalise labels using LABEL_MAP
-    original_count = len(df)
-    df["_label_normalised"] = df[COL_LABEL].map(LABEL_MAP)
-    df = df[df["_label_normalised"].isin(VALID_LABELS)].copy()
-    dropped = original_count - len(df)
-    if dropped > 0:
-        print(f"      Dropped {dropped} rows with unrecognised or missing labels.")
-    print(f"      Valid rows after label normalisation: {len(df)}")
-
-    # Drop rows where IMAGEUID is null (some ADNIMERGE rows have no image)
-    before = len(df)
-    df = df[df[COL_IMAGE_ID].notna()].copy()
-    nulls = before - len(df)
-    if nulls > 0:
-        print(f"      Dropped {nulls} rows with missing IMAGEUID.")
-
-    print(f"      Final usable rows: {len(df)}")
+    print(f"      Unique subjects: {len(df)}")
     return df
 
 
+def build_image_label_map(collection: pd.DataFrame, adnimerge: pd.DataFrame) -> pd.DataFrame:
+    print(f"\n[3/6] Joining collection with ADNIMERGE on Subject ID...")
+
+    merged = collection.merge(
+        adnimerge,
+        left_on=COL_COLLECTION_SUBJECT,
+        right_on=COL_MERGE_SUBJECT,
+        how="left"
+    )
+
+    # Normalise labels
+    merged["_label"] = merged[COL_MERGE_LABEL].map(LABEL_MAP)
+
+    before = len(merged)
+    merged = merged[merged["_label"].isin(VALID_LABELS)].copy()
+    dropped = before - len(merged)
+
+    if dropped > 0:
+        print(f"      Dropped {dropped} rows with missing/unrecognised diagnosis.")
+    print(f"      Matched {len(merged)} images with valid labels.")
+
+    # Show class distribution
+    dist = merged["_label"].value_counts()
+    for label in VALID_LABELS:
+        print(f"        {label:<6}: {dist.get(label, 0)}")
+
+    return merged[[COL_COLLECTION_IMAGE_ID, "_label"]]
+
+
 def discover_nifti_files(nifti_dir: str) -> dict:
-    print(f"\n[2/5] Scanning for NIfTI files in: {nifti_dir}")
-
+    print(f"\n[4/6] Scanning NIfTI files in: {nifti_dir}")
     if not os.path.exists(nifti_dir):
-        raise FileNotFoundError(
-            f"Directory not found: '{nifti_dir}'.\n"
-            f"Place raw .nii/.nii.gz files in:\n"
-            f"  R26-DS-015/mri/alzheimers/data/raw/"
-        )
+        raise FileNotFoundError(f"Directory not found: '{nifti_dir}'")
 
-    nifti_map  = {}
-    extensions = (".nii", ".nii.gz")
-
+    nifti_map = {}
     for root, _, files in os.walk(nifti_dir):
         for filename in files:
-            if any(filename.endswith(ext) for ext in extensions):
+            if filename.endswith(".nii.gz") or filename.endswith(".nii"):
                 filepath = Path(root) / filename
                 stem     = filename.replace(".nii.gz", "").replace(".nii", "")
                 parts    = stem.split("_")
@@ -132,7 +180,7 @@ def discover_nifti_files(nifti_dir: str) -> dict:
 
 
 def create_output_dirs(output_dir: str) -> dict:
-    print(f"\n[3/5] Creating output directories under: {output_dir}")
+    print(f"\n[5/6] Creating output directories under: {output_dir}")
     label_dirs = {}
     for label in VALID_LABELS:
         label_path = Path(output_dir) / label
@@ -142,16 +190,16 @@ def create_output_dirs(output_dir: str) -> dict:
     return label_dirs
 
 
-def sort_files(df: pd.DataFrame, nifti_map: dict, label_dirs: dict) -> dict:
-    print(f"\n[4/5] Sorting files...")
+def sort_files(image_label_map: pd.DataFrame, nifti_map: dict, label_dirs: dict) -> dict:
+    print(f"\n[6/6] Sorting files...")
 
     summary   = {label: 0 for label in VALID_LABELS}
     not_found = []
     skipped   = []
 
-    for _, row in df.iterrows():
-        image_id = str(row[COL_IMAGE_ID]).strip()        # already "I<number>"
-        label    = str(row["_label_normalised"]).strip()  # normalised label
+    for _, row in image_label_map.iterrows():
+        image_id = str(row[COL_COLLECTION_IMAGE_ID]).strip()
+        label    = str(row["_label"]).strip()
 
         if label not in VALID_LABELS:
             continue
@@ -172,38 +220,43 @@ def sort_files(df: pd.DataFrame, nifti_map: dict, label_dirs: dict) -> dict:
         summary[label] += 1
 
     if not_found:
-        print(f"\n   Could not match {len(not_found)} Image IDs to files.")
+        print(f"\n    Could not find NIfTI files for {len(not_found)} Image IDs.")
         print(f"      First 10: {not_found[:10]}")
-        print(f"      Normal if you haven't downloaded all ADNI images yet.")
+        print(f"      These images may not have been downloaded yet.")
 
     if skipped:
-        print(f"\n   Skipped {len(skipped)} already-existing files (re-run safe).")
+        print(f"\n  Skipped {len(skipped)} already-existing files (re-run safe).")
 
     return summary
 
 
 def print_summary(summary: dict, output_dir: str):
-    print(f"\n[5/5] Sorting complete. Summary:")
-    print(f"      {'─' * 30}")
+    print(f"\n{'-' * 35}")
+    print(f"  Sorting Complete")
+    print(f"  {'─' * 35}")
     total = 0
     for label, count in summary.items():
-        print(f"      {label:<6} : {count} files")
+        print(f"  {label:<6} : {count} files")
         total += count
-    print(f"      {'─' * 30}")
-    print(f"      Total  : {total} files")
-    print(f"\n      Output: {os.path.abspath(output_dir)}")
-    print(f"\n      Next step: run register.py\n")
+    print(f"  {'─' * 35}")
+    print(f"  Total  : {total} files")
+    print(f"\n  Output : {os.path.abspath(output_dir)}")
+    print(f"\n  Step 2 : run register.py\n")
 
 
 def main():
     args = parse_args()
 
-    print(" Alzheimer's MRI Preprocessing - Step 1: Compile & Sort")
+    print("-" * 35)
+    print("  Alzheimer's MRI Preprocessing - Step 1: Compile & Sort | Complete")
+    print("-" * 35)
 
-    df         = load_metadata(args.csv)
-    nifti_map  = discover_nifti_files(args.nifti_dir)
-    label_dirs = create_output_dirs(args.output_dir)
-    summary    = sort_files(df, nifti_map, label_dirs)
+    collection     = load_collection(args.collection_csv)
+    adnimerge      = load_adnimerge(args.adnimerge_csv)
+    image_label_map = build_image_label_map(collection, adnimerge)
+    nifti_map      = discover_nifti_files(args.nifti_dir)
+    label_dirs     = create_output_dirs(args.output_dir)
+    summary        = sort_files(image_label_map, nifti_map, label_dirs)
     print_summary(summary, args.output_dir)
 
 
