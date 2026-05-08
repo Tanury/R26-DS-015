@@ -1,0 +1,15 @@
+# Synthetic smoke-test config only. Do not use this for final Phase 1 metrics.
+_base_: configs/training.yaml
+
+data:
+  synthetic_fallback: true
+  synthetic_subjects_per_class: 6
+  synthetic_channels: 19
+  synthetic_samples: 30000
+  max_train_epochs_per_subject: 12
+  max_eval_epochs_per_subject: null
+  fail_on_skipped_subjects: false
+
+training:
+  epochs: 2
+  batch_size: 8

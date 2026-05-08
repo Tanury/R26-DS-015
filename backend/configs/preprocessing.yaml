@@ -1,0 +1,68 @@
+project:
+  name: eeg_ad_hc_phase1
+  seed: 42
+
+paths:
+  dataset_root: data/raw/openneuro_ds004504
+  labels_dir: data/labels
+  splits_dir: data/splits
+  processed_epochs_dir: data/processed/epochs
+  preprocessing_logs_dir: data/processed/preprocessing_logs
+  figures_dir: outputs/figures
+
+dataset:
+  name: OpenNeuro ds004504
+  task: resting-state closed-eyes EEG
+  ad_codes: ["A", "AD", "Alzheimer", "Alzheimer's disease"]
+  hc_codes: ["C", "HC", "Control", "Healthy Control"]
+  excluded_codes: ["F", "FTD", "Frontotemporal Dementia"]
+
+preprocessing:
+  low_freq_hz: 0.5
+  high_freq_hz: 40.0
+  target_sampling_rate_hz: 250
+  epoch_length_seconds: 4.0
+  epoch_overlap: 0.5
+  montage: standard_1020
+  channel_selection: selected
+  selected_channels:
+    - Fp1
+    - Fp2
+    - F3
+    - F4
+    - C3
+    - C4
+    - P3
+    - P4
+    - O1
+    - O2
+    - F7
+    - F8
+    - T3
+    - T4
+    - T5
+    - T6
+    - Fz
+    - Cz
+    - Pz
+  channel_aliases:
+    T3: T7
+    T4: T8
+    T5: P7
+    T6: P8
+  min_clean_epochs: 5
+  amplitude_reject_uv: 200.0
+  use_ica: true
+  ica_n_components: auto
+  ica_random_state: 42
+  ica_max_iter: 200
+  ica_frontal_corr_threshold: 0.35
+  ica_max_auto_exclude: 2
+  ica_exclude_components: []
+  feature_transform: raw_eeg_tensor
+  use_stft: false
+  use_cwt: false
+  stft_window_seconds: 1.0
+  stft_overlap: 0.5
+  cwt_frequencies_hz: [4, 8, 13, 30]
+  plot_seconds: 10.0

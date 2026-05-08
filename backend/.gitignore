@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE / OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Raw EEG / BIDS downloads
+data/raw/
+*.edf
+*.bdf
+*.fif
+*.set
+*.vhdr
+*.eeg
+*.vmrk
+
+# Generated data artifacts
+data/processed/
+data/demo_samples/
+data/labels/
+data/splits/
+
+# Model artifacts
+models/checkpoints/
+models/final/
+models/embeddings/
+*.pth
+*.pt
+*.ckpt
+*.onnx
+
+# Generated outputs
+outputs/
+
+# Logs and local runtime files
+*.log
+logs/
+tmp/
+temp/
+

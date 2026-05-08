@@ -1,0 +1,60 @@
+# Inherits all settings from preprocessing.yaml.
+# Keys defined here override the base. Do not duplicate preprocessing keys here.
+_base_: configs/preprocessing.yaml
+
+project:
+  name: eeg_ad_hc_phase1
+  seed: 42
+
+data:
+  n_splits: 5
+  active_fold: 2
+  label_file: data/labels/ad_hc_subjects.csv
+  split_file: data/splits/subject_level_5fold.csv
+  synthetic_fallback: false
+  synthetic_subjects_per_class: 6
+  synthetic_channels: 19
+  synthetic_samples: 30000
+  max_train_epochs_per_subject: 60
+  max_eval_epochs_per_subject: null
+  fail_on_skipped_subjects: true
+  recreate_splits_on_train: true
+
+paths:
+  checkpoints_dir: models/checkpoints
+  final_model_dir: models/final
+  embeddings_dir: models/embeddings
+  reports_dir: outputs/reports
+  logs_dir: outputs/logs
+
+model:
+  name: EEGNet-Baseline
+  version: phase1_eegnet_v1
+  embedding_dim: 256
+  dropout: 0.6
+  temporal_kernel: 64
+  f1: 8
+  d: 2
+  f2: 16
+
+training:
+  batch_size: 16
+  epochs: 40
+  learning_rate: 0.0005
+  weight_decay: 0.001
+  enable_early_stopping: true
+  early_stopping_patience: 7
+  lr_patience: 2
+  use_class_weights: true
+  label_smoothing: 0.05
+  grad_clip_norm: 1.0
+  num_workers: 0
+  device: auto
+
+inference:
+  decision_threshold: 0.5
+  use_calibrated_threshold: true
+  threshold_objective: balanced_accuracy
+  uncertainty_margin: 0.05
+  low_risk_max: 0.39
+  medium_risk_max: 0.69
