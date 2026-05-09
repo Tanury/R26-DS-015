@@ -1,0 +1,10 @@
+model_name,train_acc,val_acc,gap,val_f1_dem,val_recall_dem,val_auc
+Audio_LogisticRegression,1.0,1.0,0.0,1.0,1.0,1.0
+Audio_GradientBoosting,1.0,1.0,0.0,1.0,1.0,1.0
+Audio_ExtraTrees,1.0,1.0,0.0,1.0,1.0,1.0
+Audio_XGBoost_Tuned,1.0,1.0,0.0,1.0,1.0,1.0
+Audio_XGBoost,1.0,1.0,0.0,1.0,1.0,1.0
+Audio_Stacking_Ensemble,1.0,1.0,0.0,1.0,1.0,1.0
+Audio_RandomForest,1.0,0.9879518072289156,0.012048192771084376,0.9894736842105263,1.0,0.9988179669030732
+Audio_Voting_Ensemble,1.0,0.9879518072289156,0.012048192771084376,0.9894736842105263,1.0,1.0
+Audio_RBF_SVM,1.0,0.9397590361445783,0.06024096385542166,0.946236559139785,0.9361702127659575,0.9934988179669031

@@ -1,0 +1,39 @@
+
+FINAL EVALUATION AND EXPLAINABILITY SUMMARY
+============================================
+
+Research Title:
+Speech-Based Dementia Risk Detection Using the DementiaBank Pitt Cookie Theft Dataset
+
+Research Scope:
+This research evaluates transcript-only and audio-only dementia classification models separately.
+No multimodal fusion is performed in this phase.
+
+Dataset:
+DementiaBank Pitt Cookie Theft Corpus
+
+Classes:
+0 = Control
+1 = Dementia
+
+Model Comparison:
+     model_type  accuracy  precision_dementia  recall_dementia  f1_dementia  f1_weighted  auc_roc  num_test_samples  num_correct  num_wrong
+Transcript-only  0.698795                 0.8         0.608696     0.691358     0.697833 0.766745                83           58         25
+     Audio-only  1.000000                 1.0         1.000000     1.000000     1.000000 1.000000                83           83          0
+
+Best Model Based on F1, Recall, and AUC:
+Audio-only
+
+Interpretation:
+Accuracy alone is not sufficient for this screening-style task. Dementia-class recall,
+Dementia F1-score, and AUC-ROC should be considered because the model should avoid
+missing possible dementia-pattern samples.
+
+Explainability:
+The transcript model is explained using TF-IDF feature influence or model coefficients.
+The audio model is explained using feature importance or coefficient magnitude where available.
+These explanations are statistical model explanations and must not be interpreted as clinical proof.
+
+Clinical/Research Disclaimer:
+This output is for research-based dementia risk screening only. It is not a clinical diagnosis.
+A clinician must make any medical interpretation or diagnosis.

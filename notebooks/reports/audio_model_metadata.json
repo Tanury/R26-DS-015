@@ -1,0 +1,135 @@
+{
+  "model_name": "Audio_LogisticRegression",
+  "task": "DementiaBank Pitt Cookie Theft audio classification",
+  "input_type": "acoustic features (40 MFCCs, delta, delta-delta, mel, chroma, tonnetz, pause, pitch)",
+  "classes": {
+    "0": "Control",
+    "1": "Dementia"
+  },
+  "num_features": 319,
+  "anti_overfitting_controls": [
+    "RF/ET: max_depth=15/12, min_samples_leaf=4/5, max_features=sqrt",
+    "XGB: 200 trees, reg_alpha=0.5, reg_lambda=2.0, min_child_weight=5",
+    "GBM: 200 trees, min_samples_leaf=8, min_samples_split=15",
+    "LR/SVM: C=1.0 (was 10.0)",
+    "Stacking meta-learner LR: C=1.0 (was 5.0)",
+    "SelectKBest k=60 (was 80)",
+    "GridSearch tuned on X_train only",
+    "Training accuracy reported via CV, not on training data directly"
+  ],
+  "cv_train_accuracy": 1.0,
+  "test_metrics": {
+    "accuracy": 1.0,
+    "precision_dem": 1.0,
+    "recall_dem": 1.0,
+    "f1_dem": 1.0,
+    "f1_weighted": 1.0,
+    "auc_roc": 1.0
+  },
+  "cv_summary": {
+    "accuracy": {
+      "mean": 1.0,
+      "std": 0.0
+    },
+    "precision": {
+      "mean": 1.0,
+      "std": 0.0
+    },
+    "recall": {
+      "mean": 1.0,
+      "std": 0.0
+    },
+    "f1": {
+      "mean": 1.0,
+      "std": 0.0
+    },
+    "roc_auc": {
+      "mean": 1.0,
+      "std": 0.0
+    }
+  },
+  "validation_results": [
+    {
+      "model_name": "Audio_LogisticRegression",
+      "train_acc": 1.0,
+      "val_acc": 1.0,
+      "gap": 0.0,
+      "val_f1_dem": 1.0,
+      "val_recall_dem": 1.0,
+      "val_auc": 1.0
+    },
+    {
+      "model_name": "Audio_GradientBoosting",
+      "train_acc": 1.0,
+      "val_acc": 1.0,
+      "gap": 0.0,
+      "val_f1_dem": 1.0,
+      "val_recall_dem": 1.0,
+      "val_auc": 1.0
+    },
+    {
+      "model_name": "Audio_ExtraTrees",
+      "train_acc": 1.0,
+      "val_acc": 1.0,
+      "gap": 0.0,
+      "val_f1_dem": 1.0,
+      "val_recall_dem": 1.0,
+      "val_auc": 1.0
+    },
+    {
+      "model_name": "Audio_XGBoost_Tuned",
+      "train_acc": 1.0,
+      "val_acc": 1.0,
+      "gap": 0.0,
+      "val_f1_dem": 1.0,
+      "val_recall_dem": 1.0,
+      "val_auc": 1.0
+    },
+    {
+      "model_name": "Audio_XGBoost",
+      "train_acc": 1.0,
+      "val_acc": 1.0,
+      "gap": 0.0,
+      "val_f1_dem": 1.0,
+      "val_recall_dem": 1.0,
+      "val_auc": 1.0
+    },
+    {
+      "model_name": "Audio_Stacking_Ensemble",
+      "train_acc": 1.0,
+      "val_acc": 1.0,
+      "gap": 0.0,
+      "val_f1_dem": 1.0,
+      "val_recall_dem": 1.0,
+      "val_auc": 1.0
+    },
+    {
+      "model_name": "Audio_RandomForest",
+      "train_acc": 1.0,
+      "val_acc": 0.9879518072289156,
+      "gap": 0.012048192771084376,
+      "val_f1_dem": 0.9894736842105263,
+      "val_recall_dem": 1.0,
+      "val_auc": 0.9988179669030732
+    },
+    {
+      "model_name": "Audio_Voting_Ensemble",
+      "train_acc": 1.0,
+      "val_acc": 0.9879518072289156,
+      "gap": 0.012048192771084376,
+      "val_f1_dem": 0.9894736842105263,
+      "val_recall_dem": 1.0,
+      "val_auc": 1.0
+    },
+    {
+      "model_name": "Audio_RBF_SVM",
+      "train_acc": 1.0,
+      "val_acc": 0.9397590361445783,
+      "gap": 0.06024096385542166,
+      "val_f1_dem": 0.946236559139785,
+      "val_recall_dem": 0.9361702127659575,
+      "val_auc": 0.9934988179669031
+    }
+  ],
+  "clinical_note": "Research-based dementia risk screening only. Not a clinical diagnosis."
+}

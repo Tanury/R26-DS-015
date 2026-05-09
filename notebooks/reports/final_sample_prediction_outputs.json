@@ -1,0 +1,60 @@
+[
+  {
+    "input_metadata": {
+      "file_id": "183-3",
+      "model_type": "Transcript-only",
+      "input_type": "CHAT transcript participant speech",
+      "task": "Cookie Theft picture description",
+      "dataset": "DementiaBank Pitt Corpus"
+    },
+    "prediction": {
+      "predicted_class": "Control",
+      "risk_level": "Low",
+      "confidence": 68.78,
+      "probabilities": {
+        "Control": 68.78,
+        "Dementia": 31.22
+      }
+    },
+    "explainability": {
+      "explanation_type": "TF-IDF word/phrase influence",
+      "possible_language_markers": [
+        "lexical diversity",
+        "word usage patterns",
+        "description completeness",
+        "repetition and hesitation markers"
+      ]
+    },
+    "clinical_note": "This output is for research-based dementia risk screening only. It is not a clinical diagnosis."
+  },
+  {
+    "input_metadata": {
+      "file_id": "183-3",
+      "model_type": "Audio-only",
+      "input_type": "audio-derived acoustic features",
+      "task": "Cookie Theft picture description",
+      "dataset": "DementiaBank Pitt Corpus"
+    },
+    "prediction": {
+      "predicted_class": "Dementia",
+      "risk_level": "High",
+      "confidence": 97.82,
+      "probabilities": {
+        "Control": 2.18,
+        "Dementia": 97.82
+      }
+    },
+    "explainability": {
+      "explanation_type": "audio feature importance",
+      "possible_acoustic_markers": [
+        "pause ratio",
+        "speech ratio",
+        "MFCC patterns",
+        "energy",
+        "pitch",
+        "spectral features"
+      ]
+    },
+    "clinical_note": "This output is for research-based dementia risk screening only. It is not a clinical diagnosis."
+  }
+]

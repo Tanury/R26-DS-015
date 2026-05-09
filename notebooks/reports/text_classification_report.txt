@@ -1,0 +1,10 @@
+Best model: LR_Combined
+
+              precision    recall  f1-score   support
+
+     Control       0.62      0.81      0.71        37
+    Dementia       0.80      0.61      0.69        46
+
+    accuracy                           0.70        83
+   macro avg       0.71      0.71      0.70        83
+weighted avg       0.72      0.70      0.70        83

@@ -1,0 +1,16 @@
+pandas
+numpy
+scikit-learn
+matplotlib
+joblib
+tqdm
+librosa
+soundfile
+audioread
+jupyter
+notebook
+streamlit
+fastapi
+uvicorn[standard]
+requests
+gradio

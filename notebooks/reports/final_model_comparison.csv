@@ -1,0 +1,3 @@
+model_type,accuracy,precision_dementia,recall_dementia,f1_dementia,f1_weighted,auc_roc,num_test_samples,num_correct,num_wrong
+Transcript-only,0.6987951807228916,0.8,0.6086956521739131,0.691358024691358,0.6978327252364579,0.7667450058754407,83,58,25
+Audio-only,1.0,1.0,1.0,1.0,1.0,1.0,83,83,0

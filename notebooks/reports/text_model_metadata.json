@@ -1,0 +1,117 @@
+{
+  "model_name": "LR_Combined",
+  "task": "DementiaBank Pitt Cookie Theft transcript classification",
+  "input_type": "CHAT transcript participant speech",
+  "feature_strategy": "Word TF-IDF (1-2gram, min_df=3, max_df=0.90, max_features=4000) + Char TF-IDF (3-4gram, min_df=5, max_df=0.95, max_features=1200) + Linguistic features",
+  "anti_overfitting_controls": [
+    "Word TF-IDF: min_df=3, max_df=0.90, max_features=4000",
+    "Char TF-IDF: min_df=5, max_df=0.95, max_features=1200",
+    "RF: max_depth=12, min_samples_leaf=6, max_features=sqrt",
+    "XGB: max_depth=2, reg_alpha=1.0, reg_lambda=3.0, min_child_weight=7",
+    "LR/SVM: C=0.3 (stronger regularisation)",
+    "GBM: max_depth=2, min_samples_leaf=10, min_samples_split=20",
+    "GridSearch tuned on X_train only (no val/test leakage)",
+    "Training accuracy reported via CV, not on training data directly"
+  ],
+  "classes": {
+    "0": "Control",
+    "1": "Dementia"
+  },
+  "cv_train_accuracy": 0.8016243422557767,
+  "test_metrics": {
+    "accuracy": 0.6987951807228916,
+    "precision_dem": 0.8,
+    "recall_dem": 0.6086956521739131,
+    "f1_dem": 0.691358024691358,
+    "f1_weighted": 0.6978327252364579,
+    "auc_roc": 0.7667450058754407
+  },
+  "cv_summary": {
+    "accuracy": {
+      "mean": 0.7952713952713952,
+      "std": 0.025628827142748927
+    },
+    "precision": {
+      "mean": 0.8560099573257467,
+      "std": 0.03752346703758094
+    },
+    "recall": {
+      "mean": 0.7638477801268498,
+      "std": 0.010041726923499302
+    },
+    "f1": {
+      "mean": 0.8070696335477411,
+      "std": 0.021496762921171652
+    },
+    "roc_auc": {
+      "mean": 0.8635741823156323,
+      "std": 0.030291482168353822
+    }
+  },
+  "validation_results": [
+    {
+      "model_name": "XGB_Combined",
+      "train_acc": 0.9248704663212435,
+      "val_acc": 0.8072289156626506,
+      "gap": 0.11764155065859283,
+      "val_f1_dem": 0.8260869565217391,
+      "val_recall_dem": 0.8085106382978723,
+      "val_auc": 0.8552009456264775
+    },
+    {
+      "model_name": "Stacking_Ensemble",
+      "train_acc": 0.9455958549222798,
+      "val_acc": 0.7951807228915663,
+      "gap": 0.15041513203071355,
+      "val_f1_dem": 0.8172043010752689,
+      "val_recall_dem": 0.8085106382978723,
+      "val_auc": 0.8682033096926715
+    },
+    {
+      "model_name": "LR_Combined",
+      "train_acc": 0.8626943005181347,
+      "val_acc": 0.7831325301204819,
+      "gap": 0.07956177039765278,
+      "val_f1_dem": 0.8,
+      "val_recall_dem": 0.7659574468085106,
+      "val_auc": 0.8291962174940898
+    },
+    {
+      "model_name": "XGB_Tuned",
+      "train_acc": 0.927461139896373,
+      "val_acc": 0.7710843373493976,
+      "gap": 0.1563768025469754,
+      "val_f1_dem": 0.8,
+      "val_recall_dem": 0.8085106382978723,
+      "val_auc": 0.8534278959810875
+    },
+    {
+      "model_name": "SVM_Combined",
+      "train_acc": 0.9404145077720207,
+      "val_acc": 0.7710843373493976,
+      "gap": 0.1693301704226231,
+      "val_f1_dem": 0.7956989247311828,
+      "val_recall_dem": 0.7872340425531915,
+      "val_auc": 0.8670212765957448
+    },
+    {
+      "model_name": "GBM_Combined",
+      "train_acc": 0.9922279792746114,
+      "val_acc": 0.7710843373493976,
+      "gap": 0.22114364192521374,
+      "val_f1_dem": 0.7912087912087912,
+      "val_recall_dem": 0.7659574468085106,
+      "val_auc": 0.8498817966903074
+    },
+    {
+      "model_name": "RF_Combined",
+      "train_acc": 0.9818652849740933,
+      "val_acc": 0.7710843373493976,
+      "gap": 0.21078094762469568,
+      "val_f1_dem": 0.7816091954022989,
+      "val_recall_dem": 0.723404255319149,
+      "val_auc": 0.8817966903073287
+    }
+  ],
+  "clinical_note": "Research-based dementia risk screening only. Not a clinical diagnosis."
+}

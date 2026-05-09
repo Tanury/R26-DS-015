@@ -1,0 +1,45 @@
+{
+  "research_title": "Speech-Based Dementia Risk Detection Using the DementiaBank Pitt Cookie Theft Dataset",
+  "research_scope": "Non-fusion evaluation of transcript-only and audio-only models.",
+  "dataset": "DementiaBank Pitt Cookie Theft Corpus",
+  "classes": {
+    "0": "Control",
+    "1": "Dementia"
+  },
+  "models_evaluated": [
+    {
+      "model_type": "Transcript-only",
+      "accuracy": 0.6987951807228916,
+      "precision_dementia": 0.8,
+      "recall_dementia": 0.6086956521739131,
+      "f1_dementia": 0.691358024691358,
+      "f1_weighted": 0.6978327252364579,
+      "auc_roc": 0.7667450058754407,
+      "num_test_samples": 83,
+      "num_correct": 58,
+      "num_wrong": 25
+    },
+    {
+      "model_type": "Audio-only",
+      "accuracy": 1.0,
+      "precision_dementia": 1.0,
+      "recall_dementia": 1.0,
+      "f1_dementia": 1.0,
+      "f1_weighted": 1.0,
+      "auc_roc": 1.0,
+      "num_test_samples": 83,
+      "num_correct": 83,
+      "num_wrong": 0
+    }
+  ],
+  "best_model_by_validation_style_ranking": {
+    "model_type": "Audio-only",
+    "accuracy": 1.0,
+    "precision_dementia": 1.0,
+    "recall_dementia": 1.0,
+    "f1_dementia": 1.0,
+    "auc_roc": 1.0
+  },
+  "important_interpretation_note": "The best model is selected based on screening-oriented metrics such as dementia recall, F1-score, and AUC-ROC, not accuracy alone.",
+  "clinical_note": "This system is for research-based dementia risk screening only and is not a clinical diagnosis."
+}
