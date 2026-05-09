@@ -1,0 +1,55 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# IDE and OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs and local runtime output
+*.log
+logs/
+gradio_stdout.log
+gradio_stderr.log
+
+# Build and packaging artifacts
+build/
+dist/
+*.egg-info/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Local archives and generated bundles
+*.zip
+
+# Large trained model artifacts
+# Keep these out of Git unless the project intentionally versions model binaries.
+app/models/*.pkl
+saved_models/
+
+# Temporary data files
+*.tmp
+*.bak
+*.csv.tmp
