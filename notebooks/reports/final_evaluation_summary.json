@@ -21,25 +21,25 @@
     },
     {
       "model_type": "Audio-only",
-      "accuracy": 1.0,
-      "precision_dementia": 1.0,
-      "recall_dementia": 1.0,
-      "f1_dementia": 1.0,
-      "f1_weighted": 1.0,
-      "auc_roc": 1.0,
+      "accuracy": 0.6385542168674698,
+      "precision_dementia": 0.66,
+      "recall_dementia": 0.717391304347826,
+      "f1_dementia": 0.6875,
+      "f1_weighted": 0.6357573149741824,
+      "auc_roc": 0.7555816686251469,
       "num_test_samples": 83,
-      "num_correct": 83,
-      "num_wrong": 0
+      "num_correct": 53,
+      "num_wrong": 30
     }
   ],
   "best_model_by_validation_style_ranking": {
-    "model_type": "Audio-only",
-    "accuracy": 1.0,
-    "precision_dementia": 1.0,
-    "recall_dementia": 1.0,
-    "f1_dementia": 1.0,
-    "auc_roc": 1.0
+    "model_type": "Transcript-only",
+    "accuracy": 0.6987951807228916,
+    "precision_dementia": 0.8,
+    "recall_dementia": 0.6086956521739131,
+    "f1_dementia": 0.691358024691358,
+    "auc_roc": 0.7667450058754407
   },
-  "important_interpretation_note": "The best model is selected based on screening-oriented metrics such as dementia recall, F1-score, and AUC-ROC, not accuracy alone.",
+  "important_interpretation_note": "Audio metrics were regenerated after removing leaked label/metadata columns from the audio feature set.",
   "clinical_note": "This system is for research-based dementia risk screening only and is not a clinical diagnosis."
 }

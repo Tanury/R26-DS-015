@@ -1,135 +1,50 @@
 {
-  "model_name": "Audio_LogisticRegression",
+  "model_name": "Audio_LogisticRegression_NoLeakage",
   "task": "DementiaBank Pitt Cookie Theft audio classification",
-  "input_type": "acoustic features (40 MFCCs, delta, delta-delta, mel, chroma, tonnetz, pause, pitch)",
+  "input_type": "acoustic features with label/metadata leakage removed",
   "classes": {
     "0": "Control",
     "1": "Dementia"
   },
-  "num_features": 319,
-  "anti_overfitting_controls": [
-    "RF/ET: max_depth=15/12, min_samples_leaf=4/5, max_features=sqrt",
-    "XGB: 200 trees, reg_alpha=0.5, reg_lambda=2.0, min_child_weight=5",
-    "GBM: 200 trees, min_samples_leaf=8, min_samples_split=15",
-    "LR/SVM: C=1.0 (was 10.0)",
-    "Stacking meta-learner LR: C=1.0 (was 5.0)",
-    "SelectKBest k=60 (was 80)",
-    "GridSearch tuned on X_train only",
-    "Training accuracy reported via CV, not on training data directly"
+  "num_features": 318,
+  "removed_leakage_columns": [
+    "age",
+    "audio_error",
+    "audio_load_success",
+    "audio_path",
+    "file_id",
+    "label",
+    "label_id",
+    "label_id.1",
+    "mmse",
+    "num_samples",
+    "sample_rate",
+    "sex",
+    "transcript",
+    "word_count"
   ],
-  "cv_train_accuracy": 1.0,
+  "validation_metrics": {
+    "split": "validation",
+    "accuracy": 0.6265060240963856,
+    "precision_dem": 0.6818181818181818,
+    "recall_dem": 0.6382978723404256,
+    "f1_dem": 0.6593406593406593,
+    "f1_weighted": 0.6278194095061566,
+    "auc_roc": 0.6962174940898345,
+    "num_samples": 83,
+    "num_correct": 52,
+    "num_wrong": 31
+  },
   "test_metrics": {
-    "accuracy": 1.0,
-    "precision_dem": 1.0,
-    "recall_dem": 1.0,
-    "f1_dem": 1.0,
-    "f1_weighted": 1.0,
-    "auc_roc": 1.0
+    "accuracy": 0.6385542168674698,
+    "precision_dem": 0.66,
+    "recall_dem": 0.717391304347826,
+    "f1_dem": 0.6875,
+    "f1_weighted": 0.6357573149741824,
+    "auc_roc": 0.7555816686251469,
+    "num_test_samples": 83,
+    "num_correct": 53,
+    "num_wrong": 30
   },
-  "cv_summary": {
-    "accuracy": {
-      "mean": 1.0,
-      "std": 0.0
-    },
-    "precision": {
-      "mean": 1.0,
-      "std": 0.0
-    },
-    "recall": {
-      "mean": 1.0,
-      "std": 0.0
-    },
-    "f1": {
-      "mean": 1.0,
-      "std": 0.0
-    },
-    "roc_auc": {
-      "mean": 1.0,
-      "std": 0.0
-    }
-  },
-  "validation_results": [
-    {
-      "model_name": "Audio_LogisticRegression",
-      "train_acc": 1.0,
-      "val_acc": 1.0,
-      "gap": 0.0,
-      "val_f1_dem": 1.0,
-      "val_recall_dem": 1.0,
-      "val_auc": 1.0
-    },
-    {
-      "model_name": "Audio_GradientBoosting",
-      "train_acc": 1.0,
-      "val_acc": 1.0,
-      "gap": 0.0,
-      "val_f1_dem": 1.0,
-      "val_recall_dem": 1.0,
-      "val_auc": 1.0
-    },
-    {
-      "model_name": "Audio_ExtraTrees",
-      "train_acc": 1.0,
-      "val_acc": 1.0,
-      "gap": 0.0,
-      "val_f1_dem": 1.0,
-      "val_recall_dem": 1.0,
-      "val_auc": 1.0
-    },
-    {
-      "model_name": "Audio_XGBoost_Tuned",
-      "train_acc": 1.0,
-      "val_acc": 1.0,
-      "gap": 0.0,
-      "val_f1_dem": 1.0,
-      "val_recall_dem": 1.0,
-      "val_auc": 1.0
-    },
-    {
-      "model_name": "Audio_XGBoost",
-      "train_acc": 1.0,
-      "val_acc": 1.0,
-      "gap": 0.0,
-      "val_f1_dem": 1.0,
-      "val_recall_dem": 1.0,
-      "val_auc": 1.0
-    },
-    {
-      "model_name": "Audio_Stacking_Ensemble",
-      "train_acc": 1.0,
-      "val_acc": 1.0,
-      "gap": 0.0,
-      "val_f1_dem": 1.0,
-      "val_recall_dem": 1.0,
-      "val_auc": 1.0
-    },
-    {
-      "model_name": "Audio_RandomForest",
-      "train_acc": 1.0,
-      "val_acc": 0.9879518072289156,
-      "gap": 0.012048192771084376,
-      "val_f1_dem": 0.9894736842105263,
-      "val_recall_dem": 1.0,
-      "val_auc": 0.9988179669030732
-    },
-    {
-      "model_name": "Audio_Voting_Ensemble",
-      "train_acc": 1.0,
-      "val_acc": 0.9879518072289156,
-      "gap": 0.012048192771084376,
-      "val_f1_dem": 0.9894736842105263,
-      "val_recall_dem": 1.0,
-      "val_auc": 1.0
-    },
-    {
-      "model_name": "Audio_RBF_SVM",
-      "train_acc": 1.0,
-      "val_acc": 0.9397590361445783,
-      "gap": 0.06024096385542166,
-      "val_f1_dem": 0.946236559139785,
-      "val_recall_dem": 0.9361702127659575,
-      "val_auc": 0.9934988179669031
-    }
-  ],
   "clinical_note": "Research-based dementia risk screening only. Not a clinical diagnosis."
 }

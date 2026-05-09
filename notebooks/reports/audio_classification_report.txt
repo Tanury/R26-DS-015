@@ -1,10 +1,10 @@
-Best model: Audio_LogisticRegression
+Best model: Audio_LogisticRegression_NoLeakage
 
               precision    recall  f1-score   support
 
-     Control       1.00      1.00      1.00        37
-    Dementia       1.00      1.00      1.00        46
+     Control       0.61      0.54      0.57        37
+    Dementia       0.66      0.72      0.69        46
 
-    accuracy                           1.00        83
-   macro avg       1.00      1.00      1.00        83
-weighted avg       1.00      1.00      1.00        83
+    accuracy                           0.64        83
+   macro avg       0.63      0.63      0.63        83
+weighted avg       0.64      0.64      0.64        83

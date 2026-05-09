@@ -218,25 +218,28 @@ The dashboard supports three inference modes:
 - Upload audio: upload `.mp3`, `.wav`, `.m4a`, or `.flac`
 - Manual features: paste JSON feature values
 
-Expected sample output for `035-1`:
+Example no-leakage output for uploaded control file `006-4.mp3`:
 
 ```json
 {
   "input_metadata": {
-    "file_id": "035-1",
-    "input_type": "audio features"
+    "file_id": "006-4.mp3",
+    "input_type": "uploaded audio file"
   },
   "prediction": {
-    "predicted_class": "Dementia",
-    "risk_level": "High",
+    "predicted_class": "Control",
+    "risk_level": "Medium",
     "probabilities": {
-      "Control": 3.8,
-      "Dementia": 96.2
+      "Control": 55.58,
+      "Dementia": 44.42
     }
   },
   "clinical_note": "Research-based dementia risk screening only. Not a clinical diagnosis."
 }
 ```
+
+Note: earlier perfect audio metrics were caused by accidental target leakage from `label_id.1`.
+The current training configuration removes label and metadata columns before fitting.
 
 ## Option B: FastAPI Backend
 

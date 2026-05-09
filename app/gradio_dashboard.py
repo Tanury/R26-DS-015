@@ -57,15 +57,37 @@ def metric_value(summary: dict[str, Any], key: str) -> Any:
     return None
 
 
+def average_validation_metric(metadata: dict[str, Any], key: str) -> Any:
+    values = [
+        float(row[key])
+        for row in metadata.get("validation_results", [])
+        if row.get(key) is not None
+    ]
+    if not values:
+        return None
+    return sum(values) / len(values)
+
+
 def build_metric_strip() -> str:
-    summary = load_json(SUMMARY_PATH, {})
     metadata = load_json(METADATA_PATH, {})
-    model_name = metadata.get("model_name", "Audio model")
+    validation_results = metadata.get("validation_results", [])
+    validation_count = len(validation_results)
+    model_label = metadata.get("model_name", "Audio model")
+    if validation_count:
+        model_label = f"Audio models avg ({validation_count})"
+        accuracy = average_validation_metric(metadata, "val_acc")
+        recall = average_validation_metric(metadata, "val_recall_dem")
+        auc = average_validation_metric(metadata, "val_auc")
+    else:
+        validation_metrics = metadata.get("validation_metrics", {})
+        accuracy = validation_metrics.get("accuracy")
+        recall = validation_metrics.get("recall_dem")
+        auc = validation_metrics.get("auc_roc")
     cards = [
-        ("Model", model_name),
-        ("Test accuracy", as_percent(metric_value(summary, "accuracy"))),
-        ("Dementia recall", as_percent(metric_value(summary, "recall_dementia"))),
-        ("AUC-ROC", as_percent(metric_value(summary, "auc_roc"))),
+        ("Model", model_label),
+        ("Val accuracy", as_percent(accuracy)),
+        ("Dementia recall", as_percent(recall)),
+        ("AUC-ROC", as_percent(auc)),
     ]
     card_html = "".join(
         f"""
