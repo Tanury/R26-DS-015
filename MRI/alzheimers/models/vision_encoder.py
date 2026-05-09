@@ -54,10 +54,6 @@ Note on pretrained weights:
     Med3D pretrained weights (available on GitHub: Tencent/MedicalNet),
     you can load them via the resume mechanism in train.py.
 
-Place at:
-    R26-DS-015/mri/alzheimers/models/vision_encoder.py
-    (will move to shared/utils/ when Parkinson's + MS are added)
-
 Author: R26-DS-015 Vision Encoder
 """
 
