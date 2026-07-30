@@ -1,61 +1,23 @@
 """
 vision_encoder.py
-
-MRI Stream Vision Encoder — R26-DS-015
---------------------------------------
-Backbone: 3D ResNet-18 (MONAI)
+=================
+R26-DS-015 — Vision Encoder (Brain MRI)
+3D ResNet-18 backbone + MedicalNet pretrained weights support
 
 Architecture:
-    MRI Input (1, 96, 96, 96)
-            ↓
-    3D ResNet-18 backbone (MONAI)
-    — pretrained weights optional
-    — final FC layer removed
-            ↓
-    Global Average Pooling → 512-d feature vector
-            ↓
-    Modality Projection Head:
-        Linear(512 → 256) → BatchNorm → ReLU → Dropout(0.3)
-        Linear(256 → 128) → BatchNorm → ReLU
-            ↓
-    128-d modality embedding (z_mri)
-            ↓
-    Shared Projection Head:
-        Linear(128 → 256) → BatchNorm → ReLU → L2 Normalize
-            ↓
-    256-d z_img  ← forwarded to fusion engine (Aarabhi)
-
-            ↓ (separate branch — training supervision only)
-    Classification Head:
-        Linear(256 → num_classes)
-            ↓
-    Class logits (AD / MCI / CN)
-
-Why ResNet-18 over DenseNet121:
-    - Most cited architecture in the literature review
-      (Wen et al. 2020, Apurva et al. 2025 both use ResNet variants)
-    - Lighter than DenseNet121 (~33M params vs ~7M — but ResNet-18 is
-      the smallest ResNet variant, making it feasible on M4 Air)
-    - Residual connections handle vanishing gradients well on 3D volumes
-    - Clean, defensible architecture choice for dissertation writing
-    - MONAI's ResNet implementation supports 3D natively with
-      spatial_dims=3
-
-Why ResNet-18 specifically (not ResNet-50):
-    - ResNet-50 has ~25M params in 3D — too heavy for M4 Air with
-      batch_size=2 on 96^3 volumes without running out of memory
-    - ResNet-18 has ~11M params in 3D — manageable on M4 with MPS
-    - For datasets of 100-300 files per class, ResNet-18 generalises
-      better than deeper networks (less overfitting risk)
-
-Note on pretrained weights:
-    MONAI's 3D ResNet does not ship with MRI-pretrained weights by
-    default. Set pretrained=False (default). If you later obtain
-    Med3D pretrained weights (available on GitHub: Tencent/MedicalNet),
-    you can load them via the resume mechanism in train.py.
+    Input (1, 96, 96, 96)
+    → ResNet-18 backbone (3D, feed_forward=False) → 512-d
+    → MRIEncoder.modality_proj → 128-d z_mri
+    → VisionEncoder.shared_proj → 256-d
+    → L2 normalize → z_img  ← fusion engine input
+    → classifier → logits   ← training only
 
 Author: R26-DS-015 Vision Encoder
 """
+
+import os
+import sys
+from pathlib import Path
 
 import torch
 import torch.nn as nn
@@ -65,42 +27,49 @@ from monai.networks.nets import resnet18
 
 class MRIEncoder(nn.Module):
     """
-    3D MRI encoder: ResNet-18 backbone → modality projection → 128-d z_mri.
+    3D ResNet-18 backbone with optional MedicalNet pretrained weights.
 
     Args:
-        freeze_backbone (bool): Freeze ResNet-18 weights during Phase 1 training.
-                                Set True for first 20 epochs, then unfreeze.
-                                Default: False
+        freeze_backbone  (bool): Freeze ResNet-18 weights (Phase 1 training)
+        pretrained_path  (str):  Path to MedicalNet resnet_18.pth file.
+                                 If None or file missing, trains from scratch.
     """
 
-    # ResNet-18 output feature dimension after global average pooling
     BACKBONE_DIM = 512
 
-    def __init__(self, freeze_backbone: bool = False):
+    def __init__(
+        self,
+        freeze_backbone: bool = False,
+        pretrained_path: str = None,
+    ):
         super().__init__()
 
-        # ── ResNet-18 backbone ──────────────────────────────────────────
-        # spatial_dims=3  → 3D convolutions for volumetric MRI
-        # n_input_channels=1 → grayscale MRI (single channel)
-        # num_classes=1   → placeholder; we remove the FC head below
-        # feed_forward=False → returns feature maps before final FC
-        #                      (MONAI ResNet supports this flag)
+        # ── 3D ResNet-18 backbone ─────────────────────────────────────────
         self._backbone = resnet18(
             pretrained=False,
             spatial_dims=3,
             n_input_channels=1,
             num_classes=self.BACKBONE_DIM,
-            feed_forward=False,   # return pooled features, not logits
+            feed_forward=False,
         )
 
-        if freeze_backbone:
-            for param in self._backbone.parameters():
-                param.requires_grad = False
-            print("  ℹ️   Backbone frozen (Phase 1 training)")
+        # ── Load MedicalNet pretrained weights ────────────────────────────
+        if pretrained_path and os.path.exists(pretrained_path):
+            self._load_medicalnet(pretrained_path)
+        else:
+            if pretrained_path:
+                print(f"  ⚠️  MedicalNet weights not found at {pretrained_path}")
+                print(f"       Training backbone from scratch.")
+            else:
+                print(f"  ℹ️   No pretrained weights specified — training from scratch.")
 
-        # ── Modality Projection Head ────────────────────────────────────
-        # 512-d backbone features → 128-d z_mri
-        # Two-layer MLP with BatchNorm and Dropout for regularisation
+        # ── Freeze backbone for Phase 1 ───────────────────────────────────
+        if freeze_backbone:
+            for p in self._backbone.parameters():
+                p.requires_grad = False
+            print("  Backbone frozen (Phase 1 — only projection head trains)")
+
+        # ── Projection head: 512 → 128 ────────────────────────────────────
         self.modality_proj = nn.Sequential(
             nn.Linear(self.BACKBONE_DIM, 256),
             nn.BatchNorm1d(256),
@@ -111,160 +80,156 @@ class MRIEncoder(nn.Module):
             nn.ReLU(inplace=True),
         )
 
+    def _load_medicalnet(self, path: str) -> None:
+        """
+        Load MedicalNet ResNet-18 pretrained weights.
+
+        MedicalNet stores weights as:
+            {'state_dict': {'module.layer1...': tensor, ...}}
+        or directly as a flat state dict.
+
+        Key differences from MONAI ResNet-18:
+            - MedicalNet keys may have 'module.' prefix (DataParallel)
+            - MedicalNet conv1 is (64, 1, 7, 7, 7) — matches our n_input_channels=1
+            - Layer names match MONAI's ResNet implementation
+        """
+        print(f"  Loading MedicalNet weights from: {path}")
+
+        checkpoint = torch.load(path, map_location="cpu")
+
+        # Extract state dict
+        if isinstance(checkpoint, dict) and "state_dict" in checkpoint:
+            sd = checkpoint["state_dict"]
+        else:
+            sd = checkpoint
+
+        # Strip 'module.' prefix from DataParallel training
+        sd = {k.replace("module.", ""): v for k, v in sd.items()}
+
+        # Match against current model
+        model_sd   = self._backbone.state_dict()
+        matched    = {}
+        mismatched = []
+        skipped    = []
+
+        for k, v in sd.items():
+            if k in model_sd:
+                if v.shape == model_sd[k].shape:
+                    matched[k] = v
+                else:
+                    mismatched.append(f"{k}: ckpt {v.shape} vs model {model_sd[k].shape}")
+            else:
+                skipped.append(k)
+
+        # Load matched weights
+        model_sd.update(matched)
+        self._backbone.load_state_dict(model_sd)
+
+        print(f"  ✅ MedicalNet: loaded {len(matched)}/{len(model_sd)} layers")
+        if mismatched:
+            print(f"     Shape mismatches ({len(mismatched)}): {mismatched[:3]}")
+        if skipped:
+            print(f"     Skipped {len(skipped)} keys not in model")
+
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Args:
-            x : (batch, 1, 96, 96, 96) preprocessed MRI volume
+        return self.modality_proj(self._backbone(x))
 
-        Returns:
-            z_mri : (batch, 128) modality-specific embedding
-        """
-        features = self._backbone(x)    # (batch, 512)
-        z_mri    = self.modality_proj(features)   # (batch, 128)
-        return z_mri
-
-    def unfreeze(self):
-        """Unfreeze backbone for Phase 2 fine-tuning."""
-        for param in self._backbone.parameters():
-            param.requires_grad = True
-        print("  ✅  Backbone unfrozen (Phase 2 fine-tuning)")
+    def unfreeze(self) -> None:
+        for p in self._backbone.parameters():
+            p.requires_grad = True
+        print("  Backbone unfrozen (Phase 2 — full fine-tuning)")
 
 
 class VisionEncoder(nn.Module):
     """
-    Full Vision Encoder: MRI stream → shared projection → 256-d z_img.
+    Full Vision Encoder for neurological risk assessment.
 
-    Forward pass returns:
-        z_img  : (batch, 256) L2-normalized — for SupCon loss + fusion engine
-        logits : (batch, num_classes)       — for CrossEntropy + evaluation metrics
-
-    The classification head gives you accuracy/F1/AUC for your supervisor.
-    The z_img is what your team's fusion engine (Aarabhi) consumes.
-
-    After training, only z_img is used in production.
-    The classification head is kept in the checkpoint but not called
-    by embed.py or the fusion engine.
-
-    Args:
-        num_classes     (int):  3 for AD/MCI/CN. Default: 3
-        freeze_backbone (bool): Freeze backbone for Phase 1. Default: False
+    Input:  (B, 1, 96, 96, 96) preprocessed brain MRI
+    Output: z_img  — (B, 256) L2-normalised embedding for fusion engine
+            logits — (B, num_classes) for classification training
     """
 
     def __init__(
         self,
-        num_classes:     int  = 3,
+        num_classes: int = 3,
         freeze_backbone: bool = False,
+        pretrained_path: str = None,
+        device: torch.device = None,
     ):
         super().__init__()
 
-        self.num_classes = num_classes
+        self.mri_encoder = MRIEncoder(
+            freeze_backbone=freeze_backbone,
+            pretrained_path=pretrained_path,
+        )
 
-        # ── MRI Stream ──────────────────────────────────────────────────
-        self.mri_encoder = MRIEncoder(freeze_backbone=freeze_backbone)
-
-        # ── Shared Projection Head ──────────────────────────────────────
-        # 128-d z_mri → 256-d z_img (L2 normalized)
-        # Matches proposal FR5:
-        #   FC → BatchNorm → ReLU → L2 Normalize
+        # Shared projection: 128 → 256-d embedding space
         self.shared_proj = nn.Sequential(
             nn.Linear(128, 256),
             nn.BatchNorm1d(256),
             nn.ReLU(inplace=True),
         )
 
-        # ── Classification Head ─────────────────────────────────────────
-        # Provides supervised signal during training.
-        # Gives accuracy/F1/AUC for evaluation.
-        # Not used by the fusion engine.
+        # Classifier head (used during training, not inference)
         self.classifier = nn.Linear(256, num_classes)
 
-    def forward(self, x: torch.Tensor) -> tuple:
-        """
-        Args:
-            x : (batch, 1, 96, 96, 96) preprocessed MRI volume
+        if device is not None:
+            self.to(device)
 
-        Returns:
-            z_img  : (batch, 256) L2-normalized embedding
-            logits : (batch, num_classes) classification scores
-        """
-        # MRI stream → 128-d modality embedding
-        z_mri = self.mri_encoder(x)
+        total  = sum(p.numel() for p in self.parameters())
+        frozen = sum(p.numel() for p in self.parameters() if not p.requires_grad)
+        print(f"\n  VisionEncoder — 3D ResNet-18 + MedicalNet init")
+        print(f"  Embedding     : z_img (256-d, L2-normalised)")
+        print(f"  Classes       : {num_classes}")
+        print(f"  Parameters    : {total:,} total  |  {total - frozen:,} trainable")
 
-        # Shared projection → 256-d
-        z_proj = self.shared_proj(z_mri)
-
-        # L2 normalize onto unit hypersphere
-        # Required for: SupCon loss (cosine similarity) + fusion engine
-        z_img = F.normalize(z_proj, p=2, dim=1)
-
-        # Classification logits (training + evaluation only)
-        logits = self.classifier(z_img)
-
+    def forward(
+        self, x: torch.Tensor
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        z_mri  = self.mri_encoder(x)           # (B, 128)
+        z_proj = self.shared_proj(z_mri)        # (B, 256)
+        z_img  = F.normalize(z_proj, p=2, dim=1)  # L2 normalise → unit sphere
+        logits = self.classifier(z_img)         # (B, num_classes)
         return z_img, logits
 
     def encode(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Returns only z_img. Used by embed.py and the fusion engine.
-
-        Args:
-            x : (batch, 1, 96, 96, 96)
-
-        Returns:
-            z_img : (batch, 256) L2-normalized
-        """
+        """Extract z_img embedding only (for fusion engine inference)."""
         z_img, _ = self.forward(x)
         return z_img
 
-    def unfreeze_backbone(self):
-        """
-        Call this at the start of Phase 2 training to unfreeze the
-        ResNet-18 backbone for full fine-tuning.
-
-        Usage in train.py:
-            model.unfreeze_backbone()
-            optimizer = torch.optim.Adam(model.parameters(), lr=1e-5)
-        """
+    def unfreeze_backbone(self) -> None:
         self.mri_encoder.unfreeze()
-
-    def get_embedding_dim(self) -> int:
-        """Always 256."""
-        return 256
 
 
 def build_encoder(
-    num_classes:     int           = 3,
-    freeze_backbone: bool          = False,
-    device:          torch.device  = None,
+    num_classes: int = 3,
+    freeze_backbone: bool = False,
+    pretrained_path: str = None,
+    device: torch.device = None,
 ) -> VisionEncoder:
     """
-    Factory function — builds and returns a VisionEncoder.
+    Factory function for VisionEncoder.
 
     Args:
-        num_classes     : 3 for AD/MCI/CN (Alzheimer's)
-                          2 for PD/HC (Parkinson's) — set when reusing for PD
-        freeze_backbone : True for Phase 1, False for Phase 2
-        device          : torch.device to move model to
+        num_classes      : Number of output classes (3 for AD/MCI/CN)
+        freeze_backbone  : Freeze ResNet-18 for Phase 1 training
+        pretrained_path  : Path to MedicalNet resnet_18.pth
+        device           : torch.device to move model to
 
     Returns:
-        VisionEncoder instance on the specified device
+        VisionEncoder instance
     """
-    model = VisionEncoder(
+    if device is None:
+        if torch.backends.mps.is_available():
+            device = torch.device("mps")
+        elif torch.cuda.is_available():
+            device = torch.device("cuda")
+        else:
+            device = torch.device("cpu")
+
+    return VisionEncoder(
         num_classes=num_classes,
         freeze_backbone=freeze_backbone,
+        pretrained_path=pretrained_path,
+        device=device,
     )
-
-    if device is not None:
-        model = model.to(device)
-
-    total_params     = sum(p.numel() for p in model.parameters())
-    trainable_params = sum(
-        p.numel() for p in model.parameters() if p.requires_grad
-    )
-
-    print(f"  VisionEncoder — 3D ResNet-18 backbone")
-    print(f"  Embedding     : z_img (256-d, L2-normalized)")
-    print(f"  Classes       : {num_classes}")
-    print(f"  Parameters    : {total_params:,} total  |  "
-          f"{trainable_params:,} trainable")
-
-    return model
