@@ -1,24 +1,14 @@
 """
-bias_correct.py - Step 4 of the Alzheimer's MRI Preprocessing Pipeline
+Step 4 of the Alzheimer's MRI Preprocessing Pipeline
 
     Takes skull-stripped NIfTI files from data/skull_stripped/
     Runs N4 Bias Field Correction using ANTs (via antspyx Python library)
     Removes intensity non-uniformity caused by MRI scanner imperfections
-    This is the FINAL preprocessing step — output feeds directly into train.py
     Supports batched processing for large datasets
     Preserves AD/MCI/CN subfolder structure in output
 
-    Input  → mri/alzheimers/data/skull_stripped/{AD,MCI,CN}/*_brain.nii.gz
-    Output → mri/alzheimers/data/denoised/{AD,MCI,CN}/*_n4.nii.gz
-
-    # With batching (recommended for >500 files):
-    python mri/alzheimers/preprocessing/bias_correct.py --batch_size 100 --batch_index 0
-    python mri/alzheimers/preprocessing/bias_correct.py --batch_size 100 --batch_index 1
-    # ... continue until all batches done
-
-This script runs sequentially (not parallel) because antspyx already
-uses all CPU cores internally per file. Parallelising on top causes thread
-contention on M-series Macs and slows things down.
+Runs sequentially (not parallel) because antspyx already uses all CPU cores internally per file. 
+Parallelising on top causes thread contention on M-series Macs and slows things down.
 """
 
 import os
