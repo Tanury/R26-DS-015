@@ -9,7 +9,6 @@ const THEMES = {
     bg: "#F5F0FA", sidebar: "#EEE5F7", cardBg: "#FFFFFF",
     border: "#D4BEE8", borderLight: "#C4A8DC",
     text: "#2D1B4E", textMuted: "#6B4E8A", textDim: "#9B7AB8",
-    barBg: "#F0E8FA", tagline: "Purple ribbon · Forget-me-not flower",
     decorSymbol: "✿", headerBg: "#7C3AED",
     shadow: "rgba(124,58,237,0.15)",
   },
@@ -20,8 +19,8 @@ const THEMES = {
     bg: "#FDF5F5", sidebar: "#FAE8E8", cardBg: "#FFFFFF",
     border: "#F0BABA", borderLight: "#E89090",
     text: "#4A0E0E", textMuted: "#8B3028", textDim: "#B07070",
-    barBg: "#FDF0F0", tagline: "Silver ribbon · Red tulip flower",
-    decorSymbol: "❀", headerBg: "#DC2626",
+    //barBg: "#FDF0F0", tagline: "Silver ribbon · Red tulip flower",
+    decorSymbol: "🌷", headerBg: "#DC2626",
     shadow: "rgba(220,38,38,0.15)",
   },
   ms: {
@@ -31,8 +30,8 @@ const THEMES = {
     bg: "#FFFAF5", sidebar: "#FEF0E0", cardBg: "#FFFFFF",
     border: "#F0C090", borderLight: "#E8A060",
     text: "#4A1A00", textMuted: "#8B4513", textDim: "#B07840",
-    barBg: "#FEF5EC", tagline: "Orange ribbon · Orange butterfly",
-    decorSymbol: "🦋", headerBg: "#EA580C",
+    //barBg: "#FEF5EC", tagline: "Orange ribbon · Orange butterfly",
+    decorSymbol: "ʚїɞ", headerBg: "#EA580C",
     shadow: "rgba(234,88,12,0.15)",
   },
 };
@@ -47,7 +46,7 @@ const CLASS_CONFIG = {
 };
 
 const STEP_COLORS = ["#64748B", "#3B82F6", "#8B5CF6", "#10B981"];
-const STEP_NAMES  = ["DICOM → NIfTI", "Registration", "Skull Strip", "Bias Correct"];
+const STEP_NAMES  = ["DICOM → NIfTI", "Skull Strip", "Registration"," Bias Field Correction"];
 
 // ─── API ─────────────────────────────────────────────────────────────────────
 async function analyzeMRI(file) {
@@ -734,7 +733,7 @@ export default function Dashboard() {
           fontSize: 10, color: t.textDim,
           boxShadow: `0 -2px 8px ${t.shadow}`,
         }}>
-          <span>R26-DS-015 · Dissanayaka D.M.T.M · IT22203762 · University of Moratuwa · Faculty of IT</span>
+          <span>R26-DS-015 | Dissanayaka D.M.T.M | IT22203762 </span>
           <span>NON-DIAGNOSTIC DECISION-SUPPORT OUTPUT ONLY</span>
         </footer>
       </div>
