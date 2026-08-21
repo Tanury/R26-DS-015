@@ -1,0 +1,1162 @@
+{
+  "passed": true,
+  "subjects_checked": 115,
+  "reference_shape": [
+    128,
+    1024
+  ],
+  "n_channels": 128,
+  "channel_set": "biosemi128",
+  "subjects": [
+    {
+      "subject_id": "AD-AR-sub-30001",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30002",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30004",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30008",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30009",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30011",
+      "shape": [
+        69,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30012",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30013",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30015",
+      "shape": [
+        79,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30017",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30018",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30020",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30022",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30026",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30029",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-AR-sub-30031",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30003",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30005",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30006",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30007",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30010",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30014",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30016",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30019",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30021",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30023",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30024",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30025",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30027",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30028",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30030",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30032",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30033",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30034",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "AD-CL-sub-30035",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100012",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100015",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100018",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-10002",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100020",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100022",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100024",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100026",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100028",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-10003",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100030",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100031",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100033",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100035",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-100038",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-10004",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-10006",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-10007",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-AR-sub-10009",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-10001",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-100010",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-100011",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-100014",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-100016",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-100017",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-100021",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-100029",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-100034",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-100037",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-100043",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-10005",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "HC-CL-sub-10008",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_509",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_513",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_514",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_515",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_516",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_517",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_518",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_519",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_520",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_521",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_522",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_524",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_525",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_526",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_527",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_528",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_529",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_531",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_532",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_533",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_534",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "MS-AR-suj_535",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-AR-sub-40001",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-AR-sub-40006",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-AR-sub-40008",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-AR-sub-40011",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-AR-sub-40012",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40001",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40004",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40005",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40006",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40007",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40008",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40009",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40010",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40011",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40012",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40016",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40017",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40018",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40019",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40020",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40021",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40022",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40023",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40024",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40025",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    },
+    {
+      "subject_id": "PD-CL-sub-40026",
+      "shape": [
+        80,
+        128,
+        1024
+      ],
+      "passed": true,
+      "messages": []
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "run_id": "20260820T114437Z",
+  "all_passed": true,
+  "passed": 32,
+  "total": 32,
+  "synthetic_run": false,
+  "checks": [
+    {
+      "requirement": "R1",
+      "description": "256-D L2-normalized z_eeg",
+      "passed": true,
+      "detail": "dim=256, l2=1.0"
+    },
+    {
+      "requirement": "R1",
+      "description": "Availability flag present; zero vector when EEG absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "requirement": "R2",
+      "description": "Multi-condition: AD, PD and MS all represented",
+      "passed": true,
+      "detail": "classes=['AD', 'HC', 'MS', 'PD'], n=115"
+    },
+    {
+      "requirement": "R2",
+      "description": "Three independent risk scores emitted per subject",
+      "passed": true,
+      "detail": "{'ad_risk_score': 0.0762, 'pd_risk_score': 0.0301, 'ms_risk_score': 0.0252}"
+    },
+    {
+      "requirement": "R2",
+      "description": "Risk scores are independent sigmoids, not a competing softmax",
+      "passed": true,
+      "detail": "sum=0.1315 (a softmax would be exactly 1.0)"
+    },
+    {
+      "requirement": "R2",
+      "description": "Per-condition risk AUC reported with bootstrap confidence intervals",
+      "passed": true,
+      "detail": "macro risk AUC 0.982"
+    },
+    {
+      "requirement": "R3",
+      "description": "0.5-40 Hz band-pass preserving five named bands",
+      "passed": true,
+      "detail": "0.5-40.0 Hz, bands=['delta', 'theta', 'alpha', 'beta', 'low_gamma']"
+    },
+    {
+      "requirement": "R3",
+      "description": "5th-order Butterworth filter applied",
+      "passed": true,
+      "detail": "5th-order Butterworth band-pass, zero-phase"
+    },
+    {
+      "requirement": "R4",
+      "description": "Automated FastICA with three documented rejection criteria",
+      "passed": true,
+      "detail": "enabled=True, components scored=25"
+    },
+    {
+      "requirement": "R5",
+      "description": "4 s epochs, 50% overlap, 150 uV rejection, >=20 clean epochs",
+      "passed": true,
+      "detail": "4.0s/0.5, 150.0uV, min=20"
+    },
+    {
+      "requirement": "R6",
+      "description": "Hybrid STFT + Morlet CWT multi-resolution tensor implemented",
+      "passed": true,
+      "detail": "hybrid shape [10, 128, 16], planes=10"
+    },
+    {
+      "requirement": "R7",
+      "description": "Three encoder architectures implemented and ablated",
+      "passed": true,
+      "detail": "implemented=['eegnet', 'bilstm', 'transformer'], ablated=3"
+    },
+    {
+      "requirement": "R8",
+      "description": "Shared head: Linear -> BatchNorm -> ReLU -> L2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "requirement": "R9",
+      "description": "Electrode dropout, Gaussian noise and temporal jitter augmentation",
+      "passed": true,
+      "detail": "dropout<=20%, SNR=[20.0, 10.0], jitter<=10%"
+    },
+    {
+      "requirement": "R10",
+      "description": "Stratified 5-fold CV with subject-level grouping",
+      "passed": true,
+      "detail": "5 folds, leakage-free=True"
+    },
+    {
+      "requirement": "R10",
+      "description": "Binary neurological-vs-control AUC >= 0.8",
+      "passed": true,
+      "detail": "achieved 0.9961"
+    },
+    {
+      "requirement": "R10",
+      "description": "F1 and precision-recall reported",
+      "passed": true,
+      "detail": "macro F1 0.9039"
+    },
+    {
+      "requirement": "R11",
+      "description": "Silhouette coefficient and inter-class Euclidean distance reported",
+      "passed": true,
+      "detail": "silhouette 0.730904507637024, inter-class 1.2248790303866068"
+    },
+    {
+      "requirement": "R12",
+      "description": "Robustness at dropout 5/10/20% and SNR 20/10/5 dB",
+      "passed": true,
+      "detail": "7 conditions evaluated"
+    },
+    {
+      "requirement": "R13",
+      "description": "Graceful-degradation contract verified (zero vector + flag 0)",
+      "passed": true,
+      "detail": "degradation percentage requires the group fusion engine \u2014 scoped, not claimed"
+    },
+    {
+      "requirement": "R14",
+      "description": "Backbone swappable behind a fixed output interface",
+      "passed": true,
+      "detail": "all backbones emit (4, 256)"
+    },
+    {
+      "requirement": "R15",
+      "description": "Clinical disclaimer present in every report",
+      "passed": true,
+      "detail": "4 report(s) checked"
+    },
+    {
+      "requirement": "R15",
+      "description": "Safe wording \u2014 disease classes framed as EEG patterns, no diagnostic claim",
+      "passed": true,
+      "detail": "class labels=['AD-related EEG risk pattern', 'PD-related EEG risk pattern', 'MS-related EEG risk pattern']"
+    },
+    {
+      "requirement": "EXTRA",
+      "description": "No subject leakage across folds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "requirement": "EXTRA",
+      "description": "Masked labels: every subject carries y_* and mask_* per condition",
+      "passed": true,
+      "detail": "policy=exclusive"
+    },
+    {
+      "requirement": "EXTRA",
+      "description": "Provenance stamped on every subject (dataset_source, site, protocol, source_kind)",
+      "passed": true,
+      "detail": "source=BrainLat"
+    },
+    {
+      "requirement": "EXTRA",
+      "description": "Caches keyed by config fingerprint (stale tensors cannot be reused)",
+      "passed": true,
+      "detail": "preprocessing=f6dd2746ebf9, features=ce6557238d59"
+    },
+    {
+      "requirement": "EXTRA",
+      "description": "Risk-score age correlation measured on the delivered output",
+      "passed": true,
+      "detail": "{}"
+    },
+    {
+      "requirement": "EXTRA",
+      "description": "Confound audit produced for every class",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "requirement": "EXTRA",
+      "description": "Age and site probes run on frozen z_eeg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "requirement": "EXTRA",
+      "description": "Confound disclosure embedded in every subject report",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "requirement": "EXTRA",
+      "description": "Colliding subject directory names disambiguated by class and site",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

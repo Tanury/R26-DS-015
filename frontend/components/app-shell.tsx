@@ -8,6 +8,7 @@ import {
   BrainCircuit,
   ChartNoAxesCombined,
   CircleHelp,
+  Activity,
   ClipboardList,
   FlaskConical,
   History,
@@ -23,7 +24,8 @@ import { Button } from "@/components/ui/button";
 const navigation = [
   { href: "/", label: "Overview", icon: LayoutDashboard },
   { href: "/voice", label: "Voice Assessment", icon: Mic },
-  { href: "/general", label: "General Assessment", icon: ClipboardList },
+  { href: "/general", label: "Biomedical Assessment", icon: ClipboardList },
+  { href: "/eeg", label: "EEG Assessment", icon: Activity },
   { href: "/history", label: "Assessment History", icon: History },
   { href: "/insights", label: "Research Insights", icon: ChartNoAxesCombined },
 ];

@@ -11,7 +11,7 @@ import type { HistoryItem } from "@/lib/types";
 import { percent } from "@/lib/utils";
 
 export function ResultsView({ item, expectedType }: { item: HistoryItem | null; expectedType: "Voice" | "General" }) {
-  if (!item || item.type !== expectedType) {
+  if (!item || item.type !== expectedType || !item.prediction) {
     const href = expectedType === "Voice" ? "/voice" : "/general";
     return (
       <AppShell><div className="mx-auto max-w-xl py-20 text-center"><ClipboardPlus className="mx-auto size-12 text-blue-700" /><h1 className="mt-5 text-2xl font-bold">No current result</h1><p className="mt-2 text-slate-600">Complete an assessment to view its result.</p><Button className="mt-6" asChild><Link href={href}>Start assessment</Link></Button></div></AppShell>

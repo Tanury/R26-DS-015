@@ -1,0 +1,189 @@
+{
+  "schema_version": "2.0",
+  "run_id": "20260820T114437Z",
+  "generated_at": "2026-08-20T13:43:44.641457+00:00",
+  "project": {
+    "id": "R26-DS-015",
+    "name": "neuro_risk_eeg_encoder",
+    "author": "Sudugodage S.R. (IT22557742)",
+    "seed": 42
+  },
+  "model": {
+    "architecture": "Lightweight EEG Transformer",
+    "backbone_key": "transformer",
+    "input_representation": "raw",
+    "input_shape": [
+      1,
+      128,
+      1024
+    ],
+    "input_description": "1 plane(s) x 128 channels x 1024 time bins, from 4 s epochs at 256 Hz after 0.5-40 Hz Butterworth filtering, FastICA cleaning and per-epoch z-scoring",
+    "embedding_dim": 256,
+    "exported_fold": 3,
+    "exported_fold_val_risk_macro_auc": 1.0,
+    "outputs": {
+      "risk_scores": {
+        "shape": [
+          3
+        ],
+        "order": [
+          "AD",
+          "PD",
+          "MS"
+        ],
+        "activation": "sigmoid",
+        "range": [
+          0,
+          1
+        ],
+        "independent": true,
+        "note": "Do NOT sum to 1. Elevated scores on several conditions are meaningful."
+      },
+      "class_probabilities": {
+        "shape": [
+          4
+        ],
+        "order": [
+          "HC",
+          "AD",
+          "PD",
+          "MS"
+        ],
+        "activation": "softmax",
+        "note": "Auxiliary head."
+      },
+      "z_eeg": {
+        "shape": [
+          256
+        ],
+        "normalization": "L2 unit norm after ReLU",
+        "note": "Fusion interface. All-zero + availability_flag 0 means EEG absent."
+      }
+    }
+  },
+  "training_data": {
+    "dataset": "BrainLat (Latin American Brain Health Institute)",
+    "n_subjects": 115,
+    "per_class": {
+      "HC": 32,
+      "AD": 35,
+      "PD": 26,
+      "MS": 22
+    },
+    "per_site": {
+      "AR": 62,
+      "CL": 53
+    },
+    "label_policy": "exclusive",
+    "cross_validation": "subject-level StratifiedGroupKFold, 5 folds",
+    "synthetic_run": false
+  },
+  "performance": {
+    "risk_macro_auc_mean": 0.98842,
+    "risk_macro_auc_std": 0.015090182238793552,
+    "per_condition_auc": {
+      "AD": 0.97858,
+      "PD": 0.9911200000000001,
+      "MS": 0.99556
+    },
+    "pooled_per_condition": {
+      "AD": {
+        "auc": 0.9668,
+        "auc_ci": {
+          "auc": 0.9668,
+          "ci_low": 0.9319,
+          "ci_high": 0.9914,
+          "n_boot": 2000
+        }
+      },
+      "PD": {
+        "auc": 0.9875,
+        "auc_ci": {
+          "auc": 0.9875,
+          "ci_low": 0.9659,
+          "ci_high": 0.9996,
+          "n_boot": 2000
+        }
+      },
+      "MS": {
+        "auc": 0.9917,
+        "auc_ci": {
+          "auc": 0.9917,
+          "ci_low": 0.9768,
+          "ci_high": 1.0,
+          "n_boot": 2000
+        }
+      }
+    },
+    "binary_neuro_vs_hc_auc": 0.996078431372549,
+    "binary_auc_ci": {
+      "auc": 0.9819,
+      "ci_low": 0.9528,
+      "ci_high": 1.0,
+      "n_boot": 2000
+    },
+    "embedding_silhouette": 0.730904507637024
+  },
+  "confound_disclosure": {
+    "age_probe": {
+      "n": 0,
+      "note": "insufficient age metadata"
+    },
+    "site_probe": {
+      "n": 115,
+      "accuracy": 0.6174,
+      "balanced_accuracy": 0.6205,
+      "majority_baseline": 0.5391
+    },
+    "risk_score_age_correlation": {},
+    "per_class_severity": {
+      "HC": "low",
+      "AD": "low",
+      "PD": "low",
+      "MS": "HIGH (site)"
+    },
+    "statement": "This model was trained on a cohort in which MS subjects are ~33 years younger than every other group and come from a single recording site. Risk scores for classes flagged CRITICAL or HIGH cannot be attributed to disease physiology on the strength of this cohort alone. Read risk_score_age_correlation before using any score: the within-negatives correlation is the decisive figure."
+  },
+  "intended_use": {
+    "purpose": "Research decision-support. Produces a 256-D z_eeg embedding for multimodal fusion and three independent EEG risk-pattern scores.",
+    "out_of_scope": [
+      "Clinical diagnosis or any medical decision",
+      "Populations unlike the training cohort (Latin American, two sites, n~118)",
+      "EEG montages other than BioSemi 128 A1-D32, or protocols other than resting state"
+    ],
+    "disclaimer": "This output is a research decision-support indicator produced by an EEG representation learning prototype. It is not a clinical diagnosis, has not been clinically validated, and must not be used as the basis of a medical decision."
+  },
+  "exported_files": {
+    "torchscript": {
+      "path": "/content/drive/MyDrive/r26_ds015_workspace/exported_model/neuro_risk_encoder.torchscript.pt",
+      "bytes": 2391974,
+      "max_abs_diff_vs_live_model": 0.0
+    },
+    "onnx": {
+      "path": "/content/drive/MyDrive/r26_ds015_workspace/exported_model/neuro_risk_encoder.onnx",
+      "bytes": 2436124,
+      "opset": 17,
+      "max_abs_diff_vs_live_model": 1.0728836059570312e-06
+    },
+    "state_dict": {
+      "path": "/content/drive/MyDrive/r26_ds015_workspace/exported_model/neuro_risk_encoder_state_dict.pth",
+      "bytes": 2350422
+    },
+    "joblib_bundle": {
+      "path": "/content/drive/MyDrive/r26_ds015_workspace/exported_model/neuro_risk_inference_bundle.joblib",
+      "bytes": 5112
+    },
+    "all_folds": {
+      "path": "/content/drive/MyDrive/r26_ds015_workspace/exported_model/all_folds_state_dicts.pth",
+      "bytes": 11724863,
+      "folds": [
+        3,
+        1,
+        0,
+        4,
+        2
+      ]
+    }
+  },
+  "failed_exports": {}
+}

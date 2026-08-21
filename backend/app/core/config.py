@@ -29,5 +29,19 @@ class Settings:
         "evaluation by a qualified clinician."
     )
 
+    # --- EEG risk module -------------------------------------------------
+    eeg_model_dir: Path = Path(__file__).resolve().parents[1] / "models" / "eeg"
+    # EEGLAB recordings are a .set header plus a .fdt data file; a 128-channel
+    # 10-minute recording runs to roughly 90 MB across the pair.
+    max_eeg_bytes: int = 120 * 1024 * 1024
+    eeg_job_ttl_seconds: int = int(os.getenv("EEG_JOB_TTL_SECONDS", "1800"))
+    eeg_max_active_jobs: int = int(os.getenv("EEG_MAX_ACTIVE_JOBS", "4"))
+    eeg_disclaimer: str = (
+        "This output is a research decision-support indicator produced by an EEG "
+        "representation learning prototype. It is not a clinical diagnosis, has not "
+        "been clinically validated, and must not be used as the basis of a medical "
+        "decision."
+    )
+
 
 settings = Settings()

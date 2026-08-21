@@ -1,0 +1,167 @@
+{
+  "backbone": "transformer",
+  "representation": "raw",
+  "silhouette_cosine": {
+    "mean": 0.730904507637024,
+    "std": 0.15734826563350168,
+    "per_fold": [
+      0.7792873382568359,
+      0.7827743291854858,
+      0.5821456909179688,
+      0.9736242890357971,
+      0.536690890789032
+    ]
+  },
+  "inter_class_euclidean": {
+    "mean": 1.2248790303866068,
+    "std": 0.101477321703724
+  },
+  "separation_ratio": 7.77016,
+  "per_fold": [
+    {
+      "n_subjects": 23,
+      "classes_present": [
+        "HC",
+        "AD",
+        "PD",
+        "MS"
+      ],
+      "silhouette_cosine": 0.7792873382568359,
+      "silhouette_euclidean": 0.7568867802619934,
+      "inter_class_euclidean": {
+        "HC-AD": 1.165228009223938,
+        "HC-PD": 1.215303659439087,
+        "HC-MS": 1.3129445314407349,
+        "AD-PD": 1.2165366411209106,
+        "AD-MS": 1.4015387296676636,
+        "PD-MS": 1.3366448879241943
+      },
+      "mean_inter_class_euclidean": 1.2746994098027546,
+      "within_class_spread": {
+        "HC": 0.3136218190193176,
+        "AD": 0.032797977328300476,
+        "PD": 0.3109198212623596,
+        "MS": 0.011078430339694023
+      },
+      "mean_within_class_spread": 0.16710451198741794,
+      "separation_ratio": 7.6282,
+      "fold": 0
+    },
+    {
+      "n_subjects": 23,
+      "classes_present": [
+        "HC",
+        "AD",
+        "PD",
+        "MS"
+      ],
+      "silhouette_cosine": 0.7827743291854858,
+      "silhouette_euclidean": 0.7441753149032593,
+      "inter_class_euclidean": {
+        "HC-AD": 1.2852061986923218,
+        "HC-PD": 1.2298589944839478,
+        "HC-MS": 1.1940335035324097,
+        "AD-PD": 1.2207468748092651,
+        "AD-MS": 1.382387638092041,
+        "PD-MS": 1.3275716304779053
+      },
+      "mean_inter_class_euclidean": 1.2733008066813152,
+      "within_class_spread": {
+        "HC": 0.3165026009082794,
+        "AD": 0.06191186234354973,
+        "PD": 0.3021334111690521,
+        "MS": 0.014143094420433044
+      },
+      "mean_within_class_spread": 0.17367274221032858,
+      "separation_ratio": 7.3316,
+      "fold": 1
+    },
+    {
+      "n_subjects": 23,
+      "classes_present": [
+        "HC",
+        "AD",
+        "PD",
+        "MS"
+      ],
+      "silhouette_cosine": 0.5821456909179688,
+      "silhouette_euclidean": 0.5059214234352112,
+      "inter_class_euclidean": {
+        "HC-AD": 1.1953939199447632,
+        "HC-PD": 1.2485758066177368,
+        "HC-MS": 1.1689177751541138,
+        "AD-PD": 0.9995976686477661,
+        "AD-MS": 0.9457588195800781,
+        "PD-MS": 0.8618153929710388
+      },
+      "mean_inter_class_euclidean": 1.0700098971525829,
+      "within_class_spread": {
+        "HC": 0.10421641916036606,
+        "AD": 0.2728573977947235,
+        "PD": 0.43071818351745605,
+        "MS": 0.6271291971206665
+      },
+      "mean_within_class_spread": 0.35873029939830303,
+      "separation_ratio": 2.9828,
+      "fold": 2
+    },
+    {
+      "n_subjects": 23,
+      "classes_present": [
+        "HC",
+        "AD",
+        "PD",
+        "MS"
+      ],
+      "silhouette_cosine": 0.9736242890357971,
+      "silhouette_euclidean": 0.909989058971405,
+      "inter_class_euclidean": {
+        "HC-AD": 1.3348984718322754,
+        "HC-PD": 1.3521267175674438,
+        "HC-MS": 1.3713579177856445,
+        "AD-PD": 1.2873115539550781,
+        "AD-MS": 1.4009145498275757,
+        "PD-MS": 1.3884414434432983
+      },
+      "mean_inter_class_euclidean": 1.3558417757352192,
+      "within_class_spread": {
+        "HC": 0.04473795369267464,
+        "AD": 0.08577147871255875,
+        "PD": 0.16951926052570343,
+        "MS": 0.015903163701295853
+      },
+      "mean_within_class_spread": 0.07898296415805817,
+      "separation_ratio": 17.1663,
+      "fold": 3
+    },
+    {
+      "n_subjects": 23,
+      "classes_present": [
+        "HC",
+        "AD",
+        "PD",
+        "MS"
+      ],
+      "silhouette_cosine": 0.536690890789032,
+      "silhouette_euclidean": 0.5190244913101196,
+      "inter_class_euclidean": {
+        "HC-AD": 0.9820999503135681,
+        "HC-PD": 1.182762861251831,
+        "HC-MS": 1.3103413581848145,
+        "AD-PD": 1.0906165838241577,
+        "AD-MS": 1.0213044881820679,
+        "PD-MS": 1.3161343336105347
+      },
+      "mean_inter_class_euclidean": 1.1505432625611622,
+      "within_class_spread": {
+        "HC": 0.37182024121284485,
+        "AD": 0.49699097871780396,
+        "PD": 0.35417795181274414,
+        "MS": 0.006906122900545597
+      },
+      "mean_within_class_spread": 0.30747382366098464,
+      "separation_ratio": 3.7419,
+      "fold": 4
+    }
+  ]
+}

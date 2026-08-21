@@ -1,0 +1,178 @@
+{
+  "subject_id": "PD-AR-sub-40012",
+  "source": "cohort",
+  "generated_at": "2026-08-20T13:43:44.641457+00:00",
+  "dataset": {
+    "name": "BrainLat (Latin American Brain Health Institute)",
+    "task": "resting-state EEG",
+    "site": "AR",
+    "true_class": "PD"
+  },
+  "risk_scores": {
+    "ad_risk_score": 0.5916,
+    "pd_risk_score": 0.3797,
+    "ms_risk_score": 0.0807
+  },
+  "risk_assessment": {
+    "conditions": {
+      "AD": {
+        "risk_score": 0.5916,
+        "risk_band": "Medium",
+        "label": "AD-related EEG risk pattern",
+        "epoch_score_std": 0.4513,
+        "epoch_score_range": [
+          0.0176,
+          0.9751
+        ],
+        "confound_severity": "low"
+      },
+      "PD": {
+        "risk_score": 0.3797,
+        "risk_band": "Low",
+        "label": "PD-related EEG risk pattern",
+        "epoch_score_std": 0.4376,
+        "epoch_score_range": [
+          0.0265,
+          0.9754
+        ],
+        "confound_severity": "low"
+      },
+      "MS": {
+        "risk_score": 0.0807,
+        "risk_band": "Low",
+        "label": "MS-related EEG risk pattern",
+        "epoch_score_std": 0.2242,
+        "epoch_score_range": [
+          0.0098,
+          0.9742
+        ],
+        "confound_severity": "HIGH (site)"
+      }
+    },
+    "highest_risk_condition": "AD",
+    "scores_are_independent": true,
+    "interpretation": "Each score is an independent probability that the recording shows the EEG pattern associated with that condition. Scores do not sum to 1 and are not mutually exclusive: elevated scores on more than one condition are meaningful, not contradictory. These are decision-support indicators, not diagnoses.",
+    "risk_bands": {
+      "low_max": 0.39,
+      "medium_max": 0.69
+    }
+  },
+  "optional_four_class_prediction": {
+    "predicted_class": "AD",
+    "class_probabilities": {
+      "HC": 0.0163,
+      "AD": 0.5546,
+      "PD": 0.3622,
+      "MS": 0.067
+    }
+  },
+  "signal_quality": {
+    "epochs_used": 60,
+    "total_epochs_generated": 199,
+    "clean_epoch_ratio": 0.9447,
+    "grade": "Good",
+    "ica_components_removed": 6,
+    "ica_rejections": [
+      {
+        "component": 9,
+        "criteria": [
+          "kurtosis"
+        ],
+        "kurtosis": 297.019,
+        "frontal_corr": 0.036,
+        "hf_power_ratio": 0.017
+      },
+      {
+        "component": 15,
+        "criteria": [
+          "kurtosis"
+        ],
+        "kurtosis": 231.002,
+        "frontal_corr": 0.031,
+        "hf_power_ratio": 0.007
+      },
+      {
+        "component": 16,
+        "criteria": [
+          "kurtosis"
+        ],
+        "kurtosis": 520.966,
+        "frontal_corr": 0.01,
+        "hf_power_ratio": 0.011
+      },
+      {
+        "component": 19,
+        "criteria": [
+          "kurtosis"
+        ],
+        "kurtosis": 694.784,
+        "frontal_corr": 0.034,
+        "hf_power_ratio": 0.026
+      },
+      {
+        "component": 22,
+        "criteria": [
+          "kurtosis"
+        ],
+        "kurtosis": 343.197,
+        "frontal_corr": 0.025,
+        "hf_power_ratio": 0.025
+      },
+      {
+        "component": 23,
+        "criteria": [
+          "kurtosis"
+        ],
+        "kurtosis": 235.688,
+        "frontal_corr": 0.039,
+        "hf_power_ratio": 0.025
+      }
+    ],
+    "channels": 128,
+    "sampling_rate_hz": 256.0,
+    "source_kind": "pre_epoched",
+    "warnings": [
+      "Recording was stored pre-epoched; 1 s segments were reassembled with tapered joins and are not physiologically continuous."
+    ]
+  },
+  "band_power_profile": {
+    "delta": 0.36742,
+    "theta": 0.09843,
+    "alpha": 0.30187,
+    "beta": 0.20458,
+    "low_gamma": 0.02726,
+    "theta_alpha_ratio": 0.32607
+  },
+  "embedding": {
+    "dim": 256,
+    "l2_norm": 1.0,
+    "availability_flag": 1,
+    "consistency": 0.5134,
+    "cosine_to_class_centroids": {
+      "HC": 0.1203,
+      "AD": 0.8638,
+      "PD": 0.5374,
+      "MS": 0.0864
+    },
+    "nearest_centroid": "AD",
+    "vector_url": "/eeg/embeddings/PD-AR-sub-40012"
+  },
+  "explainability": {
+    "scalp_region_importance": {
+      "posterior": 0.5424,
+      "right_lateral": 0.104,
+      "left_lateral": -0.1938,
+      "frontal_central": -0.2602
+    },
+    "band_importance": {},
+    "method": "occlusion \u2014 drop in predicted-class probability when the input is zeroed"
+  },
+  "confound_disclosure": {},
+  "model_summary": {
+    "architecture": "Lightweight EEG Transformer",
+    "input_representation": "raw",
+    "embedding_dim": 256
+  },
+  "clinical_disclaimer": "This output is a research decision-support indicator produced by an EEG representation learning prototype. It is not a clinical diagnosis, has not been clinically validated, and must not be used as the basis of a medical decision.",
+  "age": null
+}

@@ -1,3 +1,5 @@
+import type { EegRiskReport } from "@/lib/eeg-types";
+
 export const featureKeys = [
   "mfcc_1_mean",
   "mfcc_2_mean",
@@ -41,11 +43,20 @@ export type VoiceAssessment = {
   extraction_disclaimer: string;
 };
 
+export type AssessmentType = "Voice" | "General" | "EEG";
+
 export type HistoryItem = {
   id: string;
   createdAt: string;
-  type: "Voice" | "General";
-  prediction: Prediction;
+  type: AssessmentType;
+  /**
+   * Speech-model output. Optional because EEG rows carry `eegReport` instead —
+   * the EEG model emits three independent risk scores, not one class plus a
+   * softmax, so it cannot be squeezed into this shape without misrepresenting it.
+   * Anything reading this field must handle it being absent.
+   */
+  prediction?: Prediction;
+  eegReport?: EegRiskReport;
   features?: SpeechFeatures;
   transcript?: string;
 };

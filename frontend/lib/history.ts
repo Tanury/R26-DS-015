@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useSyncExternalStore } from "react";
+import type { EegRiskReport } from "@/lib/eeg-types";
 import type { HistoryItem, Prediction, SpeechFeatures } from "@/lib/types";
 
 const HISTORY_KEY = "neurovoice-assessments";
@@ -43,6 +44,22 @@ export function saveAssessment(
     type,
     prediction,
     ...extras,
+  };
+  const history = [item, ...readHistory()].slice(0, 100);
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  sessionStorage.setItem(RESULT_KEY, JSON.stringify(item));
+  window.dispatchEvent(new Event(HISTORY_EVENT));
+  window.dispatchEvent(new Event(RESULT_EVENT));
+  return item;
+}
+
+/** EEG results carry a report instead of a speech `Prediction`. */
+export function saveEegAssessment(report: EegRiskReport) {
+  const item: HistoryItem = {
+    id: `NEEG-${String(Date.now()).slice(-6)}`,
+    createdAt: new Date().toISOString(),
+    type: "EEG",
+    eegReport: report,
   };
   const history = [item, ...readHistory()].slice(0, 100);
   localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
