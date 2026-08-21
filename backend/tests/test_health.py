@@ -2,4 +2,4 @@ from app.main import app
 
 
 def test_app_imports() -> None:
-    assert app.title == "Aaraby Research Backend"
+    assert app.title == "NeuroRisk Research Platform"

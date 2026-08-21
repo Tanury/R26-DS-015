@@ -38,8 +38,8 @@ function SideNavigation({ pathname, onNavigate }: { pathname: string; onNavigate
           <BrainCircuit className="size-6" />
         </div>
         <div className="min-w-0">
-          <div className="text-xl font-bold text-blue-800">NeuroVoice AI</div>
-          <div className="text-xs font-semibold text-slate-500">Precision Diagnostics</div>
+          <div className="text-lg font-bold leading-tight text-blue-800">NeuroRisk Research Platform</div>
+          <div className="text-xs font-semibold text-slate-500">Multimodal Decision Support</div>
         </div>
       </div>
       <nav className="flex-1 space-y-1 py-4" aria-label="Primary navigation">

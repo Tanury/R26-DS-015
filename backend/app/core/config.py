@@ -8,12 +8,12 @@ load_dotenv()
 
 
 class Settings:
-    app_name: str = os.getenv("APP_NAME", "Aaraby Research Backend")
+    app_name: str = os.getenv("APP_NAME", "NeuroRisk Research Platform")
     environment: str = os.getenv("ENVIRONMENT", "development")
     model_dir: Path = Path(__file__).resolve().parents[1] / "models"
     frontend_dir: Path = Path(__file__).resolve().parents[3] / "frontend"
     gemini_api_key: str = os.getenv("GEMINI_API_KEY", "")
-    gemini_model: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    gemini_model: str = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite")
     frontend_origins: tuple[str, ...] = tuple(
         origin.strip()
         for origin in os.getenv(

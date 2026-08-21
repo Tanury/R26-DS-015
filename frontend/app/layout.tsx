@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NeuroVoice AI Research System",
+  title: "NeuroRisk Research Platform",
   description: "Research neurological risk assessment interface for voice, biomedical marker, and EEG evidence",
 };
 
