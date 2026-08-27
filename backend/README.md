@@ -23,9 +23,9 @@ The backend is a FastAPI application that validates research inputs, serves seve
 
 The backend supports four related but distinct paths:
 
-1. **General speech-feature scoring** accepts exactly 14 public speech measurements and maps them to the Keras model's feature schema.
-2. **Voice assessment** sends validated audio to the configured Gemini model for structured feature extraction, then calls the same speech classifier.
-3. **Neurological feature scoring** accepts a strict 20-field request and invokes a saved scikit-learn runtime pipeline.
+1. **General biomedical assessment** accepts the metadata-bound 24-key request and invokes separate disease and risk pipelines.
+2. **Voice assessment** sends validated audio to the configured Gemini model for structured feature extraction, then calls the speech classifier.
+3. **Legacy biomedical scoring** retains the former 14-field soft-voting endpoint for API compatibility.
 4. **EEG assessment** serves precomputed cohort data without an ML runtime and optionally performs CPU TorchScript inference for uploaded EEGLAB recordings.
 
 ## Architecture
@@ -154,9 +154,9 @@ Useful URLs:
 | Method | Path | Purpose | Special dependency |
 | --- | --- | --- | --- |
 | `GET` | `/health/` | Liveness check | None |
-| `POST` | `/predictions/` | Score 14 speech features | TensorFlow/Keras artifacts |
+| `POST` | `/predictions/` | Legacy 14-field biomedical scoring | 130-feature preprocessor plus soft-voting ensemble |
 | `POST` | `/voice-assessments/` | Extract features from audio and score them | Gemini API key plus speech model |
-| `POST` | `/neurological-risk/predict` | Score the strict neurological feature schema | Saved scikit-learn pipeline |
+| `POST` | `/neurological-risk/predict` | Score the General 24-field biomedical contract | Separate saved disease and risk pipelines |
 | `GET` | `/eeg/model-card` | Model architecture, performance, intended use, confounds | Installed JSON model card |
 | `GET` | `/eeg/band-reference` | Cohort band-power context | Precomputed cohort artifacts |
 | `GET` | `/eeg/cohort` | Paginated/filterable cohort list | Precomputed cohort artifacts |
@@ -168,27 +168,37 @@ Useful URLs:
 
 ### General prediction example
 
-The endpoint accepts either a flat object or `{"features": {...}}`. Every one of the 14 keys is required and unexpected keys are rejected.
+The endpoint requires exactly the 24 keys below and rejects missing or unexpected keys. Any value may be `null`; the fitted numeric median or categorical mode imputer then handles it. The disease pipeline returns AD/Healthy/MS/PD probabilities. The separate risk pipeline returns Low/Medium/High plus `0×P(Low) + 50×P(Medium) + 100×P(High)`, normalized to the API's 0–1 `risk_score`.
 
 ```bash
-curl -X POST http://127.0.0.1:8000/predictions/ \
+curl -X POST http://127.0.0.1:8000/neurological-risk/predict \
   -H "Content-Type: application/json" \
   -H "X-Request-ID: readme-example" \
   -d '{
-    "mfcc_1_mean": -245.2,
-    "mfcc_2_mean": 82.1,
-    "mfcc_3_mean": 14.7,
-    "pitch_mean": 178.4,
-    "pitch_std": 32.8,
-    "jitter": 0.9,
-    "shimmer": 3.1,
-    "hnr": 18.6,
-    "speech_rate": 2.4,
-    "pause_count": 12,
-    "mean_pause_duration": 0.42,
-    "mean_energy": 61.3,
-    "spectral_centroid_mean": 1840.5,
-    "zero_crossing_rate_mean": 0.08
+    "age": 65,
+    "sex": "Female",
+    "education_years": 14,
+    "bmi": 25.0,
+    "family_history_pd": 0,
+    "systolic_bp": 125,
+    "diastolic_bp": 80,
+    "cognitive_screen_score_0_30": 27,
+    "rem_sleep_score": 4,
+    "updrs_part_i": 4,
+    "updrs_part_ii": 5,
+    "updrs_part_iii": 12,
+    "updrs_part_iv": 0,
+    "schwab_england_adl": 90,
+    "apoe_e4_count": 1,
+    "gba_variant_carrier": 0,
+    "amyloid_beta_42_40_ratio": 0.08,
+    "t_tau_pg_ml": 300.0,
+    "p_tau181_pg_ml": 50.0,
+    "nfl_pg_ml": 800.0,
+    "gfap_pg_ml": 200.0,
+    "alpha_synuclein_pg_ml": 1200.0,
+    "gdf15_pg_ml": 800.0,
+    "crp40_copy_number": 2000.0
   }'
 ```
 
@@ -311,7 +321,8 @@ The application expects committed artifacts at fixed paths.
 | `app/models/feature_scaler.joblib` | Speech feature scaling |
 | `app/models/label_encoder.joblib` | Speech class labels |
 | `app/models/feature_columns.joblib` | Trained speech feature order |
-| `app/models/neurological_risk_runtime_model.joblib` | `/neurological-risk/predict` |
+| `app/models/neurological_risk_model.joblib` | General disease and risk inference at `/neurological-risk/predict` |
+| `app/models/neurological_risk_model_metadata.json` | Exact run, schema, classes, metrics, and runtime contract |
 | `app/models/eeg/model_card.json` | EEG architecture, metrics, disclosures, availability |
 | `app/models/eeg/neuro_risk_encoder.torchscript.pt` | Live EEG CPU inference |
 | `app/models/eeg/neuro_risk_inference_bundle.joblib` | EEG preprocessing and output contract |
@@ -366,7 +377,7 @@ Change to `backend/` before starting Uvicorn, and confirm the virtual environmen
 
 ### Prediction returns HTTP 503
 
-Confirm the model artifacts are present and TensorFlow/Keras, joblib, scikit-learn 1.6.1, and the remaining requirements are installed in the active environment.
+Confirm the model artifacts are present and TensorFlow/Keras, joblib, scikit-learn 1.8.0, and the remaining requirements are installed in the active environment.
 
 ### Voice returns HTTP 503
 

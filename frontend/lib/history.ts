@@ -2,7 +2,12 @@
 
 import { useMemo, useSyncExternalStore } from "react";
 import type { EegRiskReport } from "@/lib/eeg-types";
-import type { HistoryItem, Prediction, SpeechFeatures } from "@/lib/types";
+import type {
+  BiomedicalFeatures,
+  HistoryItem,
+  Prediction,
+  SpeechFeatures,
+} from "@/lib/types";
 
 const HISTORY_KEY = "neurorisk-assessments";
 const RESULT_KEY = "neurorisk-current-result";
@@ -48,7 +53,11 @@ export function readHistory(): HistoryItem[] {
 export function saveAssessment(
   type: HistoryItem["type"],
   prediction: Prediction,
-  extras: { features?: SpeechFeatures; transcript?: string } = {},
+  extras: {
+    features?: SpeechFeatures;
+    biomarkers?: BiomedicalFeatures;
+    transcript?: string;
+  } = {},
 ) {
   const item: HistoryItem = {
     id: `NSRA-${String(Date.now()).slice(-6)}`,

@@ -1,15 +1,28 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Ban, Cpu, ServerCrash, Target } from "lucide-react";
+import { ArrowLeft, Ban, Cpu, ServerCrash, Target } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { ConfoundBanner } from "@/components/confound-banner";
 import { PageHeader } from "@/components/page-header";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { fetchModelCard } from "@/lib/eeg-api";
 import type { EegModelCard } from "@/lib/eeg-types";
 
 type ConditionPerformance = { auc: number | null; auc_ci?: { ci_low: number; ci_high: number } | null };
+
+function BackToEegResults() {
+  return (
+    <Button className="mb-5" variant="outline" size="sm" asChild>
+      <Link href="/eeg/results">
+        <ArrowLeft className="size-4" />
+        Back to EEG Results
+      </Link>
+    </Button>
+  );
+}
 
 export default function ModelCardPage() {
   const [card, setCard] = useState<EegModelCard | null>(null);
@@ -34,6 +47,7 @@ export default function ModelCardPage() {
   if (error) {
     return (
       <AppShell>
+        <BackToEegResults />
         <div className="mx-auto max-w-xl py-20 text-center">
           <ServerCrash className="mx-auto size-12 text-red-700" />
           <h1 className="mt-5 text-2xl font-bold">Model card unavailable</h1>
@@ -46,6 +60,7 @@ export default function ModelCardPage() {
   if (!card) {
     return (
       <AppShell>
+        <BackToEegResults />
         <p className="py-20 text-center text-sm text-slate-500">Loading model card…</p>
       </AppShell>
     );
@@ -59,13 +74,14 @@ export default function ModelCardPage() {
 
   return (
     <AppShell>
+      <BackToEegResults />
       <PageHeader
         title="EEG Model Card"
         description="What this encoder is, what it was trained on, how well it performs, and — most importantly — what its numbers cannot be taken to mean."
       />
 
       <div className="space-y-6">
-        <ConfoundBanner disclosure={card.confound_disclosure} />
+        <ConfoundBanner disclosure={card.confound_disclosure} showModelCardLink={false} />
 
         <div className="grid gap-6 lg:grid-cols-2">
           <Card>

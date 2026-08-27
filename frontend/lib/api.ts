@@ -1,4 +1,4 @@
-import type { Prediction, SpeechFeatures, VoiceAssessment } from "@/lib/types";
+import type { BiomedicalFeatures, Prediction, VoiceAssessment } from "@/lib/types";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "") ??
@@ -13,8 +13,8 @@ async function parseResponse<T>(response: Response): Promise<T> {
   return body as T;
 }
 
-export async function submitGeneralAssessment(features: SpeechFeatures) {
-  const response = await fetch(`${API_BASE_URL}/predictions/`, {
+export async function submitGeneralAssessment(features: BiomedicalFeatures) {
+  const response = await fetch(`${API_BASE_URL}/neurological-risk/predict`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(features),

@@ -83,8 +83,8 @@ The backend must allow the exact frontend origin through `FRONTEND_ORIGINS`. The
 | Route | Purpose | Backend dependency |
 | --- | --- | --- |
 | `/` | Dashboard and entry points | None for initial shell |
-| `/general` | Enter 14 speech biomarkers | `POST /predictions/` on submit |
-| `/general/results` | Display the latest general/voice-style prediction | Browser session storage |
+| `/general` | Enter the exact 24 clinical/genetic/biomarker fields | `POST /neurological-risk/predict` on submit |
+| `/general/results` | Display disease probabilities, independent risk, explanation, and suggestions | Browser session storage |
 | `/voice` | Record or upload audio | `POST /voice-assessments/` |
 | `/voice/results` | Display transcript, extracted features, and prediction | Browser session storage |
 | `/eeg` | Featured cohort subjects and EEG upload | EEG model card, cohort, and assessment routes |
@@ -193,7 +193,7 @@ When the public frontend origin changes, add it to the backend's `FRONTEND_ORIGI
 With both services running:
 
 1. Open `/` and confirm navigation renders at desktop and narrow viewport widths.
-2. Open `/general`, retain the example values, submit, and confirm navigation to `/general/results`.
+2. Open `/general`, enter available values, submit, and confirm navigation to `/general/results`; verify blank fields are shown as not supplied.
 3. Open `/voice`, verify file validation and recording controls, and submit only when Gemini is configured.
 4. Open `/eeg`, confirm the model summary and featured cohort list load.
 5. Open `/eeg/cohort`, apply class/site/quality filters, and open a subject.
@@ -246,7 +246,7 @@ Set the backend's `FRONTEND_ORIGINS` to the exact frontend origin, including sch
 
 ### General assessment returns 422
 
-All 14 fields must contain finite numeric values. The backend rejects missing and unexpected feature names.
+The request must contain all 24 keys and no unexpected names. Leave unavailable form values blank; the frontend sends those keys as `null` for fitted imputation. Correct any supplied value shown outside its accepted range.
 
 ### Voice assessment returns 503
 

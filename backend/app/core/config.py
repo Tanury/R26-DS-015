@@ -28,6 +28,13 @@ class Settings:
         "features. It is not a medical diagnosis and should not replace "
         "evaluation by a qualified clinician."
     )
+    biomedical_disclaimer: str = (
+        "This neurological biomedical assessment is a research screening aid "
+        "trained on a synthetic cohort. Its disease class is a pattern match and "
+        "its risk score is an independent model estimate. It is not a medical "
+        "diagnosis. A qualified clinician must interpret the output alongside "
+        "symptoms, examination findings, assay methods, and the full clinical record."
+    )
 
     # --- EEG risk module -------------------------------------------------
     eeg_model_dir: Path = Path(__file__).resolve().parents[1] / "models" / "eeg"
