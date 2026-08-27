@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Search } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { BackButton } from "@/components/back-button";
 import { EmbeddingScatter } from "@/components/embedding-scatter";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,48 @@ const CLASS_CHIP: Record<string, string> = {
   PD: "bg-amber-100 text-amber-800",
   MS: "bg-blue-100 text-blue-800",
 };
+
+const CONDITION_NAMES: Record<string, string> = {
+  HC: "healthy control",
+  AD: "alzheimer alzheimers disease",
+  PD: "parkinson parkinsons disease",
+  MS: "multiple sclerosis",
+};
+
+function matchesSearch(subject: CohortPage["subjects"][number], query: string) {
+  const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if (!terms.length) return true;
+
+  const riskValues = Object.entries(subject.risk_scores).flatMap(([condition, score]) => [
+    condition,
+    CONDITION_NAMES[condition] ?? "",
+    String(score),
+    String(Math.round(score * 100)),
+  ]);
+  const searchable = [
+    "subject id filename",
+    subject.subject_id,
+    "class condition diagnosis",
+    subject.true_class,
+    CONDITION_NAMES[subject.true_class] ?? "",
+    "site",
+    subject.site,
+    "source type",
+    subject.source_kind,
+    "quality",
+    subject.signal_quality,
+    "age",
+    subject.age === null ? "age unavailable" : String(subject.age),
+    "top highest risk",
+    subject.highest_risk_condition,
+    CONDITION_NAMES[subject.highest_risk_condition] ?? "",
+    "confound status",
+    subject.confound_severity,
+    ...riskValues,
+  ].join(" ").toLowerCase();
+
+  return terms.every((term) => searchable.includes(term));
+}
 
 export default function EegCohortPage() {
   const router = useRouter();
@@ -71,10 +114,7 @@ export default function EegCohortPage() {
 
   const rows = useMemo(() => {
     const subjects = page?.subjects ?? [];
-    const needle = search.trim().toLowerCase();
-    return needle
-      ? subjects.filter((s) => s.subject_id.toLowerCase().includes(needle))
-      : subjects;
+    return subjects.filter((subject) => matchesSearch(subject, search));
   }, [page, search]);
 
   async function open(subjectId: string) {
@@ -94,6 +134,7 @@ export default function EegCohortPage() {
 
   return (
     <AppShell>
+      <BackButton href="/eeg" label="Back to EEG Assessment" />
       <PageHeader
         title="EEG Cohort Explorer"
         description="Every recording assessed by the encoder. Filter, inspect the embedding space, and open any subject's full report."
@@ -111,7 +152,8 @@ export default function EegCohortPage() {
             <Search className="absolute left-3 top-3 size-5 text-slate-400" />
             <Input
               className="pl-10"
-              placeholder="Search subject id"
+              placeholder="Search ID, condition, site, quality, age, or risk"
+              aria-label="Search all cohort subject information"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
             />
@@ -247,7 +289,7 @@ export default function EegCohortPage() {
           </table>
           {page && rows.length === 0 && (
             <div className="p-12 text-center text-sm text-slate-500">
-              No subjects match these filters.
+              No subjects match the search and selected filters.
             </div>
           )}
           {!page && !error && (

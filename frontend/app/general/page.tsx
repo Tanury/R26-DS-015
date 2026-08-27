@@ -12,6 +12,7 @@ import {
   UserRound,
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { BackButton } from "@/components/back-button";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -111,6 +112,7 @@ export default function GeneralAssessmentPage() {
 
   return (
     <AppShell>
+      <BackButton href="/" label="Back to Assessments" />
       <PageHeader
         title="General Biomedical Risk Assessment"
         description="A complete sample record is prefilled across the model's exact 24-field clinical, genetic, and biomarker contract. Replace the examples with the participant's actual values; blank values are sent as null and imputed by the saved pipeline."

@@ -253,7 +253,7 @@ The response has HTTP status 202 and contains a `job_id`. Poll until `status` be
 curl http://127.0.0.1:8000/eeg/assessments/JOB_ID
 ```
 
-Jobs move through `queued`, `validating`, `preprocessing`, `inference`, then `completed` or `failed`. The combined upload limit is 120 MB. A `.set` header that refers to external signal data must be uploaded with its matching `.fdt` file.
+Jobs move through `queued`, `validating`, `preprocessing`, `inference`, then `completed` or `failed`. The combined upload limit is 220 MB. A `.set` header that refers to external signal data must be uploaded with its matching `.fdt` file.
 
 ## Testing
 
@@ -358,7 +358,7 @@ python -m pytest
 - Use an explicit CORS allowlist; never use a wildcard for a credentialed or sensitive deployment.
 - Keep one Uvicorn worker with the current EEG job implementation. The registry is process-local, so a job submitted to one worker may not be visible when a poll reaches another worker.
 - For multi-worker or multi-instance deployment, replace the in-memory job registry with a durable shared queue and result store.
-- Set upload/body limits at the reverse proxy consistently with the backend's 18 MB voice and 120 MB EEG limits.
+- Set upload/body limits at the reverse proxy consistently with the backend's 18 MB voice and 220 MB EEG limits.
 - Restrict logs and avoid recording request bodies or participant identifiers.
 - Store secrets in the deployment secret manager rather than a committed file.
 - Add authentication, authorization, persistence policy, audit controls, and compliance review before any use with real patient data.

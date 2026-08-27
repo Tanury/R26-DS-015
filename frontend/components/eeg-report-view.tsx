@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BrainCircuit, RefreshCw } from "lucide-react";
 import { BandPatternComparison } from "@/components/band-pattern-comparison";
+import { BackButton } from "@/components/back-button";
 import { ConfoundBanner } from "@/components/confound-banner";
 import {
   BandPowerChart,
@@ -46,6 +47,11 @@ export function EegReportView({ report }: { report: EegRiskReport }) {
 
   return (
     <div className="space-y-6">
+      <BackButton
+        href={report.source === "cohort" ? "/eeg/cohort" : "/eeg"}
+        label={report.source === "cohort" ? "Back to EEG Cohort" : "Back to EEG Assessment"}
+        className="mb-0"
+      />
       <Card>
         <CardContent className="flex flex-col justify-between gap-5 p-6 sm:flex-row sm:items-center">
           <div className="flex items-start gap-4">

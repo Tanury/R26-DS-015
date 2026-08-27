@@ -10,6 +10,7 @@ import io
 import pytest
 from fastapi.testclient import TestClient
 
+from app.core.config import settings
 from app.core.exceptions import EegIngestError, EegJobNotFoundError
 from app.main import app
 from app.schemas.eeg_assessment import EegJob
@@ -45,8 +46,14 @@ class _FakeUpload:
         self._buffer.close()
 
 
-def _read(files, max_bytes=120 * 1024 * 1024):
-    return asyncio.run(jobs.read_uploads(files, max_bytes))
+def _read(files, max_bytes=None):
+    return asyncio.run(
+        jobs.read_uploads(files, settings.max_eeg_bytes if max_bytes is None else max_bytes)
+    )
+
+
+def test_configured_upload_limit_is_220_mb() -> None:
+    assert settings.max_eeg_bytes == 220 * 1024 * 1024
 
 
 def test_accepts_self_contained_set() -> None:

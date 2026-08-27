@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { AlertTriangle, CheckCircle2, ClipboardPlus, ExternalLink, Gauge, Info, RefreshCw, ShieldAlert, Waves } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { BackButton } from "@/components/back-button";
 import { ProbabilityBars } from "@/components/probability-bars";
 import { ResearchDisclaimer } from "@/components/research-disclaimer";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,7 @@ export function ResultsView({ item, expectedType }: { item: HistoryItem | null; 
   if (!item || item.type !== expectedType || !item.prediction) {
     const href = expectedType === "Voice" ? "/voice" : "/general";
     return (
-      <AppShell><div className="mx-auto max-w-xl py-20 text-center"><ClipboardPlus className="mx-auto size-12 text-blue-700" /><h1 className="mt-5 text-2xl font-bold">No current result</h1><p className="mt-2 text-slate-600">Complete an assessment to view its result.</p><Button className="mt-6" asChild><Link href={href}>Start assessment</Link></Button></div></AppShell>
+      <AppShell><BackButton href={href} label={`Back to ${expectedType} Assessment`} /><div className="mx-auto max-w-xl py-20 text-center"><ClipboardPlus className="mx-auto size-12 text-blue-700" /><h1 className="mt-5 text-2xl font-bold">No current result</h1><p className="mt-2 text-slate-600">Complete an assessment to view its result.</p><Button className="mt-6" asChild><Link href={href}>Start assessment</Link></Button></div></AppShell>
     );
   }
 
@@ -41,6 +42,7 @@ export function ResultsView({ item, expectedType }: { item: HistoryItem | null; 
 
   return (
     <AppShell>
+      <BackButton href={repeatHref} label={`Back to ${expectedType} Assessment`} />
       <div className="space-y-6">
         <Card className="p-1">
           <CardContent className="flex flex-col justify-between gap-5 p-6 sm:flex-row sm:items-center sm:p-8">

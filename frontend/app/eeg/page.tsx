@@ -13,6 +13,7 @@ import {
   X,
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { BackButton } from "@/components/back-button";
 import { PageHeader } from "@/components/page-header";
 import { ResearchDisclaimer } from "@/components/research-disclaimer";
 import { Button } from "@/components/ui/button";
@@ -33,7 +34,7 @@ import type {
 import { saveEegAssessment } from "@/lib/history";
 import { percent } from "@/lib/utils";
 
-const MAX_BYTES = 120 * 1024 * 1024;
+const MAX_BYTES = 220 * 1024 * 1024;
 
 export default function EegAssessmentPage() {
   const router = useRouter();
@@ -81,7 +82,7 @@ export default function EegAssessmentPage() {
     }
     const total = chosen.reduce((sum, file) => sum + file.size, 0);
     if (total > MAX_BYTES) {
-      setError("The upload exceeds the 120 MB limit.");
+      setError("The combined upload exceeds the 220 MB limit.");
       return;
     }
     if (!chosen.some((file) => file.name.toLowerCase().endsWith(".set"))) {
@@ -134,6 +135,7 @@ export default function EegAssessmentPage() {
 
   return (
     <AppShell>
+      <BackButton href="/" label="Back to Assessments" />
       <PageHeader
         title="EEG Neurological Risk Assessment"
         description="Explore assessed cohort recordings, or upload an EEGLAB recording for a full pipeline run producing three independent risk scores and a 256-D z_eeg embedding."
@@ -249,7 +251,7 @@ export default function EegAssessmentPage() {
                     <UploadCloud className="size-8 text-blue-700" />
                     <span className="text-sm font-semibold">Choose .set (and .fdt)</span>
                     <span className="text-xs text-slate-500">
-                      BioSemi 128 montage · up to 120 MB
+                      BioSemi 128 montage · up to 220 MB combined
                     </span>
                   </button>
                 ) : (
