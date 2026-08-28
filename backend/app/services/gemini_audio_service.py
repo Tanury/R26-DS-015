@@ -1,5 +1,6 @@
 import json
 import logging
+from typing import Any
 
 from pydantic import ValidationError
 
@@ -34,6 +35,30 @@ notes and a short transcript when speech is intelligible. Never invent patient f
 """.strip()
 
 
+def _gemini_response_schema() -> dict[str, Any]:
+    """Return the strict response model in Gemini's supported schema subset.
+
+    ``extra="forbid"`` makes Pydantic emit ``additionalProperties: false`` for
+    each object.  The Gemini Developer API's legacy ``response_schema`` field
+    rejects that otherwise-valid JSON Schema keyword.  Remove it only from the
+    wire schema; ``GeminiAudioAnalysis.model_validate`` below still enforces the
+    backend's strict no-extra-fields contract on every response.
+    """
+    schema = GeminiAudioAnalysis.model_json_schema()
+
+    def remove_unsupported_fields(node: Any) -> None:
+        if isinstance(node, dict):
+            node.pop("additionalProperties", None)
+            for value in node.values():
+                remove_unsupported_fields(value)
+        elif isinstance(node, list):
+            for value in node:
+                remove_unsupported_fields(value)
+
+    remove_unsupported_fields(schema)
+    return schema
+
+
 def extract_speech_features(audio_bytes: bytes, mime_type: str) -> GeminiAudioAnalysis:
     if not settings.gemini_api_key:
         raise AudioFeatureExtractionError(
@@ -56,11 +81,14 @@ def extract_speech_features(audio_bytes: bytes, mime_type: str) -> GeminiAudioAn
                 EXTRACTION_PROMPT,
                 types.Part.from_bytes(data=audio_bytes, mime_type=mime_type),
             ],
-            config={
-                "response_mime_type": "application/json",
-                "response_schema": GeminiAudioAnalysis.model_json_schema(),
-                "temperature": 0,
-            },
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                response_schema=_gemini_response_schema(),
+                temperature=0,
+                automatic_function_calling=types.AutomaticFunctionCallingConfig(
+                    disable=True
+                ),
+            ),
         )
         if not response.text:
             raise AudioFeatureExtractionError("Gemini returned an empty analysis.")

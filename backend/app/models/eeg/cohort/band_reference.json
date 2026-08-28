@@ -1,0 +1,161 @@
+{
+  "generated_at": "2026-08-20T13:43:44.641457+00:00",
+  "bands": [
+    "delta",
+    "theta",
+    "alpha",
+    "beta",
+    "low_gamma",
+    "theta_alpha_ratio"
+  ],
+  "separation_margin": 0.15,
+  "canonical_axis": "theta_alpha_ratio",
+  "slowing_direction": {
+    "delta": "higher",
+    "theta": "higher",
+    "alpha": "lower",
+    "beta": "lower",
+    "low_gamma": "none",
+    "theta_alpha_ratio": "higher"
+  },
+  "healthy": {
+    "n": 32,
+    "medians": {
+      "delta": 0.22776,
+      "theta": 0.13012,
+      "alpha": 0.31137,
+      "beta": 0.25166,
+      "low_gamma": 0.03204,
+      "theta_alpha_ratio": 0.40064
+    },
+    "q1": {
+      "delta": 0.18331,
+      "theta": 0.10511,
+      "alpha": 0.24311,
+      "beta": 0.22821,
+      "low_gamma": 0.02815,
+      "theta_alpha_ratio": 0.35556
+    },
+    "q3": {
+      "delta": 0.26882,
+      "theta": 0.15136,
+      "alpha": 0.37327,
+      "beta": 0.31336,
+      "low_gamma": 0.04303,
+      "theta_alpha_ratio": 0.54746
+    }
+  },
+  "conditions": {
+    "AD": {
+      "condition": "AD",
+      "n": 35,
+      "medians": {
+        "delta": 0.24397,
+        "theta": 0.16353,
+        "alpha": 0.26862,
+        "beta": 0.21884,
+        "low_gamma": 0.03948,
+        "theta_alpha_ratio": 0.66657
+      },
+      "auc_vs_hc": {
+        "delta": 0.5857,
+        "theta": 0.7277,
+        "alpha": 0.3946,
+        "beta": 0.3446,
+        "low_gamma": 0.5585,
+        "theta_alpha_ratio": 0.7232
+      },
+      "direction_vs_hc": {
+        "delta": "none",
+        "theta": "higher",
+        "alpha": "none",
+        "beta": "lower",
+        "low_gamma": "none",
+        "theta_alpha_ratio": "higher"
+      },
+      "separating_bands": [
+        "theta",
+        "beta",
+        "theta_alpha_ratio"
+      ],
+      "opposing_bands": [],
+      "has_signature": true,
+      "note": "3 of 6 bands separate AD from healthy controls in this cohort: theta higher (AUC 0.73), theta/alpha ratio higher (AUC 0.72), beta lower (AUC 0.34). The theta/alpha ratio moves in the expected slowing direction, so a band-power comparison is meaningful for this condition."
+    },
+    "PD": {
+      "condition": "PD",
+      "n": 26,
+      "medians": {
+        "delta": 0.29408,
+        "theta": 0.19173,
+        "alpha": 0.20619,
+        "beta": 0.21047,
+        "low_gamma": 0.03331,
+        "theta_alpha_ratio": 0.88149
+      },
+      "auc_vs_hc": {
+        "delta": 0.7716,
+        "theta": 0.8077,
+        "alpha": 0.2356,
+        "beta": 0.3053,
+        "low_gamma": 0.5072,
+        "theta_alpha_ratio": 0.8365
+      },
+      "direction_vs_hc": {
+        "delta": "higher",
+        "theta": "higher",
+        "alpha": "lower",
+        "beta": "lower",
+        "low_gamma": "none",
+        "theta_alpha_ratio": "higher"
+      },
+      "separating_bands": [
+        "delta",
+        "theta",
+        "alpha",
+        "beta",
+        "theta_alpha_ratio"
+      ],
+      "opposing_bands": [],
+      "has_signature": true,
+      "note": "5 of 6 bands separate PD from healthy controls in this cohort: theta/alpha ratio higher (AUC 0.84), theta higher (AUC 0.81), delta higher (AUC 0.77). The theta/alpha ratio moves in the expected slowing direction, so a band-power comparison is meaningful for this condition."
+    },
+    "MS": {
+      "condition": "MS",
+      "n": 22,
+      "medians": {
+        "delta": 0.15774,
+        "theta": 0.14251,
+        "alpha": 0.34553,
+        "beta": 0.26982,
+        "low_gamma": 0.02888,
+        "theta_alpha_ratio": 0.45178
+      },
+      "auc_vs_hc": {
+        "delta": 0.2869,
+        "theta": 0.5298,
+        "alpha": 0.6158,
+        "beta": 0.4957,
+        "low_gamma": 0.4574,
+        "theta_alpha_ratio": 0.483
+      },
+      "direction_vs_hc": {
+        "delta": "lower",
+        "theta": "none",
+        "alpha": "none",
+        "beta": "none",
+        "low_gamma": "none",
+        "theta_alpha_ratio": "none"
+      },
+      "separating_bands": [
+        "delta"
+      ],
+      "opposing_bands": [
+        "delta"
+      ],
+      "has_signature": false,
+      "note": "MS does not show a band-power slowing signature in this cohort: the theta/alpha ratio sits at chance (AUC 0.48). Only delta lower (AUC 0.29) separates at all, and delta moves opposite to the slowing direction \u2014 the profile of a younger group rather than an affected one. No pattern is claimed here."
+    }
+  },
+  "method": "Relative band power per subject, compared across diagnostic groups with a rank-based AUC. Descriptive only \u2014 the encoder consumes raw time-domain epochs and never sees these values."
+}

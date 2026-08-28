@@ -3,10 +3,8 @@ import logging
 from fastapi import APIRouter, HTTPException
 
 from app.core.exceptions import ModelLoadError, PredictionError
-from app.schemas.neurological_prediction_response import (
-    NeurologicalPredictionResponse,
-)
 from app.schemas.neurological_risk_request import NeurologicalRiskRequest
+from app.schemas.prediction_response import PredictionResponse
 from app.services.neurological_prediction_service import (
     predict_neurological_risk,
 )
@@ -18,12 +16,12 @@ router = APIRouter()
 
 @router.post(
     "/predict",
-    response_model=NeurologicalPredictionResponse,
-    summary="Predict neurological risk from selected speech features",
+    response_model=PredictionResponse,
+    summary="Predict neurological disease pattern and biomedical risk",
 )
 def predict(
     payload: NeurologicalRiskRequest,
-) -> NeurologicalPredictionResponse:
+) -> PredictionResponse:
     try:
         return predict_neurological_risk(payload)
     except ModelLoadError as exc:

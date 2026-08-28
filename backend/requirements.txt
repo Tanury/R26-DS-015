@@ -5,10 +5,19 @@ python-dotenv
 joblib
 numpy
 pandas
-scikit-learn==1.6.1
+scikit-learn==1.8.0
 tensorflow
 xgboost==3.3.0
 google-genai
 python-multipart
 pytest
 httpx
+
+# --- EEG risk module ---------------------------------------------------
+# CPU wheels only. The CUDA build is ~2.5 GB and buys nothing: TorchScript
+# inference on ~80 epochs of [10, 128, 16] is well under a second on CPU.
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# torch is optional — cohort browsing (Tier 1) works without it, and the API
+# reports inference_available=false rather than failing.
+torch
+mne>=1.6

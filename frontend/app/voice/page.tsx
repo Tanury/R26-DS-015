@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FileAudio, Loader2, Mic, Square, UploadCloud, X } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { BackButton } from "@/components/back-button";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -62,13 +63,24 @@ export default function VoiceAssessmentPage() {
     try {
       const result = await submitVoiceAssessment(file, patientAge, task);
       setStep(2);
-      saveAssessment("Voice", result.prediction, { features: result.extracted_features, transcript: result.transcript });
+      saveAssessment("Voice", result.prediction, {
+        features: result.extracted_features,
+        transcript: result.transcript,
+        voiceDetails: {
+          filename: result.filename,
+          recording_task: result.recording_task,
+          patient_age: result.patient_age,
+          extraction_quality: result.extraction_quality,
+          quality_notes: result.quality_notes,
+          extraction_disclaimer: result.extraction_disclaimer,
+        },
+      });
       setStep(3); router.push("/voice/results");
     } catch (reason) { setStep(0); setError(reason instanceof Error ? reason.message : "Voice analysis failed."); }
     finally { setProcessing(false); }
   }
 
-  return <AppShell><PageHeader title="Neurological Voice Assessment" description="Record or upload a standardized speech sample for structured research feature extraction and model assessment." />
+  return <AppShell><BackButton href="/" label="Back to Assessments" /><PageHeader title="Neurological Voice Assessment" description="Record or upload a standardized speech sample for structured research feature extraction and model assessment." />
     <div className="mb-7 grid grid-cols-4 gap-2">{steps.map((label,index)=><div key={label} className="text-center"><div className={`mx-auto grid size-9 place-items-center rounded-full border-2 text-sm font-bold ${index <= step ? "border-blue-700 bg-blue-700 text-white" : "border-slate-300 bg-white text-slate-400"}`}>{index+1}</div><div className={`mt-2 text-xs font-semibold sm:text-sm ${index <= step ? "text-blue-700" : "text-slate-400"}`}>{label}</div></div>)}</div>
     <Card><CardContent className="grid gap-7 p-5 sm:p-7 lg:grid-cols-[300px_1fr]">
       <div className="space-y-5 border-b border-slate-200 pb-7 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-7"><label className="block"><span className="mb-2 block text-sm font-semibold">Task Selection</span><select value={task} onChange={(e)=>setTask(e.target.value)} className="h-11 w-full rounded-md border border-slate-300 bg-white px-3 text-sm"><option value="reading">Reading</option><option value="picture_description">Picture Description</option><option value="monologue">Monologue</option><option value="sustained_vowel">Sustained Vowel</option></select></label><label className="block"><span className="mb-2 block text-sm font-semibold">Patient Age</span><Input type="number" min={18} max={120} value={age} onChange={(e)=>setAge(e.target.value)} /></label><p className="text-sm leading-6 text-slate-500">Audio is sent to the configured Gemini model through FastAPI. The API key remains on the server.</p></div>

@@ -8,8 +8,8 @@ import {
   BrainCircuit,
   ChartNoAxesCombined,
   CircleHelp,
+  Activity,
   ClipboardList,
-  FlaskConical,
   History,
   LayoutDashboard,
   Menu,
@@ -23,9 +23,10 @@ import { Button } from "@/components/ui/button";
 const navigation = [
   { href: "/", label: "Overview", icon: LayoutDashboard },
   { href: "/voice", label: "Voice Assessment", icon: Mic },
-  { href: "/general", label: "General Assessment", icon: ClipboardList },
+  { href: "/general", label: "Biomedical Assessment", icon: ClipboardList },
+  { href: "/eeg", label: "EEG Assessment", icon: Activity },
   { href: "/history", label: "Assessment History", icon: History },
-  { href: "/insights", label: "Research Insights", icon: ChartNoAxesCombined },
+  { href: "/fusion", label: "Fusion Result", icon: ChartNoAxesCombined },
 ];
 
 function SideNavigation({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
@@ -36,8 +37,8 @@ function SideNavigation({ pathname, onNavigate }: { pathname: string; onNavigate
           <BrainCircuit className="size-6" />
         </div>
         <div className="min-w-0">
-          <div className="text-xl font-bold text-blue-800">NeuroVoice AI</div>
-          <div className="text-xs font-semibold text-slate-500">Precision Diagnostics</div>
+          <div className="text-lg font-bold leading-tight text-blue-800">NeuroRisk Research Platform</div>
+          <div className="text-xs font-semibold text-slate-500">Multimodal Decision Support</div>
         </div>
       </div>
       <nav className="flex-1 space-y-1 py-4" aria-label="Primary navigation">
@@ -64,7 +65,7 @@ function SideNavigation({ pathname, onNavigate }: { pathname: string; onNavigate
       </nav>
       <div className="space-y-2 border-t border-slate-200 p-5">
         <Button className="w-full" asChild>
-          <Link href="/insights"><FlaskConical className="size-4" />Research Mode</Link>
+          <Link href="/fusion"><ChartNoAxesCombined className="size-4" />Fusion Result</Link>
         </Button>
         <Link href="/support" className="flex items-center gap-3 px-2 py-2 text-sm text-slate-600 hover:text-blue-700">
           <CircleHelp className="size-5" /> Help

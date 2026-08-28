@@ -1,0 +1,23 @@
+{
+  "checkpoint": "/content/drive/MyDrive/r26_ds015_workspace/models/checkpoints/transformer_raw_fold0.pth",
+  "probes": {
+    "age": {
+      "n": 0,
+      "note": "insufficient age metadata"
+    },
+    "site": {
+      "n": 115,
+      "accuracy": 0.6174,
+      "balanced_accuracy": 0.6205,
+      "majority_baseline": 0.5391
+    },
+    "class": {
+      "n": 115,
+      "accuracy": 0.9826,
+      "balanced_accuracy": 0.9826,
+      "chance": 0.25
+    }
+  },
+  "risk_score_age_correlation": {},
+  "n_probe_folds": 5
+}

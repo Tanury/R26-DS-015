@@ -1,0 +1,77 @@
+{
+  "scanned_files": 143,
+  "readable": 128,
+  "unreadable": 15,
+  "missing_fdt": 15,
+  "unreadable_subjects": [
+    "PD-CL-sub-40015",
+    "HC-CL-sub-100013",
+    "HC-CL-sub-100019",
+    "HC-CL-sub-100023",
+    "HC-CL-sub-100025",
+    "HC-CL-sub-100027",
+    "HC-CL-sub-100032",
+    "HC-CL-sub-100036",
+    "HC-CL-sub-100039",
+    "HC-CL-sub-100040",
+    "HC-CL-sub-100041",
+    "HC-CL-sub-100042",
+    "HC-CL-sub-100044",
+    "HC-CL-sub-100045",
+    "HC-CL-sub-100046"
+  ],
+  "colliding_dir_names": [
+    "sub-40001",
+    "sub-40006",
+    "sub-40008",
+    "sub-40010",
+    "sub-40011",
+    "sub-40012"
+  ],
+  "by_class_site": {
+    "AR": {
+      "AD": 16,
+      "HC": 19,
+      "MS": 33,
+      "PD": 7
+    },
+    "CL": {
+      "AD": 19,
+      "HC": 13,
+      "MS": 0,
+      "PD": 21
+    }
+  },
+  "by_class_task": {
+    "extero": {
+      "AD": 0,
+      "HC": 0,
+      "MS": 8,
+      "PD": 0
+    },
+    "mind-wander": {
+      "AD": 0,
+      "HC": 0,
+      "MS": 2,
+      "PD": 0
+    },
+    "pre-epoched": {
+      "AD": 0,
+      "HC": 0,
+      "MS": 0,
+      "PD": 12
+    },
+    "rest": {
+      "AD": 0,
+      "HC": 32,
+      "MS": 23,
+      "PD": 16
+    },
+    "rest+HEP": {
+      "AD": 35,
+      "HC": 0,
+      "MS": 0,
+      "PD": 0
+    }
+  }
+}

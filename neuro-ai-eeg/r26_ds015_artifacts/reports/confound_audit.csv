@@ -1,0 +1,5 @@
+class,n,site_purity,dominant_site,age_mean,age_sd,age_min,age_max,age_overlap_with_others,confound_severity
+HC,32,0.594,AR,,,,,,low
+AD,35,0.543,CL,,,,,,low
+PD,28,0.75,CL,,,,,,low
+MS,23,1.0,AR,,,,,,HIGH (site)
