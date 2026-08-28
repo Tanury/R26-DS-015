@@ -149,6 +149,9 @@ export function EegReportView({ report }: { report: EegRiskReport }) {
           <Link href="/eeg/cohort">Browse cohort</Link>
         </Button>
         <Button variant="outline" asChild>
+          <Link href="/fusion"><BrainCircuit className="size-4" />Fusion Result</Link>
+        </Button>
+        <Button variant="outline" asChild>
           <Link href="/model-card">Model card</Link>
         </Button>
       </div>

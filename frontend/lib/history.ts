@@ -7,6 +7,7 @@ import type {
   HistoryItem,
   Prediction,
   SpeechFeatures,
+  VoiceAssessmentDetails,
 } from "@/lib/types";
 
 const HISTORY_KEY = "neurorisk-assessments";
@@ -57,6 +58,7 @@ export function saveAssessment(
     features?: SpeechFeatures;
     biomarkers?: BiomedicalFeatures;
     transcript?: string;
+    voiceDetails?: VoiceAssessmentDetails;
   } = {},
 ) {
   const item: HistoryItem = {

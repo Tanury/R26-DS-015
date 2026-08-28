@@ -102,6 +102,16 @@ export type VoiceAssessment = {
   extraction_disclaimer: string;
 };
 
+export type VoiceAssessmentDetails = Pick<
+  VoiceAssessment,
+  | "filename"
+  | "recording_task"
+  | "patient_age"
+  | "extraction_quality"
+  | "quality_notes"
+  | "extraction_disclaimer"
+>;
+
 export type AssessmentType = "Voice" | "General" | "EEG";
 
 export type HistoryItem = {
@@ -119,4 +129,5 @@ export type HistoryItem = {
   features?: SpeechFeatures;
   biomarkers?: BiomedicalFeatures;
   transcript?: string;
+  voiceDetails?: VoiceAssessmentDetails;
 };

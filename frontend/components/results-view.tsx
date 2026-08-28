@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { AlertTriangle, CheckCircle2, ClipboardPlus, ExternalLink, Gauge, Info, RefreshCw, ShieldAlert, Waves } from "lucide-react";
+import { AlertTriangle, BrainCircuit, CheckCircle2, ClipboardPlus, ExternalLink, Gauge, Info, RefreshCw, ShieldAlert, Waves } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { BackButton } from "@/components/back-button";
 import { ProbabilityBars } from "@/components/probability-bars";
@@ -84,7 +84,7 @@ export function ResultsView({ item, expectedType }: { item: HistoryItem | null; 
 
         <div className="flex gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-700"><Info className="mt-0.5 size-5 shrink-0 text-blue-700" /><div><div className="font-semibold text-slate-900">Research-use limitation</div><p className="mt-1">{prediction.disclaimer}</p></div></div>
 
-        <div className="flex flex-wrap gap-3"><Button asChild><Link href={repeatHref}><RefreshCw className="size-4" />New assessment</Link></Button><Button variant="outline" asChild><Link href="/history">View history</Link></Button></div>
+        <div className="flex flex-wrap gap-3"><Button asChild><Link href={repeatHref}><RefreshCw className="size-4" />New assessment</Link></Button><Button variant="outline" asChild><Link href="/fusion"><BrainCircuit className="size-4" />Fusion Result</Link></Button><Button variant="outline" asChild><Link href="/history">View history</Link></Button></div>
         <ResearchDisclaimer />
       </div>
     </AppShell>

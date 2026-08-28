@@ -63,7 +63,18 @@ export default function VoiceAssessmentPage() {
     try {
       const result = await submitVoiceAssessment(file, patientAge, task);
       setStep(2);
-      saveAssessment("Voice", result.prediction, { features: result.extracted_features, transcript: result.transcript });
+      saveAssessment("Voice", result.prediction, {
+        features: result.extracted_features,
+        transcript: result.transcript,
+        voiceDetails: {
+          filename: result.filename,
+          recording_task: result.recording_task,
+          patient_age: result.patient_age,
+          extraction_quality: result.extraction_quality,
+          quality_notes: result.quality_notes,
+          extraction_disclaimer: result.extraction_disclaimer,
+        },
+      });
       setStep(3); router.push("/voice/results");
     } catch (reason) { setStep(0); setError(reason instanceof Error ? reason.message : "Voice analysis failed."); }
     finally { setProcessing(false); }

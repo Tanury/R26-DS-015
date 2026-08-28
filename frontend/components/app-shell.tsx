@@ -10,7 +10,6 @@ import {
   CircleHelp,
   Activity,
   ClipboardList,
-  FlaskConical,
   History,
   LayoutDashboard,
   Menu,
@@ -27,7 +26,7 @@ const navigation = [
   { href: "/general", label: "Biomedical Assessment", icon: ClipboardList },
   { href: "/eeg", label: "EEG Assessment", icon: Activity },
   { href: "/history", label: "Assessment History", icon: History },
-  { href: "/insights", label: "Research Insights", icon: ChartNoAxesCombined },
+  { href: "/fusion", label: "Fusion Result", icon: ChartNoAxesCombined },
 ];
 
 function SideNavigation({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
@@ -66,7 +65,7 @@ function SideNavigation({ pathname, onNavigate }: { pathname: string; onNavigate
       </nav>
       <div className="space-y-2 border-t border-slate-200 p-5">
         <Button className="w-full" asChild>
-          <Link href="/insights"><FlaskConical className="size-4" />Research Mode</Link>
+          <Link href="/fusion"><ChartNoAxesCombined className="size-4" />Fusion Result</Link>
         </Button>
         <Link href="/support" className="flex items-center gap-3 px-2 py-2 text-sm text-slate-600 hover:text-blue-700">
           <CircleHelp className="size-5" /> Help
