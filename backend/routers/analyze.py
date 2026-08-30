@@ -98,16 +98,16 @@ def diseases():
             {
                 "id":       "parkinsons",
                 "name":     "Parkinson's Disease",
-                "modality": "Brain MRI",
+                "modality": "DaTscan SPECT + MRI",
                 "classes":  ["PD", "HC"],
-                "status":   "coming_soon",
+                "status":   "active",
             },
             {
                 "id":       "multiple_sclerosis",
                 "name":     "Multiple Sclerosis",
-                "modality": "Brain MRI",
+                "modality": "OCT Retinal Images",
                 "classes":  ["MS", "HC"],
-                "status":   "coming_soon",
+                "status":   "active",
             },
         ]
     }
