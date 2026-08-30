@@ -123,7 +123,7 @@ export default function EegCohortPage() {
     try {
       const report = await fetchCohortReport(subjectId);
       saveEegAssessment(report);
-      router.push("/eeg/results");
+      router.push("/eeg/prediction");
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : "Unable to open that subject.");
       setOpening(false);

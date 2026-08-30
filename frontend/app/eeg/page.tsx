@@ -102,7 +102,7 @@ export default function EegAssessmentPage() {
       const settled = await pollEegJob(created.job_id, setJob);
       if (settled.status === "completed" && settled.report) {
         saveEegAssessment(settled.report);
-        router.push("/eeg/results");
+        router.push("/eeg/prediction");
         return;
       }
       setError(settled.error?.message ?? "The assessment could not be completed.");
@@ -124,7 +124,7 @@ export default function EegAssessmentPage() {
     try {
       const report = await fetchCohortReport(subjectId);
       saveEegAssessment(report);
-      router.push("/eeg/results");
+      router.push("/eeg/prediction");
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : "Unable to load that subject.");
       setBusy(false);

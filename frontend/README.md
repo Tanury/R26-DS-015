@@ -90,6 +90,7 @@ The backend must allow the exact frontend origin through `FRONTEND_ORIGINS`. The
 | `/eeg` | Featured cohort subjects and EEG upload | EEG model card, cohort, and assessment routes |
 | `/eeg/cohort` | Browse/filter cohort reports | EEG cohort/projection routes |
 | `/eeg/results` | EEG risk, quality, bands, embedding, and confounds | Browser session storage; band reference as needed |
+| `/eeg/prediction` | User-focused EEG prediction, interpretation, and recommendations | Browser session storage |
 | `/model-card` | Installed EEG model performance and disclosures | `GET /eeg/model-card` |
 | `/history` | Up to 100 locally saved results | Browser local storage |
 | `/insights` | Research summary/insight views | Local application data |

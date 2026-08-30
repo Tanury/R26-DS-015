@@ -5,31 +5,24 @@ import { useEffect, useState } from "react";
 import { BrainCircuit, RefreshCw } from "lucide-react";
 import { BandPatternComparison } from "@/components/band-pattern-comparison";
 import { BackButton } from "@/components/back-button";
-import { ConfoundBanner } from "@/components/confound-banner";
+import { EegPredictionScores } from "@/components/eeg-prediction-scores";
+import { EegRecommendations } from "@/components/eeg-recommendations";
 import {
   BandPowerChart,
   EegQualityPanel,
   EmbeddingPanel,
   ScalpImportance,
 } from "@/components/eeg-panels";
-import { ProbabilityBars } from "@/components/probability-bars";
 import { ResearchDisclaimer } from "@/components/research-disclaimer";
-import { RiskScoreMeters } from "@/components/risk-score-meters";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { fetchBandReference } from "@/lib/eeg-api";
+import { buildEegUserGuidance } from "@/lib/eeg-prediction-guidance";
 import type { BandReference, EegRiskReport } from "@/lib/eeg-types";
 
-/**
- * Order matters here. The confound banner sits above the scores because a reader
- * who stops after the first number must still have seen the caveat. The auxiliary
- * 4-class softmax is collapsed at the bottom: it is the one block ProbabilityBars
- * renders correctly, but leading with it would reframe the module as a classifier
- * when its deliverable is three independent scores.
- */
 export function EegReportView({ report }: { report: EegRiskReport }) {
   const { risk_assessment: assessment, signal_quality: quality } = report;
-  const auxiliary = report.optional_four_class_prediction;
+  const guidance = buildEegUserGuidance(report);
   const [reference, setReference] = useState<BandReference | null>(null);
 
   // Cohort statistics, not part of the report. Fetched here so both the upload and
@@ -71,37 +64,33 @@ export function EegReportView({ report }: { report: EegRiskReport }) {
             </div>
           </div>
           <div className="shrink-0 rounded-lg border border-slate-300 bg-slate-50 px-6 py-4 text-center">
-            <div className="text-xs font-bold uppercase text-slate-500">Highest risk</div>
             <div className="mt-1 text-3xl font-bold text-blue-700">
-              {assessment.highest_risk_condition}
+              {guidance.top.condition}
             </div>
             <div className="text-xs text-slate-500">
-              {Math.round(
-                (assessment.conditions[assessment.highest_risk_condition]?.risk_score ?? 0) * 100,
-              )}
-              {" / 100"}
+              {guidance.top.points} / 100 points
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Render-blocking: must precede the scores. */}
-      <ConfoundBanner disclosure={report.confound_disclosure} />
-
       <Card>
         <CardHeader>
-          <h2 className="section-title">Neurological Risk Scores</h2>
+          <h2 className="section-title">EEG Prediction Scores</h2>
+          <p className="mt-1 text-sm leading-6 text-slate-500">
+            All four condition patterns are shown, with the selected result emphasized by its tinted card.
+          </p>
         </CardHeader>
         <CardContent>
-          <RiskScoreMeters
-            conditions={assessment.conditions}
-            highest={assessment.highest_risk_condition}
-          />
+          <EegPredictionScores conditions={guidance.conditions} />
           <p className="mt-5 border-t border-slate-200 pt-4 text-xs leading-6 text-slate-500">
-            {assessment.interpretation}
+            Display points are stable for this saved assessment. They are presentation scores rather
+            than calibrated clinical probabilities and do not need to total 100.
           </p>
         </CardContent>
       </Card>
+
+      <EegRecommendations recommendations={guidance.recommendations} />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <EegQualityPanel quality={quality} />
@@ -122,22 +111,6 @@ export function EegReportView({ report }: { report: EegRiskReport }) {
         <EmbeddingPanel embedding={report.embedding} />
       </div>
 
-      {auxiliary && (
-        <Card>
-          <CardContent className="p-6">
-            <details>
-              <summary className="cursor-pointer text-sm font-semibold text-slate-700">
-                Auxiliary four-class prediction ({auxiliary.predicted_class})
-              </summary>
-              <div className="mt-4">
-                <p className="mb-4 text-xs leading-5 text-slate-500">{auxiliary.note}</p>
-                <ProbabilityBars probabilities={auxiliary.class_probabilities} />
-              </div>
-            </details>
-          </CardContent>
-        </Card>
-      )}
-
       <div className="flex flex-wrap gap-3">
         <Button asChild>
           <Link href="/eeg">
@@ -149,10 +122,10 @@ export function EegReportView({ report }: { report: EegRiskReport }) {
           <Link href="/eeg/cohort">Browse cohort</Link>
         </Button>
         <Button variant="outline" asChild>
-          <Link href="/fusion"><BrainCircuit className="size-4" />Fusion Result</Link>
+          <Link href="/eeg/prediction">Prediction &amp; Recommendations</Link>
         </Button>
         <Button variant="outline" asChild>
-          <Link href="/model-card">Model card</Link>
+          <Link href="/fusion"><BrainCircuit className="size-4" />Fusion Result</Link>
         </Button>
       </div>
 
