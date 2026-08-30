@@ -1,0 +1,2207 @@
+[
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_000",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_000.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_001",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_001.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_002",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_002.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_003",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_003.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_004",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_004.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_005",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_005.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_006",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_006.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_007",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_007.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_008",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_008.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_009",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_009.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_010",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_010.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_011",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_011.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_012",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_012.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_013",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_013.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_014",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_014.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_015",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_015.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_016",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_016.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_017",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_017.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_018",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_018.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_019",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_019.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_020",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_020.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_021",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_021.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_022",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_022.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_023",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_023.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_024",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_024.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_025",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_025.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_026",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_026.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_027",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_027.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_028",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_028.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_029",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_029.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_030",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_030.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_031",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_031.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_032",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_032.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_033",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_033.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_034",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_034.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_035",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_035.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_036",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_036.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_037",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_037.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_038",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_038.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_039",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_039.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_040",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_040.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_041",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_041.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_042",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_042.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_043",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_043.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_044",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_044.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_045",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_045.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_046",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_046.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_047",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_047.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc04",
+    "label": "HC",
+    "frame": "frame_048",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/frame_048.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc04/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_000",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_000.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_001",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_001.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_002",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_002.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_003",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_003.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_004",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_004.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_005",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_005.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_006",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_006.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_007",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_007.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_008",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_008.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_009",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_009.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_010",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_010.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_011",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_011.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_012",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_012.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_013",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_013.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_014",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_014.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_015",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_015.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_016",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_016.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_017",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_017.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_018",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_018.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_019",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_019.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_020",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_020.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_021",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_021.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_022",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_022.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_023",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_023.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_024",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_024.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_025",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_025.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_026",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_026.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_027",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_027.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_028",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_028.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_029",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_029.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_030",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_030.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_031",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_031.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_032",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_032.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_033",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_033.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_034",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_034.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_035",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_035.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_036",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_036.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_037",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_037.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_038",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_038.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_039",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_039.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_040",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_040.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_041",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_041.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_042",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_042.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_043",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_043.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_044",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_044.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_045",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_045.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_046",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_046.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_047",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_047.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "hc05",
+    "label": "HC",
+    "frame": "frame_048",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/frame_048.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/hc05/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_000",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_000.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_001",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_001.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_002",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_002.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_003",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_003.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_004",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_004.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_005",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_005.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_006",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_006.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_007",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_007.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_008",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_008.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_009",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_009.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_010",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_010.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_011",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_011.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_012",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_012.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_013",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_013.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_014",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_014.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_015",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_015.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_016",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_016.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_017",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_017.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_018",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_018.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_019",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_019.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_020",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_020.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_021",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_021.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_022",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_022.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_023",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_023.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_024",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_024.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_025",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_025.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_026",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_026.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_027",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_027.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_028",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_028.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_029",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_029.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_030",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_030.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_031",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_031.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_032",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_032.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_033",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_033.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_034",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_034.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_035",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_035.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_036",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_036.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_037",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_037.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_038",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_038.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_039",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_039.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_040",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_040.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_041",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_041.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_042",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_042.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_043",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_043.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_044",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_044.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_045",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_045.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_046",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_046.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_047",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_047.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms08",
+    "label": "MS",
+    "frame": "frame_048",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/frame_048.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms08/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_000",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_000.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_001",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_001.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_002",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_002.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_003",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_003.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_004",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_004.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_005",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_005.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_006",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_006.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_007",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_007.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_008",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_008.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_009",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_009.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_010",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_010.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_011",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_011.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_012",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_012.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_013",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_013.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_014",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_014.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_015",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_015.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_016",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_016.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_017",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_017.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_018",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_018.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_019",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_019.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_020",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_020.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_021",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_021.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_022",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_022.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_023",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_023.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_024",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_024.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_025",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_025.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_026",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_026.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_027",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_027.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_028",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_028.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_029",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_029.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_030",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_030.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_031",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_031.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_032",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_032.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_033",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_033.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_034",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_034.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_035",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_035.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_036",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_036.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_037",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_037.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_038",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_038.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_039",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_039.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_040",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_040.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_041",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_041.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_042",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_042.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_043",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_043.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_044",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_044.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_045",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_045.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_046",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_046.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_047",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_047.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms09",
+    "label": "MS",
+    "frame": "frame_048",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/frame_048.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms09/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_000",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_000.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_001",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_001.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_002",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_002.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_003",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_003.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_004",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_004.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_005",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_005.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_006",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_006.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_007",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_007.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_008",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_008.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_009",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_009.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_010",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_010.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_011",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_011.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_012",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_012.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_013",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_013.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_014",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_014.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_015",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_015.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_016",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_016.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_017",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_017.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_018",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_018.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_019",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_019.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_020",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_020.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_021",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_021.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_022",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_022.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_023",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_023.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_024",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_024.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_025",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_025.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_026",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_026.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_027",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_027.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_028",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_028.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_029",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_029.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_030",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_030.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_031",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_031.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_032",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_032.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_033",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_033.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_034",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_034.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_035",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_035.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_036",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_036.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_037",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_037.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_038",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_038.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_039",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_039.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_040",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_040.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_041",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_041.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_042",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_042.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_043",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_043.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_044",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_044.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_045",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_045.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_046",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_046.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_047",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_047.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  },
+  {
+    "subject_id": "ms20",
+    "label": "MS",
+    "frame": "frame_048",
+    "file_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/frame_048.png",
+    "boundary_path": "/Users/tanuridissanayaka/research/R26-DS-015/retinal/ms/data/preprocessed/bscans/ms20/boundaries.npy",
+    "modality": "OCT",
+    "source": "HC-MS IACL"
+  }
+]
