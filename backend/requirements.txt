@@ -21,3 +21,11 @@ httpx
 # reports inference_available=false rather than failing.
 torch
 mne>=1.6
+
+# --- Vision Encoder (neuroimaging) module -------------------------------
+nibabel
+monai
+antspyx
+matplotlib
+mindglide
+construct
