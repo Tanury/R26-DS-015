@@ -25,6 +25,7 @@ export async function fetchModelCard() {
 }
 
 export async function fetchCohort(params: {
+  search?: string;
   trueClass?: string;
   site?: string;
   quality?: string;
@@ -32,6 +33,7 @@ export async function fetchCohort(params: {
   limit?: number;
 } = {}) {
   const query = new URLSearchParams();
+  if (params.search) query.set("search", params.search);
   if (params.trueClass) query.set("true_class", params.trueClass);
   if (params.site) query.set("site", params.site);
   if (params.quality) query.set("quality", params.quality);

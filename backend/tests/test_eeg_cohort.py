@@ -40,6 +40,42 @@ def test_cohort_rejects_unknown_filter_value() -> None:
     assert client.get("/eeg/cohort", params={"true_class": "NOPE"}).status_code == 422
 
 
+def test_cohort_search_matches_partial_id_across_the_full_index() -> None:
+    subjects = cohort.load_cohort_index()
+    target = subjects[-1]
+    fragment = target.subject_id[-8:].lower()
+    body = client.get("/eeg/cohort", params={"search": fragment, "limit": 200}).json()
+    assert target.subject_id in {subject["subject_id"] for subject in body["subjects"]}
+
+
+@pytest.mark.parametrize(
+    ("query", "expected_class"),
+    [("alzheimer", "AD"), ("parkinson", "PD"), ("multiple sclerosis", "MS"), ("healthy", "HC")],
+)
+def test_cohort_search_matches_condition_names(query: str, expected_class: str) -> None:
+    body = client.get("/eeg/cohort", params={"search": query, "limit": 200}).json()
+    assert body["total"] > 0
+    assert all(
+        subject["true_class"] == expected_class
+        or subject["highest_risk_condition"] == expected_class
+        for subject in body["subjects"]
+    )
+
+
+def test_cohort_search_combines_terms_and_filters() -> None:
+    subject = cohort.load_cohort_index()[0]
+    body = client.get(
+        "/eeg/cohort",
+        params={
+            "search": f"{subject.subject_id[:6]} {subject.signal_quality}",
+            "site": subject.site,
+            "limit": 200,
+        },
+    ).json()
+    assert body["total"] > 0
+    assert all(item["site"] == subject.site for item in body["subjects"])
+
+
 def test_report_has_every_required_block() -> None:
     subject_id = client.get("/eeg/cohort", params={"limit": 1}).json()["subjects"][0]["subject_id"]
     body = client.get(f"/eeg/cohort/{subject_id}").json()

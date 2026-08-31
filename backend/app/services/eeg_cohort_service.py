@@ -36,6 +36,12 @@ PROJECTION_FILENAME = "projection.json"
 BAND_REFERENCE_FILENAME = "band_reference.json"
 MODEL_CARD_FILENAME = "model_card.json"
 CRITICAL_MARKER = "CRITICAL"
+CONDITION_NAMES = {
+    "HC": "healthy control healthy",
+    "AD": "alzheimer alzheimers disease",
+    "PD": "parkinson parkinsons disease",
+    "MS": "multiple sclerosis",
+}
 
 
 def _cohort_dir() -> Path:
@@ -145,6 +151,7 @@ def load_cohort_index() -> list[CohortSubject]:
 
 def list_cohort(
     *,
+    search: str | None = None,
     true_class: str | None = None,
     site: str | None = None,
     quality: str | None = None,
@@ -152,11 +159,13 @@ def list_cohort(
     limit: int = 50,
 ) -> CohortPage:
     subjects = load_cohort_index()
+    terms = [term for term in (search or "").casefold().split() if term]
     filtered = [
         subject for subject in subjects
         if (true_class is None or subject.true_class == true_class)
         and (site is None or subject.site == site)
         and (quality is None or subject.signal_quality == quality)
+        and _matches_search(subject, terms)
     ]
     window = filtered[offset: offset + limit]
     return CohortPage(
@@ -170,6 +179,42 @@ def list_cohort(
             "signal_quality": sorted({s.signal_quality for s in subjects}),
         },
     )
+
+
+def _matches_search(subject: CohortSubject, terms: list[str]) -> bool:
+    """Match every term against all useful cohort fields before pagination."""
+    if not terms:
+        return True
+
+    score_values = [
+        value
+        for score in subject.risk_scores.values()
+        for value in (str(score), str(round(score * 100)))
+    ]
+    searchable = " ".join([
+        "subject id identifier filename",
+        subject.subject_id,
+        "class condition diagnosis name",
+        subject.true_class,
+        CONDITION_NAMES.get(subject.true_class, ""),
+        "site recording location",
+        subject.site,
+        "source type format",
+        subject.source_kind,
+        "quality signal grade",
+        subject.signal_quality,
+        "age unavailable" if subject.age is None else f"age {subject.age}",
+        f"epochs {subject.epochs_used}",
+        "top highest risk result",
+        subject.highest_risk_condition,
+        CONDITION_NAMES.get(subject.highest_risk_condition, ""),
+        str(subject.highest_risk_score),
+        str(round(subject.highest_risk_score * 100)),
+        "confound severity status",
+        subject.confound_severity,
+        *score_values,
+    ]).casefold()
+    return all(term in searchable for term in terms)
 
 
 def get_report(subject_id: str) -> EegRiskReport:

@@ -74,6 +74,7 @@ def band_reference() -> BandReference:
 
 @router.get("/cohort", response_model=CohortPage, summary="Browse the assessed cohort")
 def cohort_index(
+    search: Annotated[str | None, Query(min_length=1, max_length=200)] = None,
     true_class: Annotated[RiskClass | None, Query()] = None,
     site: Annotated[Site | None, Query()] = None,
     quality: Annotated[Quality | None, Query()] = None,
@@ -82,7 +83,7 @@ def cohort_index(
 ) -> CohortPage:
     try:
         return cohort.list_cohort(
-            true_class=true_class, site=site, quality=quality,
+            search=search, true_class=true_class, site=site, quality=quality,
             offset=offset, limit=limit,
         )
     except EegBundleError as exc:

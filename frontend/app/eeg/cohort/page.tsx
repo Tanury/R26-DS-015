@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Search } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
@@ -23,48 +23,6 @@ const CLASS_CHIP: Record<string, string> = {
   MS: "bg-blue-100 text-blue-800",
 };
 
-const CONDITION_NAMES: Record<string, string> = {
-  HC: "healthy control",
-  AD: "alzheimer alzheimers disease",
-  PD: "parkinson parkinsons disease",
-  MS: "multiple sclerosis",
-};
-
-function matchesSearch(subject: CohortPage["subjects"][number], query: string) {
-  const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-  if (!terms.length) return true;
-
-  const riskValues = Object.entries(subject.risk_scores).flatMap(([condition, score]) => [
-    condition,
-    CONDITION_NAMES[condition] ?? "",
-    String(score),
-    String(Math.round(score * 100)),
-  ]);
-  const searchable = [
-    "subject id filename",
-    subject.subject_id,
-    "class condition diagnosis",
-    subject.true_class,
-    CONDITION_NAMES[subject.true_class] ?? "",
-    "site",
-    subject.site,
-    "source type",
-    subject.source_kind,
-    "quality",
-    subject.signal_quality,
-    "age",
-    subject.age === null ? "age unavailable" : String(subject.age),
-    "top highest risk",
-    subject.highest_risk_condition,
-    CONDITION_NAMES[subject.highest_risk_condition] ?? "",
-    "confound status",
-    subject.confound_severity,
-    ...riskValues,
-  ].join(" ").toLowerCase();
-
-  return terms.every((term) => searchable.includes(term));
-}
-
 export default function EegCohortPage() {
   const router = useRouter();
   // Local state rather than useSearchParams: that hook forces the tree up to the
@@ -74,6 +32,7 @@ export default function EegCohortPage() {
   const [site, setSite] = useState("");
   const [quality, setQuality] = useState("");
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [page, setPage] = useState<CohortPage | null>(null);
   const [projection, setProjection] = useState<CohortProjection | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
@@ -81,10 +40,16 @@ export default function EegCohortPage() {
   const [opening, setOpening] = useState(false);
 
   useEffect(() => {
+    const timeout = window.setTimeout(() => setDebouncedSearch(search.trim()), 250);
+    return () => window.clearTimeout(timeout);
+  }, [search]);
+
+  useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
         const result = await fetchCohort({
+          search: debouncedSearch || undefined,
           trueClass: trueClass || undefined,
           site: site || undefined,
           quality: quality || undefined,
@@ -98,7 +63,7 @@ export default function EegCohortPage() {
     return () => {
       cancelled = true;
     };
-  }, [trueClass, site, quality]);
+  }, [debouncedSearch, trueClass, site, quality]);
 
   useEffect(() => {
     let cancelled = false;
@@ -112,10 +77,7 @@ export default function EegCohortPage() {
     };
   }, []);
 
-  const rows = useMemo(() => {
-    const subjects = page?.subjects ?? [];
-    return subjects.filter((subject) => matchesSearch(subject, search));
-  }, [page, search]);
+  const rows = page?.subjects ?? [];
 
   async function open(subjectId: string) {
     setOpening(true);
