@@ -14,6 +14,7 @@ import {
   LayoutDashboard,
   Menu,
   Mic,
+  ScanSearch,
   Settings,
   X,
 } from "lucide-react";
@@ -25,6 +26,7 @@ const navigation = [
   { href: "/voice", label: "Voice Assessment", icon: Mic },
   { href: "/general", label: "Biomedical Assessment", icon: ClipboardList },
   { href: "/eeg", label: "EEG Assessment", icon: Activity },
+  {href: "/neuroimaging", label: "Neuroimaging Assessment", icon: ScanSearch },
   { href: "/history", label: "Assessment History", icon: History },
   { href: "/fusion", label: "Fusion Result", icon: ChartNoAxesCombined },
 ];
