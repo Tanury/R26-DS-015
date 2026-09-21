@@ -2,7 +2,7 @@
 
 **Project ID:** R26-DS-015
 
-NeuroRisk Research Platform is a full-stack research prototype for exploring neurological-risk signals from manually entered biomedical markers, uploaded voice recordings, and EEG recordings. The browser application is built with Next.js; the API and model-serving layer are built with FastAPI.
+NeuroRisk Research Platform is a full-stack research prototype for exploring neurological-risk signals from biomedical markers entered manually or imported from a record, uploaded voice recordings, and EEG recordings. The browser application is built with Next.js; the API and model-serving layer are built with FastAPI.
 
 > [!IMPORTANT]
 > This software is a research decision-support prototype. Its outputs are not medical diagnoses, have not been clinically validated for clinical use, and must not replace evaluation by a qualified clinician.
@@ -18,7 +18,7 @@ NeuroRisk Research Platform is a full-stack research prototype for exploring neu
 
 | Workflow | Input | Processing | Result |
 | --- | --- | --- | --- |
-| General biomedical assessment | Exact 24-field demographic, clinical-scale, genetic, and biomarker request | Saved preprocessing plus separate ExtraTrees disease and logistic risk pipelines | AD/Healthy/MS/PD probabilities, independent Low/Medium/High risk score, explanation, and suggestions |
+| General biomedical assessment | PDF/photo-assisted or manual 24-field demographic, clinical-scale, genetic, and biomarker request | Gemini structures uploaded records for review; saved preprocessing plus separate ExtraTrees disease and logistic risk pipelines score the confirmed form | AD/Healthy/MS/PD probabilities, independent Low/Medium/High risk score, explanation, and suggestions |
 | Voice assessment | WAV, MP3, M4A, OGG, or WebM plus age and recording task | Gemini extracts structured speech features; the speech classifier scores them | Transcript, extraction-quality notes, features, and risk result |
 | EEG cohort exploration | Precomputed cohort subjects | FastAPI reads the installed model card, reports, embeddings, and cohort statistics | Risk reports, quality, confounds, band context, and embedding views |
 | EEG upload assessment | EEGLAB `.set`, optionally paired with `.fdt` | Filter, ICA clean-up, epoching, TorchScript inference, and report generation | Three independent AD/PD/MS risk scores and a 256-D `z_eeg` embedding |
@@ -29,7 +29,7 @@ EEG risk scores are independent sigmoid outputs and do not form a probability di
 
 ![NeuroRisk Research Platform high-level architecture showing the Next.js frontend, FastAPI services, model and data assets, and safety and observability controls](docs/images/neurorisk-research-platform-architecture.png)
 
-The request path runs from the Next.js interface through FastAPI validation and domain services. General biomedical inputs use the metadata-bound 24-feature disease and risk pipelines; voice assessment uses Gemini before speech classification; EEG cohort browsing reads precomputed artifacts; and EEG uploads use an in-memory job, MNE preprocessing, and CPU TorchScript inference.
+The request path runs from the Next.js interface through FastAPI validation and domain services. General biomedical uploads use Gemini to populate the metadata-bound 24-feature form before disease and risk scoring; voice assessment uses Gemini before speech classification; EEG cohort browsing reads precomputed artifacts; and EEG uploads use an in-memory job, MNE preprocessing, and CPU TorchScript inference.
 
 The frontend stores assessment history in the browser's `localStorage` and the current result in `sessionStorage`. The backend does not provide user accounts or persistent assessment storage. EEG upload jobs are held in memory and expire after a configurable time.
 
@@ -41,7 +41,7 @@ The frontend stores assessment history in the browser's `localStorage` and the c
 | Backend | Python, FastAPI, Uvicorn, Pydantic, python-multipart |
 | ML and data | TensorFlow/Keras, scikit-learn 1.8.0, XGBoost 3.3, pandas, NumPy, joblib |
 | EEG | PyTorch/TorchScript, MNE, precomputed JSON artifacts |
-| External service | Google Gemini through `google-genai` for voice feature extraction |
+| External service | Google Gemini through `google-genai` for biomedical record and voice feature extraction |
 | Quality checks | pytest, FastAPI TestClient, ESLint, TypeScript, Next.js production build |
 
 ## Repository layout
@@ -77,7 +77,7 @@ Install these before starting:
 - Python 3.11 recommended (64-bit). Python 3.12 also runs the test suite; Python 3.11 is the conservative choice for the complete TensorFlow/PyTorch stack.
 - Node.js 20.9 or newer; Node.js 22 LTS is recommended.
 - npm 10 or newer.
-- A Google Gemini API key only if the voice-upload workflow is required.
+- A Google Gemini API key if biomedical record import or the voice-upload workflow is required.
 
 The full Python installation includes large ML packages. Allow additional installation time and disk space. A GPU is not required; EEG inference is designed for CPU execution.
 
@@ -154,7 +154,7 @@ Windows PowerShell:
 Copy-Item .env.example .env
 ```
 
-Edit `backend/.env`. The default file is enough for general feature scoring and EEG cohort browsing. Set `GEMINI_API_KEY` to enable voice feature extraction:
+Edit `backend/.env`. The default file is enough for manual general feature scoring and EEG cohort browsing. Set `GEMINI_API_KEY` to enable biomedical record import and voice feature extraction:
 
 ```dotenv
 APP_NAME=NeuroRisk Research Platform
@@ -310,7 +310,7 @@ At the time this documentation was prepared, backend verification completed with
 | `APP_NAME` | `NeuroRisk Research Platform` | Shared application and FastAPI title |
 | `ENVIRONMENT` | `development` | Runtime environment label |
 | `LOG_LEVEL` | `INFO` | Application log level |
-| `GEMINI_API_KEY` | empty | Enables voice feature extraction |
+| `GEMINI_API_KEY` | empty | Enables biomedical record import and voice feature extraction |
 | `GEMINI_MODEL` | `gemini-3.5-flash-lite` | Gemini model used for audio analysis |
 | `FRONTEND_ORIGINS` | localhost and 127.0.0.1 on port 3000 | Comma-separated CORS allowlist |
 | `EEG_JOB_TTL_SECONDS` | `1800` | Time an in-memory EEG job remains available |

@@ -6,6 +6,7 @@ import { BrainCircuit, RefreshCw } from "lucide-react";
 import { BandPatternComparison } from "@/components/band-pattern-comparison";
 import { BackButton } from "@/components/back-button";
 import { EegPredictionScores } from "@/components/eeg-prediction-scores";
+import { EegDecisionEvidence, EegSimilarSamples, EegWaveform } from "@/components/eeg-evidence";
 import { EegRecommendations } from "@/components/eeg-recommendations";
 import {
   BandPowerChart,
@@ -65,10 +66,10 @@ export function EegReportView({ report }: { report: EegRiskReport }) {
           </div>
           <div className="shrink-0 rounded-lg border border-slate-300 bg-slate-50 px-6 py-4 text-center">
             <div className="mt-1 text-3xl font-bold text-blue-700">
-              {guidance.top.condition}
+              {guidance.top.isPrimary ? guidance.top.condition : "Inconclusive"}
             </div>
             <div className="text-xs text-slate-500">
-              {guidance.top.points} / 100 points
+              {guidance.top.points === null ? "Score unavailable" : `${guidance.top.points}% · ${guidance.scoreLabel}`}
             </div>
           </div>
         </CardContent>
@@ -78,17 +79,21 @@ export function EegReportView({ report }: { report: EegRiskReport }) {
         <CardHeader>
           <h2 className="section-title">EEG Prediction Scores</h2>
           <p className="mt-1 text-sm leading-6 text-slate-500">
-            All four condition patterns are shown, with the selected result emphasized by its tinted card.
+            Actual model outputs for each pattern, with a single highest score highlighted when available.
           </p>
         </CardHeader>
         <CardContent>
-          <EegPredictionScores conditions={guidance.conditions} />
+          <EegPredictionScores conditions={guidance.conditions} scoreLabel={guidance.scoreLabel} />
           <p className="mt-5 border-t border-slate-200 pt-4 text-xs leading-6 text-slate-500">
-            Display points are stable for this saved assessment. They are presentation scores rather
-            than calibrated clinical probabilities and do not need to total 100.
+            Scores are read directly from this assessment. Four-class scores sum to approximately
+            100%; independent risk scores do not. Neither is a calibrated clinical probability.
           </p>
         </CardContent>
       </Card>
+
+      <EegDecisionEvidence report={report} />
+      <EegWaveform report={report} />
+      <EegSimilarSamples report={report} />
 
       <EegRecommendations recommendations={guidance.recommendations} />
 
@@ -106,7 +111,6 @@ export function EegReportView({ report }: { report: EegRiskReport }) {
       <div className="grid gap-6 lg:grid-cols-2">
         <ScalpImportance
           explainability={report.explainability}
-          condition={assessment.highest_risk_condition}
         />
         <EmbeddingPanel embedding={report.embedding} />
       </div>

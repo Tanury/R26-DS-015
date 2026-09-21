@@ -6,8 +6,9 @@ export type EegPredictionClass = (typeof eegPredictionClasses)[number];
 export type EegConditionGuidance = {
   condition: EegPredictionClass;
   name: string;
-  score: number;
-  points: number;
+  score: number | null;
+  points: number | null;
+  riskScore: number | null;
   isPrimary: boolean;
   explanation: string;
 };
@@ -20,6 +21,8 @@ export type EegUserGuidance = {
   signalQualitySummary: string;
   recommendations: string[];
   cautions: string[];
+  scoreLabel: string;
+  evidence: string[];
 };
 
 const conditionNames: Record<EegPredictionClass, string> = {
@@ -36,38 +39,11 @@ function normalizePredictionClass(value: string | null | undefined): EegPredicti
   return null;
 }
 
-/** A stable pseudo-random integer, so one saved assessment never changes on re-render. */
-function stablePoints(seed: string, minimum: number, maximum: number): number {
-  let hash = 2166136261;
-  for (let index = 0; index < seed.length; index += 1) {
-    hash ^= seed.charCodeAt(index);
-    hash = Math.imul(hash, 16777619);
-  }
-  return minimum + ((hash >>> 0) % (maximum - minimum + 1));
+function validScore(value: unknown): number | null {
+  return typeof value === "number" && Number.isFinite(value) && value >= 0 && value <= 1 ? value : null;
 }
 
-function primaryClass(report: EegRiskReport): EegPredictionClass {
-  const auxiliaryClass = normalizePredictionClass(report.optional_four_class_prediction?.predicted_class);
-  if (auxiliaryClass) return auxiliaryClass;
-
-  const rankedDiseaseScores = (["AD", "PD", "MS"] as const)
-    .map((condition) => ({ condition, score: report.risk_scores[condition] ?? 0 }))
-    .sort((left, right) => right.score - left.score);
-  return rankedDiseaseScores[0].score < 0.4 ? "Healthy" : rankedDiseaseScores[0].condition;
-}
-
-function explanationFor(condition: EegPredictionClass, isPrimary: boolean): string {
-  if (condition === "Healthy") {
-    return isPrimary
-      ? "The model selected the healthy-control EEG pattern as the closest overall match. This is reassuring, but it cannot rule out a neurological condition."
-      : "The healthy-control pattern was considered but was not the model’s selected match.";
-  }
-
-  if (isPrimary) {
-    return `The model selected the ${conditionNames[condition].toLowerCase()} as the strongest overall match in this recording.`;
-  }
-  return `The ${conditionNames[condition].toLowerCase()} was not selected, but remains visible as a secondary model output.`;
-}
+const displayScore = (score: number) => `${(score * 100).toFixed(1)}%`;
 
 function recommendationsFor(condition: EegPredictionClass): string[] {
   if (condition === "PD") {
@@ -106,45 +82,102 @@ function recommendationsFor(condition: EegPredictionClass): string[] {
 }
 
 export function buildEegUserGuidance(report: EegRiskReport): EegUserGuidance {
-  const selectedClass = primaryClass(report);
-  const assessmentSeed = `${report.subject_id}|${report.generated_at}|${selectedClass}`;
+  const probabilities: Partial<Record<EegPredictionClass, number>> = {};
+  for (const [label, value] of Object.entries(report.optional_four_class_prediction?.class_probabilities ?? {})) {
+    const condition = normalizePredictionClass(label);
+    const score = validScore(value);
+    if (condition && score !== null) probabilities[condition] = score;
+  }
+  // Never mix the independent sigmoid heads with the auxiliary softmax distribution.
+  const hasFourClass = eegPredictionClasses.every((condition) => probabilities[condition] !== undefined)
+    && Math.abs(Object.values(probabilities).reduce((sum, value) => sum + value, 0) - 1) < 0.02;
+  const riskScore = (condition: EegPredictionClass) => condition === "Healthy" ? null : validScore(
+    report.risk_assessment.conditions[condition]?.risk_score
+      ?? report.risk_scores[`${condition.toLowerCase()}_risk_score`]
+      ?? report.risk_scores[condition],
+  );
+  const scores = eegPredictionClasses.map((condition) => ({
+    condition, score: hasFourClass ? probabilities[condition]! : riskScore(condition),
+  }));
+  const ranked = scores.filter((entry): entry is {condition: EegPredictionClass; score: number} => entry.score !== null)
+    .sort((left, right) => right.score - left.score);
+  const selected = ranked[0];
+  const runnerUp = ranked[1];
+  const tied = !!selected && !!runnerUp && Math.abs(selected.score - runnerUp.score) < 1e-8;
+  const scoreLabel = hasFourClass ? "Four-class model score" : "Independent risk score";
   const conditions = eegPredictionClasses.map((condition) => {
-    const isPrimary = condition === selectedClass;
-    const points = stablePoints(
-      `${assessmentSeed}|${condition}`,
-      isPrimary ? 70 : 15,
-      isPrimary ? 88 : 50,
-    );
+    const score = scores.find((entry) => entry.condition === condition)!.score;
+    const isPrimary = !tied && condition === selected?.condition;
+    const explanation = score === null
+      ? "No measured score is available for this class. It cannot be ranked or ruled out."
+      : isPrimary
+        ? `Highest ${scoreLabel.toLowerCase()} at ${displayScore(score)}${runnerUp ? `, ${(100 * (score - runnerUp.score)).toFixed(1)} percentage points above ${runnerUp.condition}` : ""}.`
+        : selected && Math.abs(score - selected.score) < 1e-8
+          ? `Joint highest at ${displayScore(score)}. The model does not prefer one tied class.`
+          : `${displayScore(score)} is ${(100 * ((selected?.score ?? score) - score)).toFixed(1)} percentage points below ${selected?.condition}. A lower score does not rule this condition out.`;
     return {
       condition,
       name: conditionNames[condition],
-      score: points / 100,
-      points,
+      score,
+      points: score === null ? null : Math.round(score * 1000) / 10,
+      riskScore: riskScore(condition),
       isPrimary,
-      explanation: explanationFor(condition, isPrimary),
+      explanation,
     } satisfies EegConditionGuidance;
   });
-  const top = conditions.find((condition) => condition.isPrimary) ?? conditions[0];
+  const top = conditions.find((condition) => condition.condition === selected?.condition) ?? conditions[0];
 
-  const headline = top.condition === "Healthy"
-    ? "Healthy EEG pattern selected"
-    : `${top.condition} EEG pattern selected`;
-  const summary = top.condition === "Healthy"
-    ? `The healthy-control pattern was selected at ${top.points}/100 points. Review signal quality and symptoms before drawing a health conclusion.`
-    : `${top.name} was selected at ${top.points}/100 points. This research output requires confirmation through qualified clinical assessment.`;
+  const headline = !selected ? "EEG result unavailable" : tied ? "No single preferred EEG pattern"
+    : hasFourClass ? `${top.condition} EEG pattern selected` : `${top.condition} has the highest disease-risk score`;
+  const summary = !selected ? "No valid model scores were saved for this recording. Run a new assessment."
+    : tied ? "Two or more classes share the highest measured score. Review the alternatives and signal quality."
+      : `${top.name} has the highest ${scoreLabel.toLowerCase()} (${top.points}%). This is a research pattern match, not a confirmed diagnosis.`;
 
   const quality = report.signal_quality;
   const qualityName = quality.grade || "Unknown";
-  const signalQualitySummary = `${qualityName} signal quality: ${quality.epochs_used} of ${quality.total_epochs_generated} generated epochs were used (${Math.round(quality.clean_epoch_ratio * 100)}% clean). ${quality.ica_components_removed} ICA component${quality.ica_components_removed === 1 ? " was" : "s were"} removed.`;
-  const recommendations = recommendationsFor(top.condition);
+  const signalQualitySummary = `${qualityName} signal quality: ${Math.round(quality.clean_epoch_ratio * 100)}% of ${quality.total_epochs_generated} generated epochs passed quality checks; ${quality.epochs_used} were used for scoring after sampling. ${quality.ica_components_removed} ICA component${quality.ica_components_removed === 1 ? " was" : "s were"} removed.`;
+  const recommendations = selected && !tied ? recommendationsFor(top.condition) : ["Review this inconclusive result with a qualified healthcare professional alongside symptoms and signal quality."];
   if (qualityName.toLowerCase() !== "good" || quality.warnings.length > 0) {
     recommendations.push("Review the signal-quality warnings and consider repeating the EEG under standardized recording conditions before relying on this result.");
   }
 
   const cautions = [
-    "The point values are stable interface display scores: the selected class is shown from 70–88 and every other class from 15–50. They are not calibrated clinical probabilities and do not add to 100%.",
+    hasFourClass
+      ? "Four-class scores come from the auxiliary model head and sum to approximately 100%. The separate AD, PD and MS risk scores are independent and may be elevated together. Neither output is a calibrated clinical probability."
+      : "The four-class output is unavailable. Only measured AD, PD and MS risk scores are ranked; a healthy-control score cannot be inferred by subtracting them from 100%.",
     "This page explains an existing model output; it does not perform a new prediction or provide a medical diagnosis.",
   ];
+  if (runnerUp && selected && selected.score - runnerUp.score < 0.05) {
+    cautions.push("The two leading scores are less than 5 percentage points apart. Their numerical separation is small; this display flag is not a validated clinical threshold.");
+  }
+  const elevated = conditions.filter((entry) => entry.riskScore !== null && entry.riskScore > (report.risk_assessment.risk_bands.low_max ?? 0.39));
+  if (elevated.length > 1 || (top.condition === "Healthy" && elevated.length)) {
+    cautions.push(`Independent risk heads are elevated for ${elevated.map((entry) => entry.condition).join(", ")}. The four-class selection must not hide these findings.`);
+  }
+  if (!hasFourClass && selected && !elevated.length) {
+    cautions.push("All available disease-risk scores are in the low band. Having the highest score does not mean a disease pattern is established.");
+  }
+  const evidence: string[] = [hasFourClass
+    ? "The selected pattern is the largest measured output of the four-class head. The comparisons below use that same output for every class."
+    : "The available independent disease-risk heads are ranked by their measured scores. Healthy control is not scored by these heads."];
+  const target = report.explainability.target_condition;
+  const regions = Object.entries(report.explainability.scalp_region_importance)
+    .filter(([, value]) => Number.isFinite(value) && value > 0).sort((a, b) => b[1] - a[1]);
+  if (regions.length && target && report.explainability.target_output === "independent_risk") {
+    evidence.push(`Occlusion evidence targets the ${target} independent risk head: zeroing ${regions[0][0].replaceAll("_", " ")} reduced its score by ${(regions[0][1] * 100).toFixed(1)} percentage points. This is input sensitivity, not proof of disease${hasFourClass ? " or an attribution of the four-class selection" : ""}.`);
+  } else if (regions.length) {
+    evidence.push(`Stored occlusion reports a drop of ${(regions[0][1] * 100).toFixed(1)} percentage points when ${regions[0][0].replaceAll("_", " ")} is zeroed. This report does not identify a compatible output head being explained, so this cannot be attributed to the selected score.`);
+  } else {
+    evidence.push("No positive regional occlusion evidence is available in this report. The score ranking alone does not tell us which signal features caused the selection.");
+  }
+  const nearest = normalizePredictionClass(report.embedding.nearest_centroid);
+  if (nearest && report.embedding.availability_flag === 1) {
+    evidence.push(`The learned EEG representation is closest to the ${nearest} class centroid${selected && nearest !== top.condition ? ", which disagrees with the selected score" : ""}. Centroid proximity is descriptive and does not confirm a diagnosis.`);
+  }
+  if (report.confound_disclosure.statement) cautions.push(report.confound_disclosure.statement);
+  const severities = Object.entries(report.confound_disclosure.severity_by_condition ?? {})
+    .filter(([, severity]) => /critical|high|moderate/i.test(severity));
+  if (severities.length) cautions.push(`Model confounds: ${severities.map(([condition, severity]) => `${condition}: ${severity}`).join("; ")}. Age or recording site may influence these scores.`);
   if (report.source === "cohort") {
     cautions.push("This result belongs to a precomputed research-cohort participant, not a newly uploaded patient recording.");
   }
@@ -160,5 +193,7 @@ export function buildEegUserGuidance(report: EegRiskReport): EegUserGuidance {
     signalQualitySummary,
     recommendations: [...new Set(recommendations)],
     cautions: [...new Set(cautions)],
+    scoreLabel,
+    evidence,
   };
 }

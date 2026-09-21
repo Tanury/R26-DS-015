@@ -23,7 +23,7 @@ The backend is a FastAPI application that validates research inputs, serves seve
 
 The backend supports four related but distinct paths:
 
-1. **General biomedical assessment** accepts the metadata-bound 24-key request and invokes separate disease and risk pipelines.
+1. **General biomedical assessment** can use Gemini to structure an uploaded PDF/photo into the metadata-bound 24-key form, then invokes separate disease and risk pipelines after review.
 2. **Voice assessment** sends validated audio to the configured Gemini model for structured feature extraction, then calls the speech classifier.
 3. **Legacy biomedical scoring** retains the former 14-field soft-voting endpoint for API compatibility.
 4. **EEG assessment** serves precomputed cohort data without an ML runtime and optionally performs CPU TorchScript inference for uploaded EEGLAB recordings.
@@ -40,6 +40,7 @@ app/main.py
     `-- services/
         |-- prediction_service               Keras speech inference
         |-- gemini_audio_service             voice feature extraction
+        |-- gemini_biomedical_service        PDF/photo form extraction
         |-- neurological_prediction_service scikit-learn inference
         |-- eeg_cohort_service               Tier 1 precomputed data
         |-- eeg_job_service                  bounded in-memory EEG jobs
@@ -58,7 +59,7 @@ Commands in this guide assume the current directory is `backend/`. Running from 
 - Python 3.11 recommended, 64-bit
 - pip
 - Sufficient disk space for TensorFlow, PyTorch, MNE, and scientific Python wheels
-- A Gemini API key only for `/voice-assessments/`
+- A Gemini API key for `/voice-assessments/` and `/neurological-risk/extract-record`
 
 ### macOS or Linux
 
@@ -102,8 +103,8 @@ Copy `.env.example` to `.env`, then change only the values required by the envir
 | `APP_NAME` | `NeuroRisk Research Platform` | No | Shared application and OpenAPI/FastAPI title |
 | `ENVIRONMENT` | `development` | No | Environment label |
 | `LOG_LEVEL` | `INFO` | No | Logging threshold |
-| `GEMINI_API_KEY` | empty | Voice only | Server-side Gemini credential |
-| `GEMINI_MODEL` | `gemini-3.5-flash-lite` | No | Gemini audio-analysis model |
+| `GEMINI_API_KEY` | empty | Voice and record import only | Server-side Gemini credential |
+| `GEMINI_MODEL` | `gemini-3.5-flash-lite` | No | Gemini audio/document analysis model |
 | `FRONTEND_ORIGINS` | `http://localhost:3000,http://127.0.0.1:3000` | No | Comma-separated CORS origins |
 | `EEG_JOB_TTL_SECONDS` | `1800` | No | Completed/failed job retention in seconds |
 | `EEG_MAX_ACTIVE_JOBS` | `4` | No | Bounded active EEG-job count |
@@ -156,6 +157,7 @@ Useful URLs:
 | `GET` | `/health/` | Liveness check | None |
 | `POST` | `/predictions/` | Legacy 14-field biomedical scoring | 130-feature preprocessor plus soft-voting ensemble |
 | `POST` | `/voice-assessments/` | Extract features from audio and score them | Gemini API key plus speech model |
+| `POST` | `/neurological-risk/extract-record` | Extract the 24-field form draft from PDF/JPG/PNG/WebP | Gemini API key |
 | `POST` | `/neurological-risk/predict` | Score the General 24-field biomedical contract | Separate saved disease and risk pipelines |
 | `GET` | `/eeg/model-card` | Model architecture, performance, intended use, confounds | Installed JSON model card |
 | `GET` | `/eeg/band-reference` | Cohort band-power context | Precomputed cohort artifacts |

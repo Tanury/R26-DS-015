@@ -296,6 +296,21 @@ def _rejection_diagnosis(
     return message, diagnostics
 
 
+def waveform_preview(epoch: np.ndarray, channels: list[str], sfreq: float) -> dict[str, Any]:
+    """A measured, unstandardized excerpt; keep the model input untouched."""
+    indices = [i for i, name in enumerate(channels) if name in ("A1", "B1", "C1", "D1")]
+    if not indices:
+        indices = list(range(min(4, len(channels))))
+    return {
+        "sampling_rate_hz": sfreq,
+        "channels": {channels[i]: np.round(epoch[i] * 1e6, 3).tolist() for i in indices},
+        "unit": "µV",
+        "note": "First retained clean epoch after filtering and artifact removal, before "
+                "standardization. Four example electrodes only; this excerpt does not "
+                "represent the entire recording or establish a disease pattern.",
+    }
+
+
 def preprocess(
     set_path: Path,
     config: dict[str, Any],
@@ -366,6 +381,7 @@ def preprocess(
 
     return {
         "epochs": epochs,
+        "waveform_preview": waveform_preview(surviving[0], channel_order, target_sfreq),
         "quality": {
             "epochs_used": int(epochs.shape[0]),
             "total_epochs_generated": total,

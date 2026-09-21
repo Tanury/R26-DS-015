@@ -1,4 +1,9 @@
-import type { BiomedicalFeatures, Prediction, VoiceAssessment } from "@/lib/types";
+import type {
+  BiomedicalFeatures,
+  BiomedicalRecordExtraction,
+  Prediction,
+  VoiceAssessment,
+} from "@/lib/types";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "") ??
@@ -20,6 +25,16 @@ export async function submitGeneralAssessment(features: BiomedicalFeatures) {
     body: JSON.stringify(features),
   });
   return parseResponse<Prediction>(response);
+}
+
+export async function extractBiomedicalRecord(file: File) {
+  const form = new FormData();
+  form.append("file", file);
+  const response = await fetch(`${API_BASE_URL}/neurological-risk/extract-record`, {
+    method: "POST",
+    body: form,
+  });
+  return parseResponse<BiomedicalRecordExtraction>(response);
 }
 
 export async function submitVoiceAssessment(

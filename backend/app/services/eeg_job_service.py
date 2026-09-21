@@ -4,9 +4,9 @@ EEG preprocessing costs 30-90 s, so the upload endpoint returns 202 and the clie
 polls. A thread pool with a small bound keeps a burst of uploads from starving the
 speech endpoints that share this process.
 
-Deliberately in-memory: jobs are ephemeral by design and expire on a TTL. Nothing
-here persists an uploaded recording beyond the job, which keeps the data-governance
-question of storing patient EEG out of scope.
+Deliberately in-memory: jobs are ephemeral by design and expire on a TTL. Original
+upload files are removed after processing. Reports retain a short cleaned waveform
+excerpt, which the frontend saves alongside the existing assessment history.
 """
 
 from __future__ import annotations

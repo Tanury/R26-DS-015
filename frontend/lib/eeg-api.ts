@@ -5,6 +5,7 @@ import type {
   EegJob,
   EegModelCard,
   EegRiskReport,
+  SimilarEegResponse,
 } from "@/lib/eeg-types";
 
 const API_BASE_URL =
@@ -50,6 +51,20 @@ export async function fetchCohortReport(subjectId: string) {
 
 export async function fetchBandReference() {
   return parseResponse<BandReference>(await fetch(`${API_BASE_URL}/eeg/band-reference`));
+}
+
+export async function fetchSimilarEegSamples(report: EegRiskReport, signal?: AbortSignal) {
+  const bands = ["delta", "theta", "alpha", "beta", "low_gamma"];
+  return parseResponse<SimilarEegResponse>(await fetch(`${API_BASE_URL}/eeg/similar-samples`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    signal,
+    body: JSON.stringify({
+      subject_id: report.subject_id,
+      run_id: String(report.model_summary.run_id ?? ""),
+      band_power_profile: Object.fromEntries(bands.map((band) => [band, report.band_power_profile[band]])),
+    }),
+  }));
 }
 
 export async function fetchProjection() {

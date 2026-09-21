@@ -108,10 +108,10 @@ export function EegQualityPanel({ quality }: { quality: EegSignalQuality }) {
 const BAND_ORDER = ["delta", "theta", "alpha", "beta", "low_gamma"];
 const BAND_HINT: Record<string, string> = {
   delta: "0.5–4 Hz",
-  theta: "4–8 Hz · elevated in AD",
-  alpha: "8–13 Hz · reduced in AD",
-  beta: "13–30 Hz · disrupted in PD",
-  low_gamma: "30–40 Hz · altered in MS",
+  theta: "4–8 Hz",
+  alpha: "8–13 Hz",
+  beta: "13–30 Hz",
+  low_gamma: "30–40 Hz",
 };
 
 export function BandPowerChart({ profile }: { profile: Record<string, number> }) {
@@ -151,8 +151,8 @@ export function BandPowerChart({ profile }: { profile: Record<string, number> })
               <div className="text-2xl font-bold tabular-nums">{ratio.toFixed(2)}</div>
             </div>
             <p className="ml-auto max-w-xs text-xs leading-5 text-slate-500">
-              The most-cited summary of AD-type EEG slowing. Higher values indicate more
-              theta relative to alpha.
+              Higher values indicate more theta power relative to alpha.
+              This descriptive ratio does not identify a disease by itself.
             </p>
           </div>
         )}
@@ -163,10 +163,8 @@ export function BandPowerChart({ profile }: { profile: Record<string, number> })
 
 export function ScalpImportance({
   explainability,
-  condition,
 }: {
   explainability: EegExplainability;
-  condition: string;
 }) {
   const regions = Object.entries(explainability.scalp_region_importance);
   const bands = Object.entries(explainability.band_importance);
@@ -178,7 +176,7 @@ export function ScalpImportance({
     return (
       <Card>
         <CardHeader>
-          <h2 className="section-title">What Drove This Score</h2>
+          <h2 className="section-title">Signal Sensitivity (Occlusion)</h2>
         </CardHeader>
         <CardContent>
           <div className="flex gap-3 rounded-lg bg-slate-50 p-4">
@@ -223,14 +221,19 @@ export function ScalpImportance({
   return (
     <Card>
       <CardHeader>
-        <h2 className="section-title">What Drove This Score</h2>
+        <h2 className="section-title">Signal Sensitivity (Occlusion)</h2>
       </CardHeader>
       <CardContent className="space-y-5">
+        <p className="text-xs leading-6 text-slate-600">
+          {explainability.target_condition && explainability.target_output
+            ? `Target: ${explainability.target_condition} ${explainability.target_output === "independent_risk" ? "independent risk head" : "four-class head"}. This measures sensitivity to zeroing parts of the input, not a disease mechanism.`
+            : "This stored report does not identify its target output head. These sensitivities cannot be attributed to the selected class score."}
+        </p>
         {regions.length > 0 && (
           <div>
             <ScalpTopography
               importance={explainability.scalp_region_importance}
-              condition={condition}
+              condition={explainability.target_condition ?? "unspecified target"}
             />
             <h3 className="mb-3 mt-6 flex items-center gap-2 text-sm font-semibold text-slate-700">
               <Layers className="size-4 text-blue-700" /> Scalp region
