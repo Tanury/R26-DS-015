@@ -85,7 +85,7 @@ export function EegReportView({ report }: { report: EegRiskReport }) {
         <CardContent>
           <EegPredictionScores conditions={guidance.conditions} scoreLabel={guidance.scoreLabel} />
           <p className="mt-5 border-t border-slate-200 pt-4 text-xs leading-6 text-slate-500">
-            Scores are read directly from this assessment. Four-class scores sum to approximately
+            Four-class percentages are normalized and rounded together to total exactly
             100%; independent risk scores do not. Neither is a calibrated clinical probability.
           </p>
         </CardContent>

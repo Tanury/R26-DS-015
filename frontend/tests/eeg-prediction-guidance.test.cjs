@@ -74,3 +74,53 @@ test("invalid or absent measurements produce an unavailable result", () => {
   assert.equal(value.headline, "EEG result unavailable");
   assert.ok(value.conditions.every(c => c.points === null && !c.isPrimary));
 });
+
+test("four displayed percentages total exactly 100% for rounding and API precision edge cases", () => {
+  for (const probabilities of [
+    { HC: .3333, AD: .3333, PD: .3334, MS: 0 }, // Individually rounds to 99.9%.
+    { HC: .018, AD: .9447, PD: .0176, MS: .0197 }, // Individually rounds to 100.1%.
+    { HC: .2499, AD: .2499, PD: .2499, MS: .2499 }, // Rounded API total.
+    { HC: 1, AD: 0, PD: 0, MS: 0 },
+    { HC: .9999, AD: .0001, PD: 0, MS: 0 },
+  ]) {
+    const input = report();
+    input.optional_four_class_prediction.class_probabilities = probabilities;
+    const original = structuredClone(input);
+    const value = buildEegUserGuidance(input);
+    assert.equal(value.scoreLabel, "Four-class model score");
+    // Sum the displayed decimal values in integer tenths, without binary float noise.
+    assert.equal(value.conditions.reduce((sum, c) => sum + Math.round(c.points * 10), 0), 1000);
+    for (const c of value.conditions) {
+      assert.ok(c.points >= 0 && c.points <= 100);
+      assert.ok(c.explanation.includes(`${c.points.toFixed(1)}%`));
+    }
+    assert.deepEqual(input, original, "display balancing must not change saved model outputs");
+  }
+});
+
+test("balanced rounding preserves measured ties and independent risk scores", () => {
+  const input = report();
+  input.optional_four_class_prediction.class_probabilities = { HC: 0, AD: 1 / 3, PD: 1 / 3, MS: 1 / 3 };
+  const value = buildEegUserGuidance(input);
+  assert.deepEqual(value.conditions.map(c => c.points), [0, 33.4, 33.3, 33.3]);
+  assert.ok(value.conditions.every(c => !c.isPrimary));
+  assert.equal(value.headline, "No single preferred EEG pattern");
+  input.optional_four_class_prediction = null;
+  input.risk_assessment.conditions = {};
+  input.risk_scores = { AD: .8, PD: .7, MS: .6 };
+  assert.deepEqual(buildEegUserGuidance(input).conditions.map(c => c.points), [null, 80, 70, 60]);
+});
+
+test("every stored cohort four-class result displays a total of 100%", () => {
+  const directory = path.join(__dirname, "../../backend/app/models/eeg/cohort");
+  let checked = 0;
+  for (const file of fs.readdirSync(directory).filter(name => name.endsWith(".json"))) {
+    const input = JSON.parse(fs.readFileSync(path.join(directory, file), "utf8"));
+    if (!input.optional_four_class_prediction) continue;
+    const value = buildEegUserGuidance(input);
+    assert.equal(value.scoreLabel, "Four-class model score", file);
+    assert.equal(value.conditions.reduce((sum, c) => sum + Math.round(c.points * 10), 0), 1000, file);
+    checked++;
+  }
+  assert.ok(checked > 0);
+});

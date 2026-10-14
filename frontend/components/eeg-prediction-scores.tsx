@@ -2,6 +2,10 @@ import type { EegConditionGuidance } from "@/lib/eeg-prediction-guidance";
 
 export function EegPredictionScores({ conditions, scoreLabel }: { conditions: EegConditionGuidance[]; scoreLabel: string }) {
   return (
+    <div>
+    {scoreLabel === "Four-class model score" && (
+      <p className="mb-4 text-sm font-semibold text-slate-600">Total across all four classes: 100%</p>
+    )}
     <div className="grid gap-5 md:grid-cols-2 2xl:grid-cols-4">
       {conditions.map((condition) => {
         const healthy = condition.condition === "Healthy";
@@ -46,6 +50,7 @@ export function EegPredictionScores({ conditions, scoreLabel }: { conditions: Ee
           </article>
         );
       })}
+    </div>
     </div>
   );
 }

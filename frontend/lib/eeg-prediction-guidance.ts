@@ -43,7 +43,19 @@ function validScore(value: unknown): number | null {
   return typeof value === "number" && Number.isFinite(value) && value >= 0 && value <= 1 ? value : null;
 }
 
-const displayScore = (score: number) => `${(score * 100).toFixed(1)}%`;
+// Allocate 1,000 tenths of a percent using largest remainders so the displayed
+// distribution totals exactly 100.0%, including rounded API probabilities.
+function fourClassPoints(probabilities: Partial<Record<EegPredictionClass, number>>) {
+  const total = eegPredictionClasses.reduce((sum, condition) => sum + probabilities[condition]!, 0);
+  const shares = eegPredictionClasses.map((condition) => {
+    const exact = probabilities[condition]! / total * 1000;
+    return { condition, units: Math.floor(exact), remainder: exact - Math.floor(exact) };
+  });
+  const remaining = 1000 - shares.reduce((sum, share) => sum + share.units, 0);
+  const byRemainder = [...shares].sort((a, b) => b.remainder - a.remainder);
+  for (let index = 0; index < remaining; index++) byRemainder[index].units++;
+  return Object.fromEntries(shares.map(({ condition, units }) => [condition, units / 10])) as Record<EegPredictionClass, number>;
+}
 
 function recommendationsFor(condition: EegPredictionClass): string[] {
   if (condition === "PD") {
@@ -105,21 +117,25 @@ export function buildEegUserGuidance(report: EegRiskReport): EegUserGuidance {
   const runnerUp = ranked[1];
   const tied = !!selected && !!runnerUp && Math.abs(selected.score - runnerUp.score) < 1e-8;
   const scoreLabel = hasFourClass ? "Four-class model score" : "Independent risk score";
+  const balancedPoints = hasFourClass ? fourClassPoints(probabilities) : null;
+  const pointsFor = (condition: EegPredictionClass, score: number) =>
+    balancedPoints?.[condition] ?? Math.round(score * 1000) / 10;
   const conditions = eegPredictionClasses.map((condition) => {
     const score = scores.find((entry) => entry.condition === condition)!.score;
+    const points = score === null ? null : pointsFor(condition, score);
     const isPrimary = !tied && condition === selected?.condition;
     const explanation = score === null
       ? "No measured score is available for this class. It cannot be ranked or ruled out."
       : isPrimary
-        ? `Highest ${scoreLabel.toLowerCase()} at ${displayScore(score)}${runnerUp ? `, ${(100 * (score - runnerUp.score)).toFixed(1)} percentage points above ${runnerUp.condition}` : ""}.`
+        ? `Highest ${scoreLabel.toLowerCase()} at ${points!.toFixed(1)}%${runnerUp ? `, ${(points! - pointsFor(runnerUp.condition, runnerUp.score)).toFixed(1)} percentage points above ${runnerUp.condition}` : ""}.`
         : selected && Math.abs(score - selected.score) < 1e-8
-          ? `Joint highest at ${displayScore(score)}. The model does not prefer one tied class.`
-          : `${displayScore(score)} is ${(100 * ((selected?.score ?? score) - score)).toFixed(1)} percentage points below ${selected?.condition}. A lower score does not rule this condition out.`;
+          ? `Joint highest measured score; displayed as ${points!.toFixed(1)}%. The model does not prefer one tied class.`
+          : `${points!.toFixed(1)}% is ${((selected ? pointsFor(selected.condition, selected.score) : points!) - points!).toFixed(1)} percentage points below ${selected?.condition}. A lower score does not rule this condition out.`;
     return {
       condition,
       name: conditionNames[condition],
       score,
-      points: score === null ? null : Math.round(score * 1000) / 10,
+      points,
       riskScore: riskScore(condition),
       isPrimary,
       explanation,
@@ -143,7 +159,7 @@ export function buildEegUserGuidance(report: EegRiskReport): EegUserGuidance {
 
   const cautions = [
     hasFourClass
-      ? "Four-class scores come from the auxiliary model head and sum to approximately 100%. The separate AD, PD and MS risk scores are independent and may be elevated together. Neither output is a calibrated clinical probability."
+      ? "Four-class scores come from the auxiliary model head. Displayed percentages are normalized and rounded together to total exactly 100%. The separate AD, PD and MS risk scores are independent and may be elevated together. Neither output is a calibrated clinical probability."
       : "The four-class output is unavailable. Only measured AD, PD and MS risk scores are ranked; a healthy-control score cannot be inferred by subtracting them from 100%.",
     "This page explains an existing model output; it does not perform a new prediction or provide a medical diagnosis.",
   ];
