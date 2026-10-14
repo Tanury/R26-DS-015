@@ -17,13 +17,13 @@ export type VoiceResultGuidance = {
   headline: string;
   summary: string;
   selectionNote: string;
+  classificationExplanation: string;
   recommendations: string[];
   cautions: string[];
 };
 
 type PrimarySelection = {
   selectedClass: VoicePredictionClass;
-  modelClass: VoicePredictionClass;
   extension: string | null;
   formatPreference: VoicePredictionClass | null;
   formatApplied: boolean;
@@ -34,6 +34,13 @@ const conditionNames: Record<VoicePredictionClass, string> = {
   AD: "Alzheimer’s disease-associated voice pattern",
   PD: "Parkinson’s disease-associated voice pattern",
   MS: "Multiple sclerosis-associated voice pattern",
+};
+
+const classificationExplanations: Record<VoicePredictionClass, string> = {
+  Healthy: "A healthy classification means that the analyzed voice sample does not show strong patterns commonly associated with the conditions included in this assessment. It does not mean that the person is completely free from disease. The result can be influenced by recording quality, background noise, microphone type, tiredness, accent, age, and the person’s speaking style.",
+  PD: "Parkinson’s disease can affect the muscles used for speaking. A person may develop a softer voice, reduced loudness variation, slower or less clear articulation, monotone speech, breathiness, or changes in vocal stability. The assessment analyzes these acoustic patterns as possible indicators associated with Parkinson’s disease. It is not a replacement for a neurological examination.",
+  AD: "In Alzheimer’s disease, speech may change because of difficulties with memory, word retrieval, attention, and organized communication. The system may look for features such as pauses, slower or interrupted speech, repeated words, reduced vocabulary, and difficulty maintaining a clear flow of ideas. These patterns can provide an early screening signal, but they do not confirm Alzheimer’s disease.",
+  MS: "Multiple sclerosis can affect the nervous system and the coordination of muscles involved in speech and breathing. Speech may become slower, less precise, irregular in rhythm, or affected by changes in breath control and voice quality. The model examines these voice characteristics as possible screening indicators, although voice changes can also result from many other conditions.",
 };
 
 function normalizeClass(value: string | null | undefined): VoicePredictionClass | null {
@@ -70,6 +77,7 @@ function extensionFrom(filename: string | undefined): string | null {
 }
 
 function preferenceFor(extension: string | null): VoicePredictionClass | null {
+  if (extension === "webm") return "Healthy";
   if (extension === "wav" || extension === "waw") return "AD";
   if (extension === "mp3") return "MS";
   if (extension === "m4a" || extension === "mp4") return "PD";
@@ -84,82 +92,58 @@ function selectPrimary(
   const modelClass = classifierClass(prediction);
   const extension = extensionFrom(filename);
   const formatPreference = preferenceFor(extension);
-  // Recognized formats influence, but do not completely determine, the result.
-  // The stable 85% branch implements the requested "mostly" behavior without
-  // changing whenever a saved assessment is reopened.
+  // These rules are for the explicitly labelled demo display only. The model
+  // prediction is never changed. WebM always uses the Healthy demo scenario.
   const formatApplied = formatPreference !== null
-    && stablePoints(`${assessmentId}|format|${extension}`, 0, 99) < 85;
+    && (extension === "webm" || stablePoints(`${assessmentId}|format|${extension}`, 0, 99) < 85);
   return {
     selectedClass: formatApplied ? formatPreference : modelClass,
-    modelClass,
     extension,
     formatPreference,
     formatApplied,
   };
 }
 
-function selectionNote(selection: PrimarySelection): string {
+function selectionNote(selection: PrimarySelection, points: number): string {
   const extension = selection.extension ? `.${selection.extension.toUpperCase()}` : "unrecognized";
+  if (selection.extension === "webm") {
+    return `WebM demo rule: Healthy varies from 70–80% between assessments and is ${points}% for this saved assessment, with the remaining ${100 - points}% shared by AD, PD, and MS. These simulated scores do not measure the recording.`;
+  }
   if (selection.formatApplied && selection.formatPreference) {
-    return `Format-aware display rule applied: ${extension} inputs usually favor ${selection.formatPreference}, so this presentation selected ${selection.selectedClass}. The underlying voice classifier selected ${selection.modelClass}.`;
+    return `Demo display rule applied: ${extension} inputs usually favor ${selection.formatPreference}, so this simulation selected ${selection.selectedClass}. These scores are simulated.`;
   }
   if (selection.formatPreference) {
-    return `The ${extension} tendency toward ${selection.formatPreference} was considered, but this assessment retained the underlying classifier selection of ${selection.modelClass}.`;
+    return `The ${extension} format rule was not applied for this saved demonstration. The displayed percentages are simulated and total 100%.`;
   }
-  return `No file-format preference is configured for this input, so the presentation retained the underlying classifier selection of ${selection.modelClass}.`;
+  return "No file-format preference is configured for this input. The displayed percentages are simulated and total 100%.";
 }
 
 function explanationFor(
   condition: VoicePredictionClass,
   isPrimary: boolean,
-  selection: PrimarySelection,
 ): string {
-  if (condition === "Healthy") {
-    return isPrimary
-      ? "The format-aware voice presentation selected the trained healthy-reference pattern as the strongest match. This does not rule out a neurological condition."
-      : "The healthy-reference voice pattern was considered but was not the selected result.";
-  }
   return isPrimary
-    ? selection.formatApplied
-      ? `The ${conditionNames[condition].toLowerCase()} was selected after considering the classifier output and the uploaded file-format tendency.`
-      : `The voice classifier selected the ${conditionNames[condition].toLowerCase()} as the strongest overall speech-feature match.`
-    : `The ${conditionNames[condition].toLowerCase()} was not selected, but remains visible as a secondary output.`;
+    ? `${condition} is the primary class in this simulated display, not a measured health result.`
+    : `${condition} receives a share of the remaining simulated score. This is not an estimated disease probability.`;
 }
 
-function recommendationsFor(condition: VoicePredictionClass): string[] {
-  if (condition === "PD") {
-    return [
-      "Arrange an evaluation with a neurologist, preferably a movement-disorder specialist, especially when tremor, slowness, stiffness, gait, balance, sleep, or voice changes are present.",
-      "Ask for a movement, walking, balance, and fall-risk assessment; appropriate physiotherapy and regular physical activity may help preserve mobility.",
-      "Discuss symptom-control treatment with the specialist. Medication decisions require clinical examination, symptoms, medical history, and a review of current medicines.",
-      "Consider speech-language assessment for quieter or unclear speech and swallowing assessment when coughing or choking while eating occurs.",
-      "Monitor sleep, constipation, mood, memory, dizziness, fatigue, and other non-motor symptoms, with regular specialist follow-up.",
-    ];
-  }
-  if (condition === "AD") {
-    return [
-      "Arrange assessment through a memory clinic, neurologist, geriatrician, or dementia specialist when memory, language, orientation, or daily-function changes are present.",
-      "Request a complete cognitive and medical evaluation for other potentially reversible causes of cognitive change; imaging or laboratory investigations may be appropriate clinically.",
-      "Discuss a personalized treatment plan with the specialist, including whether medication is appropriate for the confirmed diagnosis and stage.",
-      "Use cognitive stimulation, meaningful social activity, occupational support, and practical strategies to maintain independence where appropriate.",
-      "Review home safety, medication management, falls, wandering risk, caregiver support, and ongoing cognitive and functional monitoring.",
-    ];
-  }
-  if (condition === "MS") {
-    return [
-      "Arrange assessment with a neurologist experienced in multiple sclerosis, particularly for recurring visual, sensory, weakness, fatigue, balance, or bladder symptoms.",
-      "Ask whether neurological examination, MRI, and other investigations are needed to confirm the cause and characterize any relapsing or progressive pattern.",
-      "If MS is clinically confirmed, discuss eligibility for disease-modifying treatment and create a clear relapse-recognition and management plan.",
-      "Consider physiotherapy, appropriate exercise, and assessment of walking, balance, weakness, spasticity, fatigue, vision, bladder, bowel, cognition, speech, and mental health.",
-      "Maintain regular review with the MS care team to monitor symptoms, relapses, disability, treatment response, preventive care, and general health.",
-    ];
-  }
-  return [
-    "Continue routine health monitoring and healthy habits, including regular physical activity, adequate sleep, balanced nutrition, and management of cardiovascular risk factors.",
-    "Do not use a healthy-reference voice result to dismiss new, persistent, or worsening memory, movement, speech, vision, sensation, or balance symptoms.",
-    "Discuss concerning symptoms, family history, or functional changes with a qualified healthcare professional even when this result appears reassuring.",
-    "Repeat the voice assessment under consistent recording conditions when audio quality was limited or a healthcare professional considers follow-up appropriate.",
-  ];
+/** Allocate whole percentage points without losing the total through rounding. */
+function demoPercentages(seed: string, primary: VoicePredictionClass, webm: boolean) {
+  const primaryPoints = stablePoints(`${seed}|${primary}`, 70, webm ? 80 : 88);
+  const remaining = 100 - primaryPoints;
+  const secondary = voicePredictionClasses.filter((condition) => condition !== primary);
+  const weights = secondary.map((condition) => stablePoints(`${seed}|${condition}`, 15, 50));
+  const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+  const shares = weights.map((weight) => weight * remaining / totalWeight);
+  const points = shares.map(Math.floor);
+  const leftover = remaining - points.reduce((sum, value) => sum + value, 0);
+  const order = secondary.map((_, index) => index)
+    .sort((left, right) => (shares[right] - points[right]) - (shares[left] - points[left]));
+  for (let index = 0; index < leftover; index += 1) points[order[index]] += 1;
+  const result = { Healthy: 0, AD: 0, PD: 0, MS: 0 };
+  result[primary] = primaryPoints;
+  secondary.forEach((condition, index) => { result[condition] = points[index]; });
+  return result;
 }
 
 export function buildVoiceResultGuidance(
@@ -170,36 +154,33 @@ export function buildVoiceResultGuidance(
   const selection = selectPrimary(assessmentId, prediction, details?.filename);
   const selectedClass = selection.selectedClass;
   const seed = `${assessmentId}|${selectedClass}`;
+  const percentages = demoPercentages(seed, selectedClass, selection.extension === "webm");
   const conditions = voicePredictionClasses.map((condition) => {
     const isPrimary = condition === selectedClass;
-    const points = stablePoints(
-      `${seed}|${condition}`,
-      isPrimary ? 70 : 15,
-      isPrimary ? 88 : 50,
-    );
     return {
       condition,
       name: conditionNames[condition],
-      points,
+      points: percentages[condition],
       isPrimary,
-      explanation: explanationFor(condition, isPrimary, selection),
+      explanation: explanationFor(condition, isPrimary),
     } satisfies VoiceClassScore;
   });
   const top = conditions.find((condition) => condition.isPrimary) ?? conditions[0];
-  const headline = top.condition === "Healthy"
-    ? "Healthy voice pattern selected"
-    : `${top.condition} voice pattern selected`;
-  const summary = top.condition === "Healthy"
-    ? `The healthy-reference voice pattern was selected at ${top.points}/100 points. Consider recording quality, symptoms, and clinical context before drawing a health conclusion.`
-    : `${top.name} was selected at ${top.points}/100 points after considering the classifier output and uploaded file type. This result requires confirmation through qualified clinical assessment.`;
+  const headline = `Demo: ${top.condition} ${top.points}%`;
+  const summary = "Voice Assesment";
 
-  const recommendations = recommendationsFor(top.condition);
+  const recommendations = [
+    "Use these simulated scores to explore the demonstration; they do not establish a health classification.",
+    "Check that your voice is clearly audible in the playback and repeat the recording if necessary.",
+    "Use the condition descriptions as general educational information, not as a finding about the speaker.",
+    "Discuss health concerns with a qualified healthcare professional rather than relying on demo scores.",
+  ];
   if (details?.extraction_quality === "limited") {
     recommendations.push("Because feature-extraction quality was limited, repeat the voice sample in a quiet setting with a clear microphone before relying on this result.");
   }
   const cautions = [
-    "The point values are stable interface display scores: the selected class is shown from 70–88 and every other class from 15–50. They are not calibrated medical probabilities and do not add to 100%.",
-    "File-format tendencies are interface heuristics, not clinically validated neurological biomarkers.",
+    "The four demo percentages always total 100%. WebM uses a Healthy demo score from 70–80%, stable for each saved assessment. These simulated values are not model predictions or calibrated medical probabilities.",
+    "File-format rules apply only to this simulated display and do not establish a health classification.",
     "Voice characteristics can be affected by language, microphone, environment, respiratory illness, fatigue, medication, and the selected speaking task.",
     "This result is research decision support, not a diagnosis or treatment recommendation.",
   ];
@@ -210,7 +191,8 @@ export function buildVoiceResultGuidance(
     conditions,
     headline,
     summary,
-    selectionNote: selectionNote(selection),
+    selectionNote: selectionNote(selection, top.points),
+    classificationExplanation: classificationExplanations[top.condition],
     recommendations: [...new Set(recommendations)],
     cautions: [...new Set(cautions)],
   };

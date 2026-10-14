@@ -60,6 +60,10 @@ Commands in this guide assume the current directory is `backend/`. Running from 
 - pip
 - Sufficient disk space for TensorFlow, PyTorch, MNE, and scientific Python wheels
 - A Gemini API key for `/voice-assessments/` and `/neurological-risk/extract-record`
+- FFmpeg on the server's `PATH` for WebM, OGG, and MP4/M4A microphone recordings.
+  These are decoded to mono 16-bit PCM WAV at 16 kHz before extraction. The
+  original filename is retained. Browser recordings must be 2–300 seconds;
+  silent recordings are rejected with microphone troubleshooting guidance.
 
 ### macOS or Linux
 

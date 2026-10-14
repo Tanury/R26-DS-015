@@ -56,7 +56,9 @@ async def assess_voice(
     patient_age: Annotated[int, Form(ge=18, le=120)],
     recording_task: Annotated[RecordingTask, Form()],
 ) -> VoiceAssessmentResponse:
-    mime_type = (file.content_type or "").lower()
+    # MediaRecorder includes parameters such as ";codecs=opus". Validate the
+    # container MIME type and pass that canonical type to the extraction API.
+    mime_type = (file.content_type or "").split(";", 1)[0].strip().lower()
     if mime_type not in ALLOWED_MIME_TYPES:
         raise HTTPException(status_code=415, detail="Unsupported audio format.")
 
@@ -75,6 +77,7 @@ async def assess_voice(
             extract_speech_features,
             audio_bytes,
             MIME_ALIASES.get(mime_type, mime_type),
+            recording_task,
         )
         prediction = await run_in_threadpool(
             predict_risk,
