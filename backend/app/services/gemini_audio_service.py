@@ -1,11 +1,13 @@
 import json
 import logging
+from typing import Any
 
 from pydantic import ValidationError
 
 from app.core.config import settings
 from app.core.exceptions import AudioFeatureExtractionError
 from app.schemas.voice_assessment import GeminiAudioAnalysis
+from app.services.audio_preparation import prepare_browser_audio
 
 
 logger = logging.getLogger(__name__)
@@ -31,10 +33,42 @@ Set quality_status to unusable for silence, music-only audio, multiple overlappi
 speakers, severe clipping, or audio too unclear for speech analysis. Use limited when
 the estimates are possible but recording quality is weak. Include concise quality
 notes and a short transcript when speech is intelligible. Never invent patient facts.
+Natural pauses, an accent, non-English speech, or mild background noise alone are
+not reasons to reject audible single-speaker speech. Use limited if meaningful
+estimates can still be made. For sustained_vowel, a held vowel is the expected
+input; no words or transcript are required. Do not require a reading passage for
+monologue or picture_description. For unusable audio, explain the specific audible
+problem in quality_notes so the speaker can correct it.
 """.strip()
 
 
-def extract_speech_features(audio_bytes: bytes, mime_type: str) -> GeminiAudioAnalysis:
+def _gemini_response_schema() -> dict[str, Any]:
+    """Return the strict response model in Gemini's supported schema subset.
+
+    ``extra="forbid"`` makes Pydantic emit ``additionalProperties: false`` for
+    each object.  The Gemini Developer API's legacy ``response_schema`` field
+    rejects that otherwise-valid JSON Schema keyword.  Remove it only from the
+    wire schema; ``GeminiAudioAnalysis.model_validate`` below still enforces the
+    backend's strict no-extra-fields contract on every response.
+    """
+    schema = GeminiAudioAnalysis.model_json_schema()
+
+    def remove_unsupported_fields(node: Any) -> None:
+        if isinstance(node, dict):
+            node.pop("additionalProperties", None)
+            for value in node.values():
+                remove_unsupported_fields(value)
+        elif isinstance(node, list):
+            for value in node:
+                remove_unsupported_fields(value)
+
+    remove_unsupported_fields(schema)
+    return schema
+
+
+def extract_speech_features(
+    audio_bytes: bytes, mime_type: str, recording_task: str = "reading"
+) -> GeminiAudioAnalysis:
     if not settings.gemini_api_key:
         raise AudioFeatureExtractionError(
             "GEMINI_API_KEY is not configured on the server."
@@ -48,19 +82,24 @@ def extract_speech_features(audio_bytes: bytes, mime_type: str) -> GeminiAudioAn
             "The google-genai package is required for voice analysis."
         ) from exc
 
+    audio_bytes, mime_type = prepare_browser_audio(audio_bytes, mime_type)
+
     try:
         client = genai.Client(api_key=settings.gemini_api_key)
         response = client.models.generate_content(
             model=settings.gemini_model,
             contents=[
-                EXTRACTION_PROMPT,
+                f"{EXTRACTION_PROMPT}\n\nSelected recording task: {recording_task}.",
                 types.Part.from_bytes(data=audio_bytes, mime_type=mime_type),
             ],
-            config={
-                "response_mime_type": "application/json",
-                "response_schema": GeminiAudioAnalysis.model_json_schema(),
-                "temperature": 0,
-            },
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                response_schema=_gemini_response_schema(),
+                temperature=0,
+                automatic_function_calling=types.AutomaticFunctionCallingConfig(
+                    disable=True
+                ),
+            ),
         )
         if not response.text:
             raise AudioFeatureExtractionError("Gemini returned an empty analysis.")
@@ -79,8 +118,11 @@ def extract_speech_features(audio_bytes: bytes, mime_type: str) -> GeminiAudioAn
         ) from exc
 
     if analysis.quality_status == "unusable":
+        notes = " ".join(note.strip() for note in analysis.quality_notes if note.strip())[:600]
         raise AudioFeatureExtractionError(
-            "The audio sample is not suitable for speech feature extraction."
+            "Speech extraction could not use this recording. "
+            + (f"Audio quality feedback: {notes} " if notes else "No reliable speech features could be extracted. ")
+            + "Listen to the preview, check the microphone level, and record the selected task again in a quiet room."
         )
 
     logger.info(

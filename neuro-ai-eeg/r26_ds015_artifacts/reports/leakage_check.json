@@ -1,0 +1,33 @@
+{
+  "split_strategy": "Subject-level StratifiedGroupKFold",
+  "group_key": "subject_id",
+  "no_epoch_leakage": true,
+  "fold_results": [
+    {
+      "fold": 0,
+      "overlap_subjects": [],
+      "passed": true
+    },
+    {
+      "fold": 1,
+      "overlap_subjects": [],
+      "passed": true
+    },
+    {
+      "fold": 2,
+      "overlap_subjects": [],
+      "passed": true
+    },
+    {
+      "fold": 3,
+      "overlap_subjects": [],
+      "passed": true
+    },
+    {
+      "fold": 4,
+      "overlap_subjects": [],
+      "passed": true
+    }
+  ],
+  "note": "Epochs from one subject never appear in both train and validation."
+}

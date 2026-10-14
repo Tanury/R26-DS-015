@@ -1,0 +1,1957 @@
+[
+  {
+    "subject_id": "AD-AR-sub-30001",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 81.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9746,
+    "risk_scores": {
+      "AD": 0.9746,
+      "PD": 0.0306,
+      "MS": 0.0317
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30011",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 78.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9748,
+    "risk_scores": {
+      "AD": 0.9748,
+      "PD": 0.031,
+      "MS": 0.0325
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30018",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 68.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.961,
+    "risk_scores": {
+      "AD": 0.961,
+      "PD": 0.0298,
+      "MS": 0.048
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30029",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 69.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9744,
+    "risk_scores": {
+      "AD": 0.9744,
+      "PD": 0.0302,
+      "MS": 0.0313
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30016",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 82.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.953,
+    "risk_scores": {
+      "AD": 0.953,
+      "PD": 0.0454,
+      "MS": 0.0439
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30023",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 98.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9738,
+    "risk_scores": {
+      "AD": 0.9738,
+      "PD": 0.0306,
+      "MS": 0.0349
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30030",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 80.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9338,
+    "risk_scores": {
+      "AD": 0.9338,
+      "PD": 0.0838,
+      "MS": 0.0302
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-100012",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 74.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.0942,
+    "risk_scores": {
+      "AD": 0.0942,
+      "PD": 0.0295,
+      "MS": 0.0247
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-100020",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 66.0,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.0381,
+    "risk_scores": {
+      "AD": 0.0294,
+      "PD": 0.0381,
+      "MS": 0.0319
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-100030",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 63.0,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.0361,
+    "risk_scores": {
+      "AD": 0.0324,
+      "PD": 0.0361,
+      "MS": 0.0302
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-100035",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 83.0,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.0357,
+    "risk_scores": {
+      "AD": 0.0343,
+      "PD": 0.0357,
+      "MS": 0.0295
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-100010",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 79.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.0353,
+    "risk_scores": {
+      "AD": 0.0353,
+      "PD": 0.0349,
+      "MS": 0.0289
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-100021",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 76.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.0372,
+    "risk_scores": {
+      "AD": 0.0372,
+      "PD": 0.0342,
+      "MS": 0.0282
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-100037",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 74.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.928,
+    "risk_scores": {
+      "AD": 0.928,
+      "PD": 0.0258,
+      "MS": 0.0259
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "MS-AR-suj_519",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9741,
+    "risk_scores": {
+      "AD": 0.0338,
+      "PD": 0.0403,
+      "MS": 0.9741
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_522",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 47.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9741,
+    "risk_scores": {
+      "AD": 0.0342,
+      "PD": 0.0399,
+      "MS": 0.9741
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_526",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 44.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.973,
+    "risk_scores": {
+      "AD": 0.0332,
+      "PD": 0.0418,
+      "MS": 0.973
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_532",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 27.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9741,
+    "risk_scores": {
+      "AD": 0.034,
+      "PD": 0.0398,
+      "MS": 0.9741
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "PD-AR-sub-40012",
+    "true_class": "PD",
+    "site": "AR",
+    "source_kind": "pre_epoched",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.5916,
+    "risk_scores": {
+      "AD": 0.5916,
+      "PD": 0.3797,
+      "MS": 0.0807
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40006",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "pre_epoched",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9752,
+    "risk_scores": {
+      "AD": 0.0321,
+      "PD": 0.9752,
+      "MS": 0.0353
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40009",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "pre_epoched",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9752,
+    "risk_scores": {
+      "AD": 0.0317,
+      "PD": 0.9752,
+      "MS": 0.0354
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40016",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9752,
+    "risk_scores": {
+      "AD": 0.0318,
+      "PD": 0.9752,
+      "MS": 0.0355
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40026",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9752,
+    "risk_scores": {
+      "AD": 0.0318,
+      "PD": 0.9752,
+      "MS": 0.0356
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30002",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 79.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9175,
+    "risk_scores": {
+      "AD": 0.9175,
+      "PD": 0.1018,
+      "MS": 0.102
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30012",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 80.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9173,
+    "risk_scores": {
+      "AD": 0.9173,
+      "PD": 0.1013,
+      "MS": 0.1015
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30020",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 69.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.8991,
+    "risk_scores": {
+      "AD": 0.8991,
+      "PD": 0.0955,
+      "MS": 0.0952
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30005",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 75.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9173,
+    "risk_scores": {
+      "AD": 0.9173,
+      "PD": 0.1012,
+      "MS": 0.102
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30010",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 81.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9168,
+    "risk_scores": {
+      "AD": 0.9168,
+      "PD": 0.1,
+      "MS": 0.1002
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30024",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 76.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.7717,
+    "risk_scores": {
+      "AD": 0.7717,
+      "PD": 0.1397,
+      "MS": 0.2094
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30033",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 66.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.8774,
+    "risk_scores": {
+      "AD": 0.8774,
+      "PD": 0.1247,
+      "MS": 0.116
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-100015",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 70.0,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.145,
+    "risk_scores": {
+      "AD": 0.1388,
+      "PD": 0.145,
+      "MS": 0.119
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-100024",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 77.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.7998,
+    "risk_scores": {
+      "AD": 0.1089,
+      "PD": 0.125,
+      "MS": 0.7998
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "HC-AR-sub-100033",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 58.0,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.1467,
+    "risk_scores": {
+      "AD": 0.1408,
+      "PD": 0.1467,
+      "MS": 0.115
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-10006",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 58.0,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.1506,
+    "risk_scores": {
+      "AD": 0.1332,
+      "PD": 0.1506,
+      "MS": 0.1215
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-100011",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 70.0,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.1455,
+    "risk_scores": {
+      "AD": 0.1416,
+      "PD": 0.1455,
+      "MS": 0.1152
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-100034",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 73.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.1666,
+    "risk_scores": {
+      "AD": 0.1666,
+      "PD": 0.1429,
+      "MS": 0.1079
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-100043",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 77.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.2712,
+    "risk_scores": {
+      "AD": 0.1126,
+      "PD": 0.1183,
+      "MS": 0.2712
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_517",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 34.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9137,
+    "risk_scores": {
+      "AD": 0.1225,
+      "PD": 0.1473,
+      "MS": 0.9137
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_525",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 46.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9137,
+    "risk_scores": {
+      "AD": 0.1223,
+      "PD": 0.1474,
+      "MS": 0.9137
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_527",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 27.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.8871,
+    "risk_scores": {
+      "AD": 0.1492,
+      "PD": 0.1451,
+      "MS": 0.8871
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_534",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 44.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9137,
+    "risk_scores": {
+      "AD": 0.1224,
+      "PD": 0.1477,
+      "MS": 0.9137
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "PD-AR-sub-40006",
+    "true_class": "PD",
+    "site": "AR",
+    "source_kind": "pre_epoched",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.5667,
+    "risk_scores": {
+      "AD": 0.5667,
+      "PD": 0.4099,
+      "MS": 0.1792
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40001",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "pre_epoched",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9075,
+    "risk_scores": {
+      "AD": 0.0988,
+      "PD": 0.9075,
+      "MS": 0.1462
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40011",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "pre_epoched",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9073,
+    "risk_scores": {
+      "AD": 0.0982,
+      "PD": 0.9073,
+      "MS": 0.1452
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40020",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9073,
+    "risk_scores": {
+      "AD": 0.0983,
+      "PD": 0.9073,
+      "MS": 0.1454
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40023",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9075,
+    "risk_scores": {
+      "AD": 0.0983,
+      "PD": 0.9075,
+      "MS": 0.1467
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30004",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 70.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.6904,
+    "risk_scores": {
+      "AD": 0.6904,
+      "PD": 0.2177,
+      "MS": 0.2028
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30017",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 80.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.7829,
+    "risk_scores": {
+      "AD": 0.7829,
+      "PD": 0.2616,
+      "MS": 0.2499
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30022",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 67.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.7581,
+    "risk_scores": {
+      "AD": 0.7581,
+      "PD": 0.2318,
+      "MS": 0.2626
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30006",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 71.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.5521,
+    "risk_scores": {
+      "AD": 0.5521,
+      "PD": 0.4031,
+      "MS": 0.3503
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30019",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 79.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.664,
+    "risk_scores": {
+      "AD": 0.664,
+      "PD": 0.4586,
+      "MS": 0.2195
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30027",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 70.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.7768,
+    "risk_scores": {
+      "AD": 0.7768,
+      "PD": 0.2553,
+      "MS": 0.2369
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30034",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 64.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.78,
+    "risk_scores": {
+      "AD": 0.78,
+      "PD": 0.2519,
+      "MS": 0.2452
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-10002",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 69.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.3038,
+    "risk_scores": {
+      "AD": 0.3038,
+      "PD": 0.2453,
+      "MS": 0.2549
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-100026",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 61.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.3392,
+    "risk_scores": {
+      "AD": 0.3392,
+      "PD": 0.2302,
+      "MS": 0.2361
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-100031",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 56.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.3013,
+    "risk_scores": {
+      "AD": 0.3013,
+      "PD": 0.2457,
+      "MS": 0.2575
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-10009",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 77.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.3365,
+    "risk_scores": {
+      "AD": 0.3365,
+      "PD": 0.2299,
+      "MS": 0.2385
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-100014",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 68.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.3143,
+    "risk_scores": {
+      "AD": 0.3143,
+      "PD": 0.2387,
+      "MS": 0.2492
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-10005",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 73.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.397,
+    "risk_scores": {
+      "AD": 0.397,
+      "PD": 0.2267,
+      "MS": 0.2127
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "MS-AR-suj_509",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 29.0,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.6557,
+    "risk_scores": {
+      "AD": 0.3277,
+      "PD": 0.6557,
+      "MS": 0.3274
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "MS-AR-suj_515",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 34.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.6499,
+    "risk_scores": {
+      "AD": 0.6499,
+      "PD": 0.3726,
+      "MS": 0.2808
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "MS-AR-suj_518",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.7987,
+    "risk_scores": {
+      "AD": 0.2804,
+      "PD": 0.2789,
+      "MS": 0.7987
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_528",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 35.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.7987,
+    "risk_scores": {
+      "AD": 0.2822,
+      "PD": 0.2764,
+      "MS": 0.7987
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_533",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 22.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.7987,
+    "risk_scores": {
+      "AD": 0.2808,
+      "PD": 0.2779,
+      "MS": 0.7987
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "PD-AR-sub-40008",
+    "true_class": "PD",
+    "site": "AR",
+    "source_kind": "pre_epoched",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.7688,
+    "risk_scores": {
+      "AD": 0.7688,
+      "PD": 0.2847,
+      "MS": 0.2325
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40005",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.8052,
+    "risk_scores": {
+      "AD": 0.2757,
+      "PD": 0.8052,
+      "MS": 0.2521
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40017",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.8055,
+    "risk_scores": {
+      "AD": 0.2733,
+      "PD": 0.8055,
+      "MS": 0.2559
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40018",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.8056,
+    "risk_scores": {
+      "AD": 0.2756,
+      "PD": 0.8056,
+      "MS": 0.2542
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40019",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.8057,
+    "risk_scores": {
+      "AD": 0.2735,
+      "PD": 0.8057,
+      "MS": 0.2564
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30008",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 80.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9719,
+    "risk_scores": {
+      "AD": 0.9719,
+      "PD": 0.0192,
+      "MS": 0.018
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30013",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 77.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.982,
+    "risk_scores": {
+      "AD": 0.982,
+      "PD": 0.0228,
+      "MS": 0.0188
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30026",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 70.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.8177,
+    "risk_scores": {
+      "AD": 0.8177,
+      "PD": 0.2092,
+      "MS": 0.0171
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30031",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 75.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9529,
+    "risk_scores": {
+      "AD": 0.9529,
+      "PD": 0.0184,
+      "MS": 0.0174
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30021",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 86.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9457,
+    "risk_scores": {
+      "AD": 0.9457,
+      "PD": 0.0365,
+      "MS": 0.0165
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30025",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 80.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9827,
+    "risk_scores": {
+      "AD": 0.9827,
+      "PD": 0.0195,
+      "MS": 0.0182
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30035",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 90.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9319,
+    "risk_scores": {
+      "AD": 0.9319,
+      "PD": 0.0185,
+      "MS": 0.0334
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-100018",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 61.0,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.0262,
+    "risk_scores": {
+      "AD": 0.0226,
+      "PD": 0.0262,
+      "MS": 0.0246
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-100028",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 56.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.0247,
+    "risk_scores": {
+      "AD": 0.0243,
+      "PD": 0.0236,
+      "MS": 0.0247
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "HC-AR-sub-100038",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 75.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.0246,
+    "risk_scores": {
+      "AD": 0.0237,
+      "PD": 0.0242,
+      "MS": 0.0246
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "HC-AR-sub-10007",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 57.0,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.0247,
+    "risk_scores": {
+      "AD": 0.0236,
+      "PD": 0.0247,
+      "MS": 0.0243
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-100016",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 72.0,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.0247,
+    "risk_scores": {
+      "AD": 0.0236,
+      "PD": 0.0247,
+      "MS": 0.0244
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-10008",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 72.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.0634,
+    "risk_scores": {
+      "AD": 0.0634,
+      "PD": 0.0197,
+      "MS": 0.0207
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "MS-AR-suj_513",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 53.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.968,
+    "risk_scores": {
+      "AD": 0.021,
+      "PD": 0.0409,
+      "MS": 0.968
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_516",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 26.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9518,
+    "risk_scores": {
+      "AD": 0.0532,
+      "PD": 0.0247,
+      "MS": 0.9518
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_521",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 55.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9839,
+    "risk_scores": {
+      "AD": 0.021,
+      "PD": 0.0252,
+      "MS": 0.9839
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_529",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 44.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9839,
+    "risk_scores": {
+      "AD": 0.0209,
+      "PD": 0.0253,
+      "MS": 0.9839
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_535",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 26.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9839,
+    "risk_scores": {
+      "AD": 0.0208,
+      "PD": 0.0248,
+      "MS": 0.9839
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "PD-AR-sub-40011",
+    "true_class": "PD",
+    "site": "AR",
+    "source_kind": "pre_epoched",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.6389,
+    "risk_scores": {
+      "AD": 0.3816,
+      "PD": 0.6389,
+      "MS": 0.0194
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40007",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.983,
+    "risk_scores": {
+      "AD": 0.0215,
+      "PD": 0.983,
+      "MS": 0.0255
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40010",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.983,
+    "risk_scores": {
+      "AD": 0.0214,
+      "PD": 0.983,
+      "MS": 0.0255
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40021",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.983,
+    "risk_scores": {
+      "AD": 0.0214,
+      "PD": 0.983,
+      "MS": 0.0253
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40024",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.983,
+    "risk_scores": {
+      "AD": 0.0218,
+      "PD": 0.983,
+      "MS": 0.0252
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30009",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 82.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9485,
+    "risk_scores": {
+      "AD": 0.9485,
+      "PD": 0.0616,
+      "MS": 0.065
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-AR-sub-30015",
+    "true_class": "AD",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 72.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.6637,
+    "risk_scores": {
+      "AD": 0.6637,
+      "PD": 0.0906,
+      "MS": 0.3476
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30003",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 76.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9483,
+    "risk_scores": {
+      "AD": 0.9483,
+      "PD": 0.0604,
+      "MS": 0.0645
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30007",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 91.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9486,
+    "risk_scores": {
+      "AD": 0.9486,
+      "PD": 0.0611,
+      "MS": 0.065
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30014",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 76.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9487,
+    "risk_scores": {
+      "AD": 0.9487,
+      "PD": 0.0613,
+      "MS": 0.0655
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "AD-CL-sub-30028",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 69.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.8912,
+    "risk_scores": {
+      "AD": 0.1271,
+      "PD": 0.0961,
+      "MS": 0.8912
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "AD-CL-sub-30032",
+    "true_class": "AD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 70.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.5158,
+    "risk_scores": {
+      "AD": 0.2954,
+      "PD": 0.0563,
+      "MS": 0.5158
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "HC-AR-sub-100022",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 79.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.0897,
+    "risk_scores": {
+      "AD": 0.0897,
+      "PD": 0.0699,
+      "MS": 0.0716
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-10003",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 74.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.0818,
+    "risk_scores": {
+      "AD": 0.0818,
+      "PD": 0.0735,
+      "MS": 0.0766
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-AR-sub-10004",
+    "true_class": "HC",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 68.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.0926,
+    "risk_scores": {
+      "AD": 0.0926,
+      "PD": 0.0703,
+      "MS": 0.07
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-10001",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 72.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.0899,
+    "risk_scores": {
+      "AD": 0.0899,
+      "PD": 0.071,
+      "MS": 0.0709
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-100017",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 80.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.9433,
+    "risk_scores": {
+      "AD": 0.9433,
+      "PD": 0.0571,
+      "MS": 0.0616
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "HC-CL-sub-100029",
+    "true_class": "HC",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 64.0,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.1586,
+    "risk_scores": {
+      "AD": 0.1586,
+      "PD": 0.0625,
+      "MS": 0.0628
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "MS-AR-suj_514",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 43.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9431,
+    "risk_scores": {
+      "AD": 0.0777,
+      "PD": 0.0894,
+      "MS": 0.9431
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_520",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 39.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.943,
+    "risk_scores": {
+      "AD": 0.0785,
+      "PD": 0.0889,
+      "MS": 0.943
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_524",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 42.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9408,
+    "risk_scores": {
+      "AD": 0.0825,
+      "PD": 0.0883,
+      "MS": 0.9408
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "MS-AR-suj_531",
+    "true_class": "MS",
+    "site": "AR",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": 39.0,
+    "highest_risk_condition": "MS",
+    "highest_risk_score": 0.9413,
+    "risk_scores": {
+      "AD": 0.0816,
+      "PD": 0.0883,
+      "MS": 0.9413
+    },
+    "confound_severity": "HIGH (site)"
+  },
+  {
+    "subject_id": "PD-AR-sub-40001",
+    "true_class": "PD",
+    "site": "AR",
+    "source_kind": "pre_epoched",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "AD",
+    "highest_risk_score": 0.7789,
+    "risk_scores": {
+      "AD": 0.7789,
+      "PD": 0.1804,
+      "MS": 0.1048
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40004",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "pre_epoched",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9466,
+    "risk_scores": {
+      "AD": 0.0681,
+      "PD": 0.9466,
+      "MS": 0.0938
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40008",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9466,
+    "risk_scores": {
+      "AD": 0.0686,
+      "PD": 0.9466,
+      "MS": 0.0927
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40012",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9466,
+    "risk_scores": {
+      "AD": 0.0687,
+      "PD": 0.9466,
+      "MS": 0.0925
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40022",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9467,
+    "risk_scores": {
+      "AD": 0.0681,
+      "PD": 0.9467,
+      "MS": 0.0944
+    },
+    "confound_severity": "low"
+  },
+  {
+    "subject_id": "PD-CL-sub-40025",
+    "true_class": "PD",
+    "site": "CL",
+    "source_kind": "continuous",
+    "signal_quality": "Good",
+    "epochs_used": 60,
+    "age": null,
+    "highest_risk_condition": "PD",
+    "highest_risk_score": 0.9466,
+    "risk_scores": {
+      "AD": 0.0683,
+      "PD": 0.9466,
+      "MS": 0.0932
+    },
+    "confound_severity": "low"
+  }
+]

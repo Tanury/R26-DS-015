@@ -1,0 +1,770 @@
+{
+  "schema_version": "2.0",
+  "generated_at": "2026-08-20T13:41:28.031179+00:00",
+  "run_id": "20260820T114437Z",
+  "dataset": {
+    "name": "BrainLat (Latin American Brain Health Institute)",
+    "task": "resting-state EEG",
+    "stage": "Multi-condition neurological risk \u2014 AD / PD / MS / HC",
+    "classes": {
+      "0": "Healthy-Control-like EEG pattern",
+      "1": "AD-related EEG risk pattern",
+      "2": "PD-related EEG risk pattern",
+      "3": "MS-related EEG risk pattern"
+    },
+    "cohort_size": 115
+  },
+  "input_metadata": {
+    "subject_id": "HC-AR-sub-100012",
+    "class": "HC",
+    "label": 0,
+    "site": "AR",
+    "task": "rest",
+    "source_kind": "continuous",
+    "input_file": "/content/dataset/5_HC/AR/sub-100012/eeg/s6_sub-100012_rs_eeg.set",
+    "n_channels": 128,
+    "channel_set": "biosemi128",
+    "montage": "biosemi128",
+    "original_sampling_rate_hz": 512.0,
+    "duration_seconds": 345.6
+  },
+  "preprocessing_summary": {
+    "stage_1_filter": {
+      "type": "5th-order Butterworth band-pass, zero-phase",
+      "low_freq_hz": 0.5,
+      "high_freq_hz": 40.0,
+      "resampled_from_hz": 512.0,
+      "resampled_to_hz": 256.0,
+      "note": "Filtering precedes resampling to prevent aliasing into the analysis band."
+    },
+    "stage_2_ica": {
+      "enabled": true,
+      "applied": true,
+      "method": "FastICA",
+      "n_components": 25,
+      "excluded_components": [
+        0,
+        10,
+        13,
+        16,
+        19,
+        22
+      ],
+      "component_scores": [
+        {
+          "component": 0,
+          "kurtosis": 0.605,
+          "frontal_corr": 0.764,
+          "hf_power_ratio": 0.068,
+          "criteria_fired": [
+            "frontal_bipolar"
+          ],
+          "excluded": true
+        },
+        {
+          "component": 1,
+          "kurtosis": 0.525,
+          "frontal_corr": 0.434,
+          "hf_power_ratio": 0.057,
+          "criteria_fired": [
+            "frontal_bipolar"
+          ],
+          "excluded": false
+        },
+        {
+          "component": 2,
+          "kurtosis": 1.379,
+          "frontal_corr": 0.306,
+          "hf_power_ratio": 0.079,
+          "criteria_fired": [],
+          "excluded": false
+        },
+        {
+          "component": 3,
+          "kurtosis": 0.756,
+          "frontal_corr": 0.197,
+          "hf_power_ratio": 0.145,
+          "criteria_fired": [],
+          "excluded": false
+        },
+        {
+          "component": 4,
+          "kurtosis": 1.141,
+          "frontal_corr": 0.004,
+          "hf_power_ratio": 0.107,
+          "criteria_fired": [],
+          "excluded": false
+        },
+        {
+          "component": 5,
+          "kurtosis": 0.571,
+          "frontal_corr": 0.13,
+          "hf_power_ratio": 0.145,
+          "criteria_fired": [],
+          "excluded": false
+        },
+        {
+          "component": 6,
+          "kurtosis": 1.542,
+          "frontal_corr": 0.03,
+          "hf_power_ratio": 0.713,
+          "criteria_fired": [
+            "high_frequency"
+          ],
+          "excluded": false
+        },
+        {
+          "component": 7,
+          "kurtosis": 0.77,
+          "frontal_corr": 0.018,
+          "hf_power_ratio": 0.154,
+          "criteria_fired": [],
+          "excluded": false
+        },
+        {
+          "component": 8,
+          "kurtosis": 1.523,
+          "frontal_corr": 0.14,
+          "hf_power_ratio": 0.139,
+          "criteria_fired": [],
+          "excluded": false
+        },
+        {
+          "component": 9,
+          "kurtosis": 0.218,
+          "frontal_corr": 0.003,
+          "hf_power_ratio": 0.16,
+          "criteria_fired": [],
+          "excluded": false
+        },
+        {
+          "component": 10,
+          "kurtosis": 1.993,
+          "frontal_corr": 0.046,
+          "hf_power_ratio": 0.719,
+          "criteria_fired": [
+            "high_frequency"
+          ],
+          "excluded": true
+        },
+        {
+          "component": 11,
+          "kurtosis": 0.421,
+          "frontal_corr": 0.141,
+          "hf_power_ratio": 0.37,
+          "criteria_fired": [],
+          "excluded": false
+        },
+        {
+          "component": 12,
+          "kurtosis": 0.5,
+          "frontal_corr": 0.149,
+          "hf_power_ratio": 0.174,
+          "criteria_fired": [],
+          "excluded": false
+        },
+        {
+          "component": 13,
+          "kurtosis": 17.37,
+          "frontal_corr": 0.028,
+          "hf_power_ratio": 0.029,
+          "criteria_fired": [
+            "kurtosis"
+          ],
+          "excluded": true
+        },
+        {
+          "component": 14,
+          "kurtosis": 0.253,
+          "frontal_corr": 0.021,
+          "hf_power_ratio": 0.261,
+          "criteria_fired": [],
+          "excluded": false
+        },
+        {
+          "component": 15,
+          "kurtosis": 0.443,
+          "frontal_corr": 0.042,
+          "hf_power_ratio": 0.661,
+          "criteria_fired": [
+            "high_frequency"
+          ],
+          "excluded": false
+        },
+        {
+          "component": 16,
+          "kurtosis": 9.584,
+          "frontal_corr": 0.0,
+          "hf_power_ratio": 0.055,
+          "criteria_fired": [
+            "kurtosis"
+          ],
+          "excluded": true
+        },
+        {
+          "component": 17,
+          "kurtosis": 0.412,
+          "frontal_corr": 0.06,
+          "hf_power_ratio": 0.585,
+          "criteria_fired": [
+            "high_frequency"
+          ],
+          "excluded": false
+        },
+        {
+          "component": 18,
+          "kurtosis": 1.025,
+          "frontal_corr": 0.006,
+          "hf_power_ratio": 0.747,
+          "criteria_fired": [
+            "high_frequency"
+          ],
+          "excluded": false
+        },
+        {
+          "component": 19,
+          "kurtosis": 4.51,
+          "frontal_corr": 0.025,
+          "hf_power_ratio": 0.586,
+          "criteria_fired": [
+            "high_frequency"
+          ],
+          "excluded": true
+        },
+        {
+          "component": 20,
+          "kurtosis": 5.11,
+          "frontal_corr": 0.064,
+          "hf_power_ratio": 0.129,
+          "criteria_fired": [
+            "kurtosis"
+          ],
+          "excluded": false
+        },
+        {
+          "component": 21,
+          "kurtosis": 2.446,
+          "frontal_corr": 0.021,
+          "hf_power_ratio": 0.197,
+          "criteria_fired": [],
+          "excluded": false
+        },
+        {
+          "component": 22,
+          "kurtosis": 7.3,
+          "frontal_corr": 0.028,
+          "hf_power_ratio": 0.23,
+          "criteria_fired": [
+            "kurtosis"
+          ],
+          "excluded": true
+        },
+        {
+          "component": 23,
+          "kurtosis": -0.572,
+          "frontal_corr": 0.009,
+          "hf_power_ratio": 0.035,
+          "criteria_fired": [],
+          "excluded": false
+        },
+        {
+          "component": 24,
+          "kurtosis": 0.956,
+          "frontal_corr": 0.011,
+          "hf_power_ratio": 0.733,
+          "criteria_fired": [
+            "high_frequency"
+          ],
+          "excluded": false
+        }
+      ],
+      "reason": "Excluded 6 component(s) on criteria ['frontal_bipolar', 'high_frequency', 'kurtosis']."
+    },
+    "stage_3_epoching": {
+      "epoch_length_seconds": 4.0,
+      "overlap": 0.5,
+      "amplitude_reject_uv": 150.0,
+      "total_epochs_generated": 171,
+      "rejected_epochs": 0,
+      "epochs_surviving_rejection": 171,
+      "epochs_after_cap": 80,
+      "max_saved_epochs_per_subject": 80,
+      "cap_applied": true,
+      "clean_epoch_ratio": 1.0,
+      "clean_epoch_ratio_definition": "epochs surviving amplitude rejection / epochs generated (the epoch cap is a deliberate subsample and is excluded)",
+      "signal_quality": "Good",
+      "min_clean_epochs_required": 20,
+      "meets_min_clean_epochs": true,
+      "epoch_tensor_shape": [
+        80,
+        128,
+        1024
+      ],
+      "standardization": "per-epoch per-channel z-score, applied after rejection"
+    }
+  },
+  "band_power_profile": {
+    "delta": 0.15793,
+    "delta__posterior": 0.13202,
+    "delta__right_lateral": 0.1553,
+    "delta__left_lateral": 0.20559,
+    "delta__frontal_central": 0.13881,
+    "theta": 0.10511,
+    "theta__posterior": 0.10439,
+    "theta__right_lateral": 0.10773,
+    "theta__left_lateral": 0.11802,
+    "theta__frontal_central": 0.0903,
+    "alpha": 0.42207,
+    "alpha__posterior": 0.50964,
+    "alpha__right_lateral": 0.46729,
+    "alpha__left_lateral": 0.42047,
+    "alpha__frontal_central": 0.29088,
+    "beta": 0.26483,
+    "beta__posterior": 0.22886,
+    "beta__right_lateral": 0.23537,
+    "beta__left_lateral": 0.22857,
+    "beta__frontal_central": 0.36654,
+    "low_gamma": 0.04912,
+    "low_gamma__posterior": 0.02469,
+    "low_gamma__right_lateral": 0.03365,
+    "low_gamma__left_lateral": 0.02694,
+    "low_gamma__frontal_central": 0.1112,
+    "theta_alpha_ratio": 0.24903
+  },
+  "model_summary": {
+    "module": "Electrophysiological Signal Representation Learning (z_eeg)",
+    "architecture": "Lightweight EEG Transformer",
+    "backbone_key": "transformer",
+    "input_representation": "raw",
+    "input_shape": [
+      1,
+      128,
+      1024
+    ],
+    "input_planes": [
+      "time"
+    ],
+    "embedding_dim": 256,
+    "projection_head": "Linear -> BatchNorm -> ReLU -> L2 normalize",
+    "checkpoint": "/content/drive/MyDrive/r26_ds015_workspace/models/checkpoints/transformer_raw_fold0.pth",
+    "checkpoint_epoch": 16,
+    "fold": 0,
+    "subject_was_validation_for_this_fold": true
+  },
+  "risk_scores": {
+    "ad_risk_score": 0.0762,
+    "pd_risk_score": 0.0301,
+    "ms_risk_score": 0.0252
+  },
+  "risk_assessment": {
+    "conditions": {
+      "AD": {
+        "risk_score": 0.0762,
+        "risk_band": "Low",
+        "label": "AD-related EEG risk pattern",
+        "epoch_score_std": 0.1207,
+        "epoch_score_range": [
+          0.0333,
+          0.7635
+        ],
+        "confound_severity": "low"
+      },
+      "PD": {
+        "risk_score": 0.0301,
+        "risk_band": "Low",
+        "label": "PD-related EEG risk pattern",
+        "epoch_score_std": 0.0059,
+        "epoch_score_range": [
+          0.0113,
+          0.0362
+        ],
+        "confound_severity": "low"
+      },
+      "MS": {
+        "risk_score": 0.0252,
+        "risk_band": "Low",
+        "label": "MS-related EEG risk pattern",
+        "epoch_score_std": 0.0049,
+        "epoch_score_range": [
+          0.0103,
+          0.03
+        ],
+        "confound_severity": "HIGH (site)"
+      }
+    },
+    "highest_risk_condition": "AD",
+    "scores_are_independent": true,
+    "interpretation": "Each score is an independent sigmoid probability that the recording shows the EEG pattern associated with that condition. Scores do not sum to 1 and are not mutually exclusive: elevated scores on more than one condition are meaningful, not contradictory. These are decision-support indicators, not diagnoses.",
+    "aggregation_method": "Mean sigmoid score across clean epochs",
+    "risk_bands": {
+      "low_max": 0.39,
+      "medium_max": 0.69
+    }
+  },
+  "optional_four_class_prediction": {
+    "predicted_class": "HC",
+    "predicted_class_full": "Healthy-Control-like EEG pattern",
+    "predicted_label": 0,
+    "class_probabilities": {
+      "HC": 0.9316,
+      "AD": 0.0366,
+      "PD": 0.0157,
+      "MS": 0.016
+    },
+    "confidence": 0.9316,
+    "note": "Auxiliary head. Mutually exclusive by construction, so it cannot express co-elevated risk. Provided as the multi-condition discrimination demonstration; the risk_scores block above is the module's output."
+  },
+  "subject_level_prediction": {
+    "predicted_class": "HC",
+    "predicted_class_full": "Healthy-Control-like EEG pattern",
+    "predicted_label": 0,
+    "class_probabilities": {
+      "HC": 0.9316,
+      "AD": 0.0366,
+      "PD": 0.0157,
+      "MS": 0.016
+    },
+    "confidence": 0.9316,
+    "binary_neuro_risk": {
+      "probability": 0.0684,
+      "risk_level": "Low",
+      "interpretation": "Aggregated probability that the recording is not healthy-control-like."
+    },
+    "uncertainty": {
+      "normalized_entropy": 0.2299,
+      "top_two_margin": 0.895,
+      "is_uncertain": false,
+      "threshold": 0.9,
+      "display": "HC"
+    },
+    "aggregation_method": "Mean softmax probability across clean epochs",
+    "ground_truth_class": "HC"
+  },
+  "epoch_level_summary": {
+    "epochs_used": 60,
+    "vote_distribution": {
+      "HC": 59,
+      "AD": 1,
+      "PD": 0,
+      "MS": 0
+    },
+    "majority_agreement": 0.9833,
+    "per_class_probability_std": {
+      "HC": 0.0903,
+      "AD": 0.086,
+      "PD": 0.0022,
+      "MS": 0.0025
+    },
+    "predicted_class_probability_range": [
+      0.342,
+      0.9548
+    ],
+    "note": "Epoch agreement measures prediction stability across EEG windows."
+  },
+  "embedding_output": {
+    "z_eeg": [
+      0.0,
+      0.08405,
+      0.0,
+      0.004344,
+      0.127698,
+      0.005363,
+      0.0,
+      0.0,
+      0.056225,
+      0.132808,
+      0.090801,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.005955,
+      0.006024,
+      0.114768,
+      0.0,
+      0.14291,
+      0.06547,
+      0.0,
+      0.070719,
+      0.0,
+      0.127551,
+      0.127373,
+      0.116715,
+      0.002803,
+      0.0,
+      0.0,
+      0.004471,
+      0.144908,
+      0.0,
+      0.0,
+      0.039237,
+      0.0,
+      0.003798,
+      0.0,
+      0.007273,
+      0.135403,
+      0.0,
+      0.056039,
+      0.0,
+      0.0,
+      0.0,
+      0.005063,
+      0.00446,
+      0.141276,
+      0.0,
+      0.008544,
+      0.005575,
+      0.0,
+      0.095209,
+      0.0,
+      0.120014,
+      0.133226,
+      0.133886,
+      0.0,
+      0.0,
+      0.002284,
+      0.126947,
+      0.0,
+      0.0,
+      0.14223,
+      0.005756,
+      0.0,
+      0.0,
+      0.046923,
+      0.041561,
+      0.004565,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.137662,
+      0.062006,
+      0.0,
+      0.0,
+      0.059055,
+      0.0,
+      0.003797,
+      0.005828,
+      0.047797,
+      0.130344,
+      0.005599,
+      0.0,
+      0.004597,
+      0.14479,
+      0.0,
+      0.004369,
+      0.004622,
+      0.0,
+      0.00547,
+      0.1127,
+      0.007846,
+      0.072675,
+      0.004302,
+      0.07219,
+      0.0,
+      0.077385,
+      0.137489,
+      0.0,
+      0.086187,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.003815,
+      0.0,
+      0.146804,
+      0.0,
+      0.007468,
+      0.0,
+      0.0,
+      0.0,
+      0.032352,
+      0.0,
+      0.006294,
+      0.004104,
+      0.0,
+      0.0,
+      0.0,
+      0.103749,
+      0.0,
+      0.006501,
+      0.074183,
+      0.0,
+      0.0,
+      0.0,
+      0.003879,
+      0.033209,
+      0.0,
+      0.143685,
+      0.0,
+      0.0,
+      0.00666,
+      0.0,
+      0.0,
+      0.0,
+      0.081319,
+      0.0,
+      0.008699,
+      0.0,
+      0.132963,
+      0.004169,
+      8e-06,
+      0.149636,
+      0.146356,
+      0.0,
+      0.00566,
+      0.001997,
+      0.146048,
+      0.046597,
+      0.0,
+      0.0,
+      0.0,
+      0.129081,
+      0.005326,
+      0.0,
+      0.0,
+      0.0,
+      0.149397,
+      0.041929,
+      0.004046,
+      0.0,
+      0.005636,
+      0.007306,
+      0.037885,
+      0.0,
+      0.000477,
+      0.127164,
+      0.0,
+      0.116881,
+      0.135933,
+      0.045468,
+      0.147856,
+      0.142877,
+      0.058337,
+      0.0,
+      0.134813,
+      0.005681,
+      0.0,
+      0.144222,
+      0.010506,
+      0.006855,
+      0.003824,
+      0.005355,
+      0.0,
+      0.005745,
+      0.0,
+      0.0,
+      0.076278,
+      0.0,
+      0.0,
+      0.005281,
+      0.0,
+      0.0,
+      0.0,
+      0.006729,
+      0.0,
+      0.0,
+      0.147424,
+      0.131975,
+      0.0,
+      0.001561,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.005482,
+      0.0,
+      0.0,
+      0.144965,
+      0.0,
+      0.137339,
+      0.0,
+      0.0,
+      0.138031,
+      0.0,
+      0.005446,
+      0.0,
+      0.004511,
+      0.0,
+      0.0,
+      0.059884,
+      0.0,
+      0.121085,
+      0.049286,
+      0.130328,
+      0.0,
+      0.105095,
+      0.0,
+      0.000213,
+      0.0,
+      0.00404,
+      0.0,
+      0.0,
+      0.140557,
+      0.004899,
+      0.133381,
+      0.0,
+      0.0,
+      0.058102,
+      0.147232,
+      0.036603,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.066472,
+      0.143727,
+      0.003281,
+      0.0,
+      7.1e-05,
+      0.021997,
+      0.0
+    ],
+    "embedding_dim": 256,
+    "l2_norm": 1.0,
+    "availability_flag": 1,
+    "embedding_consistency": 0.9849,
+    "cosine_to_class_centroids": {
+      "HC": 0.9922,
+      "AD": 0.1609,
+      "PD": 0.0605,
+      "MS": 0.0365
+    },
+    "nearest_centroid": "HC",
+    "margin_to_second_centroid": 0.8313,
+    "normalization": "L2 (unit norm) after ReLU \u2014 non-negative orthant",
+    "note": "embedding_consistency is the norm of the mean epoch embedding before re-normalization; near 1.0 means the epochs agreed."
+  },
+  "explainability": {
+    "baseline_probability": 0.9316,
+    "scalp_region_importance": {
+      "posterior": 0.0796,
+      "right_lateral": -0.0218,
+      "left_lateral": -0.0209,
+      "frontal_central": -0.023
+    },
+    "plane_importance": {},
+    "band_importance": {},
+    "method": "occlusion \u2014 drop in predicted-class probability when the input is zeroed",
+    "note": "Positive values mean the model relied on that region or band."
+  },
+  "confound_disclosure": {
+    "cohort_age_probe_mae_years": null,
+    "cohort_age_probe_improvement_over_baseline": null,
+    "cohort_site_probe_balanced_accuracy": 0.6205,
+    "predicted_class_confound_severity": "low",
+    "predicted_class_site_purity": 0.594,
+    "predicted_class_age_overlap_with_others": null,
+    "interpretation": "The cohort this model was trained on has documented age and site confounds. Where the predicted class carries a CRITICAL or HIGH severity, this prediction cannot be attributed to disease physiology on the strength of this cohort alone."
+  },
+  "quality_control": {
+    "signal_quality": "Good",
+    "clean_epoch_ratio": 1.0,
+    "meets_min_clean_epochs": true,
+    "ica_components_removed": 6,
+    "source_kind": "continuous",
+    "warnings": [],
+    "synthetic_run": false
+  },
+  "clinical_disclaimer": "This output is a research decision-support indicator produced by an EEG representation learning prototype. It is not a clinical diagnosis, has not been clinically validated, and must not be used as the basis of a medical decision."
+}

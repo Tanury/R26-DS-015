@@ -1,0 +1,21 @@
+architecture,representation,fold,best_epoch,epochs_run,train_loss,val_loss,train_acc,val_acc,acc_gap,flag
+Extended EEGNet CNN,hybrid,0,4,12,0.8138,1.0557,1.0,0.7826,0.2174,CHECK
+Extended EEGNet CNN,hybrid,1,8,16,0.5097,1.0811,1.0,0.8261,0.1739,ok
+Extended EEGNet CNN,hybrid,2,30,38,0.3005,1.2184,1.0,0.8696,0.1304,ok
+Extended EEGNet CNN,hybrid,3,22,30,0.297,0.883,1.0,0.913,0.087,ok
+Extended EEGNet CNN,hybrid,4,6,14,0.6449,1.227,1.0,0.6522,0.3478,CHECK
+BiLSTM + Attention,hybrid,0,5,13,0.4256,1.1974,1.0,0.8261,0.1739,ok
+BiLSTM + Attention,hybrid,1,4,12,0.5458,1.1952,1.0,0.7826,0.2174,CHECK
+BiLSTM + Attention,hybrid,2,11,19,0.2341,1.5941,1.0,0.6522,0.3478,CHECK
+BiLSTM + Attention,hybrid,3,5,13,0.4425,0.9741,1.0,0.913,0.087,ok
+BiLSTM + Attention,hybrid,4,14,22,0.1947,1.7359,1.0,0.7826,0.2174,CHECK
+Lightweight EEG Transformer,hybrid,0,5,13,0.4657,1.1483,1.0,0.8261,0.1739,ok
+Lightweight EEG Transformer,hybrid,1,8,16,0.2876,1.2065,1.0,0.8261,0.1739,ok
+Lightweight EEG Transformer,hybrid,2,1,9,1.4651,1.4137,1.0,0.7826,0.2174,CHECK
+Lightweight EEG Transformer,hybrid,3,8,16,0.3056,0.9398,1.0,0.8696,0.1304,ok
+Lightweight EEG Transformer,hybrid,4,6,14,0.3833,1.5372,1.0,0.7826,0.2174,CHECK
+Lightweight EEG Transformer,raw,0,16,24,0.1837,0.4601,1.0,0.913,0.087,ok
+Lightweight EEG Transformer,raw,1,7,15,0.3347,0.5393,1.0,0.913,0.087,ok
+Lightweight EEG Transformer,raw,2,3,11,0.7662,1.0486,1.0,0.8696,0.1304,ok
+Lightweight EEG Transformer,raw,3,24,32,0.1375,0.3147,1.0,1.0,0.0,ok
+Lightweight EEG Transformer,raw,4,10,18,0.2659,0.9097,1.0,0.8261,0.1739,ok

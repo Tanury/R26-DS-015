@@ -1,0 +1,107 @@
+{
+  "run_id": "neuro24_20260827T125302Z",
+  "created_at_utc": "2026-08-27T12:53:02.735502+00:00",
+  "schema_version": "neurological-biomedical-24-v1",
+  "schema_hash": "84a39236b4552164ea643cdc5103887b1be42982278ec3c6878675af0b71634b",
+  "dataset_file": "neurological_risk_24_features.csv",
+  "dataset_sha256": "455608bcd7955778723d78ecd9edfa182727e7c8ce588a3c27ef4a4e2b7c86cb",
+  "row_count": 10000,
+  "feature_count": 24,
+  "feature_columns": [
+    "age",
+    "sex",
+    "education_years",
+    "bmi",
+    "family_history_pd",
+    "systolic_bp",
+    "diastolic_bp",
+    "cognitive_screen_score_0_30",
+    "rem_sleep_score",
+    "updrs_part_i",
+    "updrs_part_ii",
+    "updrs_part_iii",
+    "updrs_part_iv",
+    "schwab_england_adl",
+    "apoe_e4_count",
+    "gba_variant_carrier",
+    "amyloid_beta_42_40_ratio",
+    "t_tau_pg_ml",
+    "p_tau181_pg_ml",
+    "nfl_pg_ml",
+    "gfap_pg_ml",
+    "alpha_synuclein_pg_ml",
+    "gdf15_pg_ml",
+    "crp40_copy_number"
+  ],
+  "categorical_columns": [
+    "sex"
+  ],
+  "numeric_columns": [
+    "age",
+    "education_years",
+    "bmi",
+    "family_history_pd",
+    "systolic_bp",
+    "diastolic_bp",
+    "cognitive_screen_score_0_30",
+    "rem_sleep_score",
+    "updrs_part_i",
+    "updrs_part_ii",
+    "updrs_part_iii",
+    "updrs_part_iv",
+    "schwab_england_adl",
+    "apoe_e4_count",
+    "gba_variant_carrier",
+    "amyloid_beta_42_40_ratio",
+    "t_tau_pg_ml",
+    "p_tau181_pg_ml",
+    "nfl_pg_ml",
+    "gfap_pg_ml",
+    "alpha_synuclein_pg_ml",
+    "gdf15_pg_ml",
+    "crp40_copy_number"
+  ],
+  "targets": {
+    "disease": "disease_label",
+    "risk": "risk_label"
+  },
+  "classes": {
+    "disease": [
+      "AD",
+      "Healthy",
+      "MS",
+      "PD"
+    ],
+    "risk": [
+      "High",
+      "Low",
+      "Medium"
+    ]
+  },
+  "selected_models": {
+    "disease": "ExtraTrees",
+    "risk": "LogisticRegression"
+  },
+  "test_metrics": {
+    "disease": {
+      "accuracy": 0.9633333333333334,
+      "balanced_accuracy": 0.9442899711085828,
+      "f1_macro": 0.9516081491430954,
+      "log_loss": 0.2203111191513061
+    },
+    "risk": {
+      "accuracy": 0.9553333333333334,
+      "balanced_accuracy": 0.950395391707021,
+      "f1_macro": 0.9509133530269597,
+      "log_loss": 0.15932456834889902
+    }
+  },
+  "missing_value_policy": "All 24 keys are required at inference. Values may be null; the fitted pipeline imputes numeric values with training medians and categorical values with the training mode.",
+  "risk_score_definition": "0*P(Low) + 50*P(Medium) + 100*P(High)",
+  "software": {
+    "python": "3.13.5",
+    "pandas": "2.2.3",
+    "scikit_learn": "1.8.0",
+    "joblib": "1.5.3"
+  }
+}

@@ -1,3 +1,4 @@
+import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -45,10 +46,29 @@ def healthy_prediction() -> PredictionResponse:
     )
 
 
-def test_voice_assessment_composes_extraction_and_prediction(monkeypatch) -> None:
+@pytest.mark.parametrize(
+    "filename,audio,content_type,expected_mime",
+    [
+        ("sample.wav", VALID_WAV, "audio/wav", "audio/wav"),
+        ("voice.webm", b"\x1a\x45\xdf\xa3" + b"\x00" * 32, "audio/webm;codecs=opus", "audio/webm"),
+        ("voice.webm", b"\x1a\x45\xdf\xa3" + b"\x00" * 32, 'Audio/WebM ; codecs="opus"', "audio/webm"),
+        ("voice.ogg", b"OggS" + b"\x00" * 32, "audio/ogg;codecs=opus", "audio/ogg"),
+        ("voice.m4a", b"\x00" * 4 + b"ftyp" + b"\x00" * 32, "audio/mp4;codecs=mp4a.40.2", "audio/mp4"),
+        ("sample.wav", VALID_WAV, "audio/x-wav;rate=48000", "audio/wav"),
+    ],
+)
+def test_voice_assessment_composes_extraction_and_prediction(
+    monkeypatch, filename, audio, content_type, expected_mime
+) -> None:
+    def extract(received_audio, mime, recording_task):
+        assert received_audio == audio
+        assert mime == expected_mime
+        assert recording_task == "reading"
+        return extracted_analysis()
+
     monkeypatch.setattr(
         "app.api.routes.voice_assessment.extract_speech_features",
-        lambda audio, mime: extracted_analysis(),
+        extract,
     )
     monkeypatch.setattr(
         "app.api.routes.voice_assessment.predict_risk",
@@ -59,7 +79,7 @@ def test_voice_assessment_composes_extraction_and_prediction(monkeypatch) -> Non
         response = client.post(
             "/voice-assessments/",
             data={"patient_age": "58", "recording_task": "reading"},
-            files={"file": ("sample.wav", VALID_WAV, "audio/wav")},
+            files={"file": (filename, audio, content_type)},
         )
 
     assert response.status_code == 200
@@ -70,12 +90,13 @@ def test_voice_assessment_composes_extraction_and_prediction(monkeypatch) -> Non
     assert body["extraction_quality"] == "usable"
 
 
-def test_voice_assessment_rejects_invalid_audio_signature() -> None:
+@pytest.mark.parametrize("content_type", ["audio/wav", "audio/webm;codecs=opus", "audio/ogg;codecs=opus", "audio/mp4;codecs=mp4a.40.2"])
+def test_voice_assessment_rejects_invalid_audio_signature(content_type) -> None:
     with TestClient(app) as client:
         response = client.post(
             "/voice-assessments/",
             data={"patient_age": "58", "recording_task": "reading"},
-            files={"file": ("sample.wav", b"not-wave-audio", "audio/wav")},
+            files={"file": ("sample.wav", b"not-wave-audio", content_type)},
         )
 
     assert response.status_code == 422

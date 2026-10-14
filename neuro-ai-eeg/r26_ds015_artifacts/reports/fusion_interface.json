@@ -1,0 +1,15 @@
+{
+  "embedding_dim": 256,
+  "normalization": "L2 unit norm after ReLU",
+  "present_contract": {
+    "z_eeg": "float32[256], L2 norm 1",
+    "availability_flag": 1
+  },
+  "absent_contract": {
+    "z_eeg": "float32[256] zeros",
+    "availability_flag": 0
+  },
+  "contract_verified": true,
+  "masked_attention_reference": "MaskedCrossModalAttention (key_padding_mask on availability)",
+  "r13_status": "contract verified; degradation percentage requires the group fusion engine"
+}

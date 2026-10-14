@@ -1,0 +1,90 @@
+{
+  "conditions": [
+    {
+      "condition": "clean",
+      "accuracy": 0.9043478260869564,
+      "balanced_accuracy": 0.9047619047619048,
+      "macro_f1": 0.9039310689310689,
+      "macro_auc": 0.990329131652661,
+      "binary_auc": 0.996078431372549,
+      "embedding_cosine_to_clean": 1.0,
+      "accuracy_retained": 1.0,
+      "macro_auc_retained": 1.0,
+      "binary_auc_retained": 1.0
+    },
+    {
+      "condition": "electrode_dropout_5pct",
+      "accuracy": 0.9043478260869564,
+      "balanced_accuracy": 0.9047619047619048,
+      "macro_f1": 0.9039310689310689,
+      "macro_auc": 0.9899918300653596,
+      "binary_auc": 0.996078431372549,
+      "embedding_cosine_to_clean": 0.9994577796562858,
+      "accuracy_retained": 1.0,
+      "macro_auc_retained": 0.9996594045590292,
+      "binary_auc_retained": 1.0
+    },
+    {
+      "condition": "electrode_dropout_10pct",
+      "accuracy": 0.9043478260869564,
+      "balanced_accuracy": 0.9047619047619048,
+      "macro_f1": 0.9045876345876346,
+      "macro_auc": 0.9903728991596639,
+      "binary_auc": 0.9980392156862745,
+      "embedding_cosine_to_clean": 0.9980527660121088,
+      "accuracy_retained": 1.0,
+      "macro_auc_retained": 1.0000441949101606,
+      "binary_auc_retained": 1.0019685039370079
+    },
+    {
+      "condition": "electrode_dropout_20pct",
+      "accuracy": 0.8869565217391304,
+      "balanced_accuracy": 0.8876190476190476,
+      "macro_f1": 0.888102591852592,
+      "macro_auc": 0.9887062324929972,
+      "binary_auc": 0.9980392156862745,
+      "embedding_cosine_to_clean": 0.9929156163464422,
+      "accuracy_retained": 0.9807692307692308,
+      "macro_auc_retained": 0.9983612527312454,
+      "binary_auc_retained": 1.0019685039370079
+    },
+    {
+      "condition": "snr_20dB",
+      "accuracy": 0.9043478260869564,
+      "balanced_accuracy": 0.9047619047619048,
+      "macro_f1": 0.9039310689310689,
+      "macro_auc": 0.990329131652661,
+      "binary_auc": 0.996078431372549,
+      "embedding_cosine_to_clean": 0.9999803885169651,
+      "accuracy_retained": 1.0,
+      "macro_auc_retained": 1.0,
+      "binary_auc_retained": 1.0
+    },
+    {
+      "condition": "snr_10dB",
+      "accuracy": 0.9043478260869564,
+      "balanced_accuracy": 0.9047619047619048,
+      "macro_f1": 0.9039310689310689,
+      "macro_auc": 0.990329131652661,
+      "binary_auc": 0.996078431372549,
+      "embedding_cosine_to_clean": 0.9994555302288222,
+      "accuracy_retained": 1.0,
+      "macro_auc_retained": 1.0,
+      "binary_auc_retained": 1.0
+    },
+    {
+      "condition": "snr_5dB",
+      "accuracy": 0.9043478260869564,
+      "balanced_accuracy": 0.9047619047619048,
+      "macro_f1": 0.9039310689310689,
+      "macro_auc": 0.990547385620915,
+      "binary_auc": 0.996078431372549,
+      "embedding_cosine_to_clean": 0.994614871688511,
+      "accuracy_retained": 1.0,
+      "macro_auc_retained": 1.0002203852853342,
+      "binary_auc_retained": 1.0
+    }
+  ],
+  "backbone": "transformer",
+  "representation": "raw"
+}

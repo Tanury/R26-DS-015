@@ -1,0 +1,6 @@
+[
+  {
+    "subject_id": "PD-AR-sub-40013",
+    "error": "ValueError: PD-AR-sub-40013: 128 configured channel(s) absent, e.g. ['A1', 'A2', 'A3', 'A4', 'A5', 'A6']. File provides 127 channels."
+  }
+]

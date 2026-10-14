@@ -1,0 +1,56 @@
+{
+  "audit": [
+    {
+      "class": "HC",
+      "n": 32,
+      "site_purity": 0.594,
+      "dominant_site": "AR",
+      "age_mean": NaN,
+      "age_sd": NaN,
+      "age_min": NaN,
+      "age_max": NaN,
+      "age_overlap_with_others": NaN,
+      "confound_severity": "low"
+    },
+    {
+      "class": "AD",
+      "n": 35,
+      "site_purity": 0.543,
+      "dominant_site": "CL",
+      "age_mean": NaN,
+      "age_sd": NaN,
+      "age_min": NaN,
+      "age_max": NaN,
+      "age_overlap_with_others": NaN,
+      "confound_severity": "low"
+    },
+    {
+      "class": "PD",
+      "n": 28,
+      "site_purity": 0.75,
+      "dominant_site": "CL",
+      "age_mean": NaN,
+      "age_sd": NaN,
+      "age_min": NaN,
+      "age_max": NaN,
+      "age_overlap_with_others": NaN,
+      "confound_severity": "low"
+    },
+    {
+      "class": "MS",
+      "n": 23,
+      "site_purity": 1.0,
+      "dominant_site": "AR",
+      "age_mean": NaN,
+      "age_sd": NaN,
+      "age_min": NaN,
+      "age_max": NaN,
+      "age_overlap_with_others": NaN,
+      "confound_severity": "HIGH (site)"
+    }
+  ],
+  "critical_classes": [],
+  "high_risk_classes": [
+    "MS"
+  ]
+}

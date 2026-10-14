@@ -5,3 +5,18 @@ venv/
 .env
 .pytest_cache/
 .mypy_cache/
+
+# MRI raw/processed patient data — never commit (ADNI data use agreement)
+mri/**/data/raw/
+mri/**/data/denoised_small/
+mri/**/data/**/*.nii.gz
+
+# Extracted embeddings — regenerable
+**/embeddings/*.npz
+**/*.npz
+!**/test_split.npz
+
+# Python
+__pycache__/
+.venv/
+.DS_Store
