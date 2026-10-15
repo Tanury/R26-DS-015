@@ -79,6 +79,15 @@ export type BiomedicalFeatures = {
   sex: "Female" | "Male" | null;
 } & Record<BiomedicalNumericKey, number | null>;
 
+export type BiomedicalRecordExtraction = {
+  filename: string;
+  extraction_quality: "usable" | "limited";
+  quality_notes: string[];
+  extracted_count: number;
+  features: BiomedicalFeatures;
+  extraction_disclaimer: string;
+};
+
 export type Prediction = {
   predicted_class: string;
   confidence_score: number;

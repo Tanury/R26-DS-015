@@ -7,7 +7,7 @@ classes cannot express. `scores_are_independent` is carried in the payload so a
 client cannot mistake this for a distribution.
 """
 
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -81,6 +81,8 @@ class EmbeddingSummary(BaseModel):
 
 
 class Explainability(BaseModel):
+    target_condition: str | None = None
+    target_output: Literal["independent_risk", "four_class"] | None = None
     scalp_region_importance: dict[str, float] = Field(default_factory=dict)
     band_importance: dict[str, float] = Field(default_factory=dict)
     method: str = (
@@ -100,6 +102,13 @@ class ConfoundDisclosure(BaseModel):
     has_critical: bool = False
 
 
+class WaveformPreview(BaseModel):
+    sampling_rate_hz: float = Field(gt=0)
+    channels: dict[str, list[float]]
+    unit: Literal["µV"] = "µV"
+    note: str
+
+
 class EegRiskReport(BaseModel):
     model_config = ConfigDict(protected_namespaces=())
 
@@ -114,11 +123,33 @@ class EegRiskReport(BaseModel):
 
     signal_quality: SignalQuality
     band_power_profile: dict[str, float] = Field(default_factory=dict)
+    waveform_preview: WaveformPreview | None = None
     embedding: EmbeddingSummary
     explainability: Explainability = Field(default_factory=Explainability)
     confound_disclosure: ConfoundDisclosure
     model_summary: dict[str, str | int | float | None] = Field(default_factory=dict)
     clinical_disclaimer: str
+
+
+class SimilarEegRequest(BaseModel):
+    subject_id: str = Field(max_length=128)
+    run_id: str = Field(min_length=1, max_length=128)
+    band_power_profile: dict[str, Annotated[float, Field(ge=0, le=1, allow_inf_nan=False)]] = Field(max_length=5)
+
+
+class SimilarEegSample(BaseModel):
+    subject_id: str
+    true_class: str
+    site: str
+    signal_quality: str
+    band_power_profile: dict[str, float]
+    distance: float
+
+
+class SimilarEegResponse(BaseModel):
+    samples: list[SimilarEegSample]
+    compared_subjects: int
+    method: str
 
 
 class CohortSubject(BaseModel):

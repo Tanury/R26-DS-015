@@ -18,6 +18,10 @@ class AudioFeatureExtractionError(AppError):
     """Raised when an uploaded audio sample cannot be analyzed safely."""
 
 
+class BiomedicalRecordExtractionError(AppError):
+    """Raised when Gemini cannot safely structure an uploaded record."""
+
+
 class EegBundleError(AppError):
     """Raised when the EEG model bundle or cohort store is missing or malformed."""
 

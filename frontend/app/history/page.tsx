@@ -27,7 +27,7 @@ export default function HistoryPage(){
     if(item.type==="EEG"&&item.eegReport){const a=item.eegReport.risk_assessment;const top=a.conditions[a.highest_risk_condition];
       return {label:`${a.highest_risk_condition} risk`,tone:top&&top.risk_band!=="Low"?"bg-red-100 text-red-800":"bg-emerald-100 text-emerald-800",score:top?percent(top.risk_score):"-",confidence:top?top.risk_band:"-"};}
     if(item.type==="Voice"&&item.prediction){const guidance=buildVoiceResultGuidance(item.id,item.prediction,item.voiceDetails);const top=guidance.top;
-      return {label:top.condition,tone:top.condition==="Healthy"?"bg-emerald-100 text-emerald-800":"bg-red-100 text-red-800",score:`${top.points} / 100`,confidence:"Primary"};}
+      return {label:`Demo: ${top.condition}`,tone:"bg-blue-100 text-blue-800",score:`${top.points}%`,confidence:"Simulated"};}
     if(item.prediction){const p=item.prediction;
       return {label:p.predicted_class,tone:p.predicted_class==="Healthy"?"bg-emerald-100 text-emerald-800":"bg-red-100 text-red-800",score:percent(p.risk_score),confidence:percent(p.confidence_score)};}
     return {label:"-",tone:"bg-slate-100 text-slate-700",score:"-",confidence:"-"};

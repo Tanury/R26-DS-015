@@ -23,6 +23,9 @@ class Settings:
         if origin.strip()
     )
     max_audio_bytes: int = 18 * 1024 * 1024
+    # Gemini inline document requests must remain comfortably below the API's
+    # request limit after multipart and base64 encoding overhead.
+    max_biomedical_record_bytes: int = 15 * 1024 * 1024
     disclaimer: str = (
         "This assessment is an informational screening aid based on speech "
         "features. It is not a medical diagnosis and should not replace "

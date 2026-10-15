@@ -1,15 +1,19 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Activity,
   CheckCircle2,
   Dna,
+  FileText,
   FlaskConical,
   Info,
   Loader2,
+  Sparkles,
+  Upload,
   UserRound,
+  X,
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { BackButton } from "@/components/back-button";
@@ -17,7 +21,7 @@ import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { submitGeneralAssessment } from "@/lib/api";
+import { extractBiomedicalRecord, submitGeneralAssessment } from "@/lib/api";
 import { biomarkerDetails, biomarkerGroups } from "@/lib/general-assessment";
 import { saveAssessment } from "@/lib/history";
 import {
@@ -25,6 +29,7 @@ import {
   biomedicalNumericKeys,
   type BiomedicalFeatures,
   type BiomedicalInputKey,
+  type BiomedicalRecordExtraction,
 } from "@/lib/types";
 
 const sampleValues: Record<BiomedicalInputKey, string> = {
@@ -56,6 +61,16 @@ const sampleValues: Record<BiomedicalInputKey, string> = {
 
 const numericKeys = new Set<string>(biomedicalNumericKeys);
 const groupIcons = [UserRound, Activity, Dna, FlaskConical];
+const acceptedRecordTypes = new Set([
+  "application/pdf",
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+]);
+const maxRecordBytes = 15 * 1024 * 1024;
+const emptyValues = Object.fromEntries(
+  biomedicalInputKeys.map((key) => [key, ""]),
+) as Record<BiomedicalInputKey, string>;
 
 function isValidValue(key: BiomedicalInputKey, value: string) {
   if (!value.trim()) return true;
@@ -70,7 +85,13 @@ function isValidValue(key: BiomedicalInputKey, value: string) {
 
 export default function GeneralAssessmentPage() {
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [values, setValues] = useState<Record<BiomedicalInputKey, string>>(sampleValues);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [extraction, setExtraction] = useState<BiomedicalRecordExtraction | null>(null);
+  const [importedKeys, setImportedKeys] = useState<Set<BiomedicalInputKey>>(new Set());
+  const [extracting, setExtracting] = useState(false);
+  const [extractionError, setExtractionError] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const providedCount = useMemo(
@@ -81,6 +102,69 @@ export default function GeneralAssessmentPage() {
     () => biomedicalInputKeys.filter((key) => !isValidValue(key, values[key])),
     [values],
   );
+
+  async function importRecord(file: File) {
+    setExtractionError("");
+    setError("");
+
+    if (!acceptedRecordTypes.has(file.type)) {
+      setUploadedFile(null);
+      setExtractionError("Upload a PDF, JPG, PNG, or WebP file.");
+      return;
+    }
+    if (file.size === 0) {
+      setUploadedFile(null);
+      setExtractionError("The selected file is empty.");
+      return;
+    }
+    if (file.size > maxRecordBytes) {
+      setUploadedFile(null);
+      setExtractionError("The selected file must be 15 MB or smaller.");
+      return;
+    }
+
+    setUploadedFile(file);
+    setExtracting(true);
+    try {
+      const result = await extractBiomedicalRecord(file);
+      setValues(Object.fromEntries(
+        biomedicalInputKeys.map((key) => {
+          const value = result.features[key];
+          return [key, value === null ? "" : String(value)];
+        }),
+      ) as Record<BiomedicalInputKey, string>);
+      setImportedKeys(new Set(
+        biomedicalInputKeys.filter((key) => result.features[key] !== null),
+      ));
+      setExtraction(result);
+    } catch (reason) {
+      setUploadedFile(null);
+      setExtractionError(
+        reason instanceof Error ? reason.message : "The record could not be analyzed.",
+      );
+    } finally {
+      setExtracting(false);
+    }
+  }
+
+  function updateValue(key: BiomedicalInputKey, value: string) {
+    setValues((current) => ({ ...current, [key]: value }));
+    setImportedKeys((current) => {
+      if (!current.has(key)) return current;
+      const next = new Set(current);
+      next.delete(key);
+      return next;
+    });
+  }
+
+  function clearImportedRecord() {
+    setUploadedFile(null);
+    setExtraction(null);
+    setExtractionError("");
+    setImportedKeys(new Set());
+    setValues(emptyValues);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  }
 
   async function submit(event: FormEvent) {
     event.preventDefault();
@@ -115,20 +199,112 @@ export default function GeneralAssessmentPage() {
       <BackButton href="/" label="Back to Assessments" />
       <PageHeader
         title="General Biomedical Risk Assessment"
-        description="A complete sample record is prefilled across the model's exact 24-field clinical, genetic, and biomarker contract. Replace the examples with the participant's actual values; blank values are sent as null and imputed by the saved pipeline."
+        description="Upload a biomedical PDF or photo to fill the 24-field form with Gemini, or enter values manually. Always verify imported values against the source; blank fields are sent as null and imputed by the saved pipeline."
       />
       <form
         onSubmit={submit}
         className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_340px]"
       >
         <div className="space-y-6">
-          <div className="flex gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
-            <Info className="mt-0.5 size-5 shrink-0" />
-            <div>
-              <div className="font-semibold">Sample values are currently displayed</div>
-              <p className="mt-1">Replace them with the participant&apos;s measured values before assessment. Clear a field when it is genuinely unavailable; do not treat these examples as clinical reference ranges.</p>
+          <Card className="overflow-hidden border-blue-200">
+            <CardContent className="p-0">
+              <div className="border-b border-blue-100 bg-blue-50 px-6 py-5">
+                <div className="flex items-start gap-3">
+                  <div className="grid size-10 shrink-0 place-items-center rounded-lg bg-blue-700 text-white">
+                    <Sparkles className="size-5" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-bold text-slate-950">Fill from a document or photo</h2>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                      Gemini reads supported values and places them into the form for your review. PDF, JPG, PNG, and WebP files up to 15 MB are accepted.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-6">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="application/pdf,image/jpeg,image/png,image/webp,.pdf,.jpg,.jpeg,.png,.webp"
+                  className="sr-only"
+                  onChange={(event) => {
+                    const file = event.target.files?.[0];
+                    if (file) void importRecord(file);
+                    event.target.value = "";
+                  }}
+                  aria-label="Upload biomedical document or photo"
+                />
+                <div
+                  className={`rounded-xl border-2 border-dashed px-5 py-8 text-center transition-colors ${extracting ? "border-blue-300 bg-blue-50" : "border-slate-300 hover:border-blue-400 hover:bg-slate-50"}`}
+                  onDragOver={(event) => event.preventDefault()}
+                  onDrop={(event) => {
+                    event.preventDefault();
+                    const file = event.dataTransfer.files[0];
+                    if (file && !extracting) void importRecord(file);
+                  }}
+                >
+                  {extracting ? (
+                    <>
+                      <Loader2 className="mx-auto size-8 animate-spin text-blue-700" />
+                      <p className="mt-3 font-semibold text-slate-900">Reading {uploadedFile?.name}</p>
+                      <p className="mt-1 text-sm text-slate-500">Extracting and validating the 24 supported fields…</p>
+                    </>
+                  ) : extraction ? (
+                    <>
+                      <CheckCircle2 className="mx-auto size-8 text-emerald-700" />
+                      <p className="mt-3 font-semibold text-slate-900">{extraction.filename}</p>
+                      <p className="mt-1 text-sm text-slate-600">
+                        {extraction.extracted_count} of 24 fields imported · {extraction.extraction_quality} extraction
+                      </p>
+                      <div className="mt-4 flex flex-wrap justify-center gap-2">
+                        <Button type="button" variant="outline" onClick={() => fileInputRef.current?.click()}>
+                          <Upload className="size-4" />Replace file
+                        </Button>
+                        <Button type="button" variant="ghost" onClick={clearImportedRecord}>
+                          <X className="size-4" />Clear imported values
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <FileText className="mx-auto size-8 text-blue-700" />
+                      <p className="mt-3 font-semibold text-slate-900">Drop a record here, or choose a file</p>
+                      <p className="mt-1 text-sm text-slate-500">Extraction begins automatically after selection.</p>
+                      <Button type="button" className="mt-4" onClick={() => fileInputRef.current?.click()}>
+                        <Upload className="size-4" />Choose document or photo
+                      </Button>
+                    </>
+                  )}
+                </div>
+                {extraction?.quality_notes.length ? (
+                  <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950">
+                    <div className="font-semibold">Review notes</div>
+                    <ul className="mt-2 list-disc space-y-1 pl-5">
+                      {extraction.quality_notes.map((note) => <li key={note}>{note}</li>)}
+                    </ul>
+                  </div>
+                ) : null}
+                {extraction && (
+                  <p className="mt-4 text-xs leading-5 text-slate-500">{extraction.extraction_disclaimer}</p>
+                )}
+                {extractionError && (
+                  <div role="alert" className="mt-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-800">{extractionError}</div>
+                )}
+                <p className="mt-4 text-xs leading-5 text-slate-500">
+                  The file is sent to the configured Gemini API through the server. Upload only records you are permitted to process with that service.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+          {!extraction && !extracting && (
+            <div className="flex gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
+              <Info className="mt-0.5 size-5 shrink-0" />
+              <div>
+                <div className="font-semibold">Sample values are currently displayed</div>
+                <p className="mt-1">Replace them manually or upload a source record. An upload replaces all samples, leaving unreported fields blank so no example value is mistaken for patient data.</p>
+              </div>
             </div>
-          </div>
+          )}
           {biomarkerGroups.map((group, groupIndex) => {
             const Icon = groupIcons[groupIndex];
             return (
@@ -153,13 +329,14 @@ export default function GeneralAssessmentPage() {
                           <span className="mb-2 flex items-center gap-2 text-sm font-semibold">
                             {detail.label}
                             <Info className="size-3.5 text-slate-400" aria-label={detail.description} />
+                            {importedKeys.has(key) && <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-800">Imported</span>}
                             <span className="text-xs font-normal text-slate-400">optional</span>
                           </span>
                           {detail.options ? (
                             <select
                               className="h-11 w-full rounded-md border border-slate-300 bg-white px-3 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
                               value={values[key]}
-                              onChange={(event) => setValues((current) => ({ ...current, [key]: event.target.value }))}
+                              onChange={(event) => updateValue(key, event.target.value)}
                               aria-describedby={`${key}-description`}
                             >
                               <option value="">Not available</option>
@@ -175,7 +352,7 @@ export default function GeneralAssessmentPage() {
                                 max={detail.max}
                                 step={detail.step ?? "any"}
                                 value={values[key]}
-                                onChange={(event) => setValues((current) => ({ ...current, [key]: event.target.value }))}
+                                onChange={(event) => updateValue(key, event.target.value)}
                                 aria-invalid={!valid}
                                 aria-describedby={`${key}-description`}
                                 className={`pr-24 ${valid ? "" : "border-red-500 focus-visible:ring-red-200"}`}
@@ -215,10 +392,12 @@ export default function GeneralAssessmentPage() {
               <div className="h-full bg-emerald-700 transition-all" style={{ width: `${(providedCount / biomedicalInputKeys.length) * 100}%` }} />
             </div>
             <div className="mt-5 rounded-lg border border-blue-100 bg-blue-50 p-4 text-xs leading-5 text-slate-600">
-              The initial values are examples only. Replace them with source-record values. Do not guess missing values, and match each clinical scale, laboratory method, specimen, and unit.
+              {extraction
+                ? "Verify every imported value against the source record. Do not guess missing values, and match each clinical scale, laboratory method, specimen, and unit."
+                : "The initial values are examples only. Replace them with source-record values. Do not guess missing values, and match each clinical scale, laboratory method, specimen, and unit."}
             </div>
             {error && <div role="alert" className="mt-5 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-800">{error}</div>}
-            <Button type="submit" size="lg" className="mt-6 w-full" disabled={loading || invalidKeys.length > 0}>
+            <Button type="submit" size="lg" className="mt-6 w-full" disabled={loading || extracting || invalidKeys.length > 0}>
               {loading ? <><Loader2 className="size-4 animate-spin" />Analyzing</> : "Run Risk Assessment"}
             </Button>
           </CardContent>

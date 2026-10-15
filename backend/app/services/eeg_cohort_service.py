@@ -13,6 +13,7 @@ would otherwise keep quoting stale figures forever.
 from __future__ import annotations
 
 import json
+import math
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -28,6 +29,9 @@ from app.schemas.eeg_assessment import (
     EegRiskReport,
     EmbeddingVector,
     ModelCard,
+    SimilarEegRequest,
+    SimilarEegResponse,
+    SimilarEegSample,
 )
 
 
@@ -225,7 +229,19 @@ def get_report(subject_id: str) -> EegRiskReport:
         raise EegSubjectNotFoundError(f"No EEG report for subject '{subject_id}'.")
 
     payload = _read_json(path)
-    payload["confound_disclosure"] = load_model_card().confound_disclosure.model_dump()
+    card = load_model_card()
+    payload["confound_disclosure"] = card.confound_disclosure.model_dump()
+    summary = payload.setdefault("model_summary", {})
+    # Older exports omitted run_id. Recover it only when both the export timestamp
+    # and model geometry match this bundle, never just because it is the current card.
+    if (not summary.get("run_id") and card.generated_at
+            and payload.get("generated_at") == card.generated_at
+            and summary.get("architecture") == card.architecture
+            and summary.get("input_representation") == card.input_representation
+            and summary.get("embedding_dim") == card.embedding_dim):
+        summary["run_id"] = card.run_id
+    if payload.get("fixture"):
+        payload.setdefault("dataset", {})["provenance"] = "synthetic fixture"
     payload.setdefault("source", "cohort")
     payload.setdefault("clinical_disclaimer", settings.eeg_disclaimer)
     try:
@@ -280,6 +296,53 @@ def _safe_subject_id(subject_id: str) -> str:
     if not all(char.isalnum() or char in "-_" for char in candidate):
         raise EegSubjectNotFoundError("Invalid subject id.")
     return candidate
+
+
+COMPARISON_BANDS = ("delta", "theta", "alpha", "beta", "low_gamma")
+
+
+def find_similar_samples(request: SimilarEegRequest) -> SimilarEegResponse:
+    """Closest real band profile in each class; never filter by the prediction.
+
+    All five relative-power dimensions have the same unit. Exclude the source
+    subject and incompatible runs; do not invent a neighbour or similarity %.
+    """
+    if set(request.band_power_profile) != set(COMPARISON_BANDS):
+        raise ValueError("All five relative band powers are required: delta, theta, alpha, beta, low_gamma.")
+    best: dict[str, SimilarEegSample] = {}
+    compared = 0
+    for subject in load_cohort_index():
+        if subject.subject_id == request.subject_id:
+            continue
+        report = get_report(subject.subject_id)
+        if report.dataset.get("provenance") == "synthetic fixture":
+            continue
+        if str(report.model_summary.get("run_id", "")) != request.run_id:
+            continue
+        profile = report.band_power_profile
+        if not all(b in profile and math.isfinite(profile[b]) and 0 <= profile[b] <= 1
+                   for b in COMPARISON_BANDS):
+            continue
+        compared += 1
+        distance = math.sqrt(sum((profile[b] - request.band_power_profile[b]) ** 2
+                                 for b in COMPARISON_BANDS) / len(COMPARISON_BANDS))
+        sample = SimilarEegSample(
+            subject_id=subject.subject_id, true_class=subject.true_class,
+            site=subject.site, signal_quality=subject.signal_quality,
+            band_power_profile={b: profile[b] for b in COMPARISON_BANDS},
+            distance=distance,
+        )
+        previous = best.get(subject.true_class)
+        if previous is None or (distance, sample.subject_id) < (previous.distance, previous.subject_id):
+            best[subject.true_class] = sample
+    return SimilarEegResponse(
+        samples=sorted(best.values(), key=lambda sample: (sample.distance, sample.subject_id)),
+        compared_subjects=compared,
+        method=("Root mean square difference across delta, theta, alpha, beta and low-gamma "
+                "relative power; lower is closer. The nearest sample from each labelled group "
+                "is shown, excluding this subject and other model runs. This is descriptive "
+                "similarity, not a diagnosis or an explanation of the model's decision."),
+    )
 
 
 def reset_caches() -> None:

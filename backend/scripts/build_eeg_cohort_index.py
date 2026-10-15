@@ -493,6 +493,7 @@ def write_store(reports: list[dict], card: dict, embeddings: list[dict]) -> None
     (COHORT_DIR / "embeddings").mkdir(exist_ok=True)
 
     for report in reports:
+        report.setdefault("model_summary", {}).setdefault("run_id", card.get("run_id"))
         (COHORT_DIR / f"{report['subject_id']}.json").write_text(
             json.dumps(report, indent=2), encoding="utf-8")
 

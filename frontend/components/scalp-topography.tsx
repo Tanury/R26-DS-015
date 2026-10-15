@@ -65,7 +65,7 @@ export function ScalpTopography({
         viewBox="0 0 200 200"
         className="mx-auto block h-auto w-full max-w-[260px]"
         role="img"
-        aria-label={`Scalp regions shaded by how much each contributed to the ${condition} risk score`}
+        aria-label={`Scalp regions shaded by the change in the ${condition} score during occlusion`}
       >
         {/* Nose marks the front of the head; ears fix left from right. */}
         <path d="M 90 27 L 100 6 L 110 27 Z" className="fill-slate-100 stroke-slate-400" strokeWidth="1.5" />
@@ -123,7 +123,7 @@ export function ScalpTopography({
         </div>
         <p className="text-center text-[11px] leading-5 text-slate-500">
           Viewed from above, nose up, subject&apos;s left on the left. Sectors are BioSemi
-          banks A–D; shading is the drop in {condition} risk when that bank is zeroed and
+          banks A–D; shading is the drop in the {condition} score when that bank is zeroed and
           the recording re-scored.
         </p>
       </figcaption>
