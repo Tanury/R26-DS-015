@@ -4,8 +4,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 
-load_dotenv()
-
+#load_dotenv()
+load_dotenv(dotenv_path=Path(__file__).resolve().parents[2] / ".env")
 
 class Settings:
     app_name: str = os.getenv("APP_NAME", "NeuroRisk Research Platform")
