@@ -1,5 +1,73 @@
 @import "tailwindcss";
 
+/* Platform palette — same values as the neuroimaging dashboard (CHROME/THEMES).
+   Overriding Tailwind's blue scale here recolours every existing `blue-*`
+   class (buttons, icon tiles, rings, badges) across ALL pages at once. */
+@theme {
+  --color-blue-50:  #F0F4FE;
+  --color-blue-100: #E8EFFE;
+  --color-blue-200: #C7D9FB;
+  --color-blue-300: #A8C0F5;
+  --color-blue-600: #2F5FDC;
+  --color-blue-700: #2F5FDC;
+  --color-blue-800: #1E40AF;
+  --color-slate-200: #E5E8EF;
+  --color-slate-300: #D5DAE5;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --background: #F5F7FB;
+  --foreground: #111827;
+  --primary: #2F5FDC;
+  --primary-strong: #1E40AF;
+  --primary-light: #E8EFFE;
+  --muted: #4B5563;
+  --dim: #6B7280;
+  --success: #007a5e;
+  --border: #E5E8EF;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--background); }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), "Inter", system-ui, sans-serif;
+  letter-spacing: 0;
+}
+button, input, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+.page-title {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.section-title {
+  font-size: 1.35rem;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.thin-scrollbar { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
+
+@keyframes equalize {
+  0%, 100% { transform: scaleY(.35); }
+  50% { transform: scaleY(1); }
+}
+
+.wave-bar { animation: equalize 1s ease-in-out infinite; transform-origin: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; }
+}
+
+/*@import "tailwindcss";
+
 :root {
   --background: #f8fafc;
   --foreground: #111827;
@@ -45,3 +113,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; }
 }
+
+*/
+
