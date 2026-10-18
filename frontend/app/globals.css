@@ -1,11 +1,31 @@
 @import "tailwindcss";
 
+/* Platform palette — same values as the neuroimaging dashboard (CHROME/THEMES).
+   Overriding Tailwind's blue scale here recolours every existing `blue-*`
+   class (buttons, icon tiles, rings, badges) across ALL pages at once. */
+@theme {
+  --color-blue-50:  #F0F4FE;
+  --color-blue-100: #E8EFFE;
+  --color-blue-200: #C7D9FB;
+  --color-blue-300: #A8C0F5;
+  --color-blue-600: #2F5FDC;
+  --color-blue-700: #2F5FDC;
+  --color-blue-800: #1E40AF;
+  --color-slate-200: #E5E8EF;
+  --color-slate-300: #D5DAE5;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+}
+
 :root {
-  --background: #f8fafc;
+  --background: #F5F7FB;
   --foreground: #111827;
-  --primary: #0755d9;
+  --primary: #2F5FDC;
+  --primary-strong: #1E40AF;
+  --primary-light: #E8EFFE;
+  --muted: #4B5563;
+  --dim: #6B7280;
   --success: #007a5e;
-  --border: #cbd5e1;
+  --border: #E5E8EF;
 }
 
 * { box-sizing: border-box; }
@@ -14,7 +34,7 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), "Inter", system-ui, sans-serif;
   letter-spacing: 0;
 }
 button, input, select { font: inherit; }
