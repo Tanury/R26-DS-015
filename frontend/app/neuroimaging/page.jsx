@@ -2,6 +2,8 @@
 
 import { useState, useCallback, useRef } from "react";
 import Link from "next/link";
+import { AppShell } from "@/components/app-shell";
+import { BackButton } from "@/components/back-button";
 import { saveNeuroimagingAssessment } from "@/lib/history";
 import {
   analyzeMRI,
@@ -465,11 +467,8 @@ export default function NeuroimagingPage() {
   const hasPipeline = pipeline && pipeline.pipeline;
 
   return (
-    <>
+    <AppShell>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        *{box-sizing:border-box;margin:0;padding:0;}
-        body{background:${t.bg};color:${t.text};font-family:'Inter',sans-serif;min-height:100vh;transition:background 0.3s;}
         @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
         @keyframes spin{to{transform:rotate(360deg)}}
         @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
@@ -477,41 +476,37 @@ export default function NeuroimagingPage() {
         ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:${t.border};border-radius:3px}
       `}</style>
 
-      <div style={{display:"flex",flexDirection:"column",minHeight:"100vh"}}>
+      <div style={{display:"flex",flexDirection:"column"}}>
 
-        {/* Header */}
-        <header style={{background:t.headerBg,padding:"0 28px"}}>
-          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"14px 0 10px"}}>
-            <div style={{display:"flex",alignItems:"center",gap:12}}>
-              <div style={{width:40,height:40,borderRadius:10,background:"rgba(255,255,255,0.2)",border:"1px solid rgba(255,255,255,0.35)",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 12px rgba(0,0,0,0.15),inset 0 1px 0 rgba(255,255,255,0.3)"}}>
-                <DiseaseIcon theme={t} size={24}/>
-              </div>
-              <div>
-                <div style={{fontSize:17,fontWeight:700,color:"#fff",fontFamily:"'Inter',sans-serif",letterSpacing:-0.3}}>NeuroRisk AI</div>
-                <div style={{fontSize:9,color:"rgba(255,255,255,0.7)",letterSpacing:1.5,textTransform:"uppercase"}}>R26-DS-015 · Adaptive Multimodal Neurological Risk Assessment</div>
+        <BackButton href="/" label="Back to Assessments" className="mb-4 self-start" />
+
+        {/* Disease selector */}
+        <div style={{background:t.cardBg,border:`1px solid ${t.border}`,borderRadius:14,boxShadow:`0 2px 8px ${t.shadow}`,padding:"14px 18px",marginBottom:20,display:"flex",flexWrap:"wrap",alignItems:"center",justifyContent:"space-between",gap:12}}>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <DiseaseIcon theme={t} size={26}/>
+            <div>
+              <div style={{fontSize:16,fontWeight:700,color:t.text,lineHeight:1.2}}>Neuroimaging Assessment</div>
+              <div style={{fontSize:12,color:t.textMuted,marginTop:2,display:"flex",alignItems:"center",gap:8}}>
+                {t.name}
+                {isParkinsons&&<span style={{fontSize:10,background:t.accentLight,color:t.accentStrong,padding:"2px 8px",borderRadius:10,fontWeight:600}}>DaTscan AUC 93.75% · Active</span>}
               </div>
             </div>
-            <div style={{display:"flex",gap:6}}>
-              {Object.values(THEMES).map(d=>(
-                <button key={d.id} onClick={()=>switchDisease(d.id)} style={{ padding:"7px 16px",borderRadius:20,border:active===d.id?"1.5px solid rgba(255,255,255,0.85)":"1.5px solid rgba(255,255,255,0.25)",background:active===d.id?"rgba(255,255,255,0.25)":"rgba(255,255,255,0.1)",color:"#fff",fontSize:12,fontWeight:active===d.id?700:400,cursor:"pointer",transition:"all 0.2s",display:"flex",alignItems:"center",gap:6,boxShadow:active===d.id?"0 2px 8px rgba(0,0,0,0.2)":"none" }}>
-                  <RibbonSVG color={d.id==="parkinsons"?"#E0E0E0":"#fff"} size={13}/>
-                  {d.short}
-                </button>
-              ))}
-            </div>
           </div>
-          <div style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0 12px",borderTop:"1px solid rgba(255,255,255,0.15)"}}>
-            <RibbonSVG color={t.id==="parkinsons"?"#E0E0E0":"rgba(255,255,255,0.9)"} size={15}/>
-            <span style={{fontSize:12,fontWeight:600,color:"rgba(255,255,255,0.95)"}}>{t.name}</span>
-            {isParkinsons&&<span style={{fontSize:10,background:"rgba(255,255,255,0.2)",color:"rgba(255,255,255,0.9)",padding:"2px 8px",borderRadius:10,fontWeight:600}}>DaTscan AUC 93.75% · Active</span>}
+          <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+            {Object.values(THEMES).map(d=>(
+              <button key={d.id} onClick={()=>switchDisease(d.id)} style={{ padding:"7px 16px",borderRadius:20,border:`1.5px solid ${active===d.id?d.accent:d.border}`,background:active===d.id?d.accent:"#fff",color:active===d.id?"#fff":d.textMuted,fontSize:12,fontWeight:active===d.id?700:500,cursor:"pointer",transition:"all 0.2s",display:"flex",alignItems:"center",gap:6 }}>
+                <RibbonSVG color={active===d.id?"#fff":d.accent} size={13}/>
+                {d.short}
+              </button>
+            ))}
           </div>
-        </header>
+        </div>
 
         {/* Body */}
-        <div style={{display:"flex",flex:1}}>
+        <div style={{display:"flex",flex:1,gap:24,alignItems:"flex-start",flexWrap:"wrap"}}>
 
           {/* Sidebar */}
-          <aside style={{width:290,background:t.sidebar,borderRight:`1px solid ${t.border}`,padding:18,display:"flex",flexDirection:"column",gap:16,boxShadow:`2px 0 12px ${t.shadow}`}}>
+          <aside style={{width:290,maxWidth:"100%",background:t.sidebar,border:`1px solid ${t.border}`,borderRadius:14,padding:18,display:"flex",flexDirection:"column",gap:16,boxShadow:`0 2px 8px ${t.shadow}`}}>
             <div>
               <div style={{fontSize:9,color:t.textDim,letterSpacing:2,textTransform:"uppercase",marginBottom:8,fontWeight:700}}>Input Mode</div>
               <ModeToggle mode={mode} setMode={handleModeChange} theme={t} isParkinsons={isParkinsons} isMS={isMS}/>
@@ -560,7 +555,7 @@ export default function NeuroimagingPage() {
           </aside>
 
           {/* Main */}
-          <main style={{flex:1,padding:24,background:t.bg,overflowY:"auto"}}>
+          <main style={{flex:1,minWidth:320}}>
             {!loading&&!hasPipeline&&!result&&!error&&(
               <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"100%",minHeight:400}}>
                 <div style={{textAlign:"center"}}>
@@ -668,11 +663,11 @@ export default function NeuroimagingPage() {
         </div>
 
         {/* Footer */}
-        <footer style={{padding:"10px 28px",background:t.sidebar,borderTop:`1px solid ${t.border}`,display:"flex",justifyContent:"space-between",fontSize:10,color:t.textDim,boxShadow:`0 -2px 8px ${t.shadow}`}}>
+        <footer style={{marginTop:24,padding:"12px 4px 0",borderTop:`1px solid ${t.border}`,display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:6,fontSize:10,color:t.textDim}}>
           <span>R26-DS-015 | Dissanayaka D.M.T.M | IT22203762</span>
           <span>NON-DIAGNOSTIC DECISION-SUPPORT OUTPUT ONLY</span>
         </footer>
       </div>
-    </>
+    </AppShell>
   );
 }
