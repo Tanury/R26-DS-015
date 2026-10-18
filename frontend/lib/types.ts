@@ -121,7 +121,36 @@ export type VoiceAssessmentDetails = Pick<
   | "extraction_disclaimer"
 >;
 
-export type AssessmentType = "Voice" | "General" | "EEG";
+export type AssessmentType = "Voice" | "General" | "EEG" | "Neuroimaging";
+
+/**
+ * Each imaging model is trained for a single condition (AD MRI: AD/MCI/CN,
+ * PD DaTscan/MRI: PD/HC, MS OCT/MRI: MS/HC), so a saved scan only carries
+ * evidence for its `condition`.
+ */
+export type NeuroimagingResult = {
+  condition: "AD" | "PD" | "MS";
+  scanType: string;
+  modality: string;
+  filename?: string;
+  prediction: string;
+  confidence: number;
+  riskLevel: string;
+  modelVersion?: string;
+  /** True when the backend served a mock prediction (no trained checkpoint). */
+  demo?: boolean;
+  /** Present for precomputed results from the neuroimaging module's processed cohort. */
+  cohort?: {
+    trueLabel: string;
+    /** The production checkpoint was fit on this subject, so the prediction is in-sample. */
+    inSample: boolean;
+    embeddingDim: number;
+    loocvAccuracy: number;
+    loocvAuc: number;
+  };
+  /** Class probabilities (0–1) keyed by short label: AD, MCI, CN, PD, HC, MS. */
+  probabilities: Record<string, number>;
+};
 
 export type HistoryItem = {
   id: string;
@@ -135,6 +164,7 @@ export type HistoryItem = {
    */
   prediction?: Prediction;
   eegReport?: EegRiskReport;
+  neuroimaging?: NeuroimagingResult;
   features?: SpeechFeatures;
   biomarkers?: BiomedicalFeatures;
   transcript?: string;

@@ -26,6 +26,7 @@ from backend.routers.analyze import router as neuroimaging_ad_router
 from backend.routers.preprocess import router as neuroimaging_preprocess_router
 from backend.routers.analyze_pd import router as neuroimaging_pd_router
 from backend.routers.analyze_ms import router as neuroimaging_ms_router
+from backend.routers.imaging_cohort import router as neuroimaging_cohort_router
 #end of new - tanuri
 
 configure_logging()
@@ -52,6 +53,7 @@ app.include_router(neuroimaging_ad_router, prefix="/api")
 app.include_router(neuroimaging_preprocess_router, prefix="/api")
 app.include_router(neuroimaging_pd_router, prefix="/api")
 app.include_router(neuroimaging_ms_router, prefix="/api")
+app.include_router(neuroimaging_cohort_router, prefix="/api")
 #end of new - tanuri
 
 app.include_router(

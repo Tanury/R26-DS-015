@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
+import Link from "next/link";
+import { saveNeuroimagingAssessment } from "@/lib/history";
 import {
   analyzeMRI,
   preprocessDICOM,
@@ -8,6 +10,7 @@ import {
   analyzePdMRI,
   analyzeMsMRI,
   analyzeMsOct,
+  toNeuroimagingResult,
 } from "@/lib/neuroimaging-api";
 // ── API ─────────────────────────────────────────────────────────────────────
 // Extracted to lib/neuroimaging-api.ts (env-based backend URL, matching the
@@ -54,6 +57,15 @@ const CLASS_CONFIG = {
   PD:  { label: "Parkinson's Disease",       risk: "HIGH" },
   HC:  { label: "Healthy Control",           risk: "LOW" },
   MS:  { label: "Multiple Sclerosis",        risk: "HIGH" },
+};
+
+const FUSION_CONDITION = { alzheimers: "AD", parkinsons: "PD", ms: "MS" };
+const SCAN_TYPE = {
+  dicom: "Structural MRI (DICOM pipeline)",
+  nifti: "Structural MRI (NIfTI)",
+  dat:   "DaTscan SPECT",
+  mri:   "Brain MRI (MindGlide)",
+  oct:   "Retinal OCT",
 };
 
 const AD_STEP_COLORS = ["#64748B","#3B82F6","#8B5CF6","#10B981"];
@@ -223,7 +235,7 @@ function RegionVolumePanel({ regions, theme }) {
 }
 
 // ── Result card ────────────────────────────────────────────────────────────────
-function ResultCard({ prediction, theme }) {
+function ResultCard({ prediction, theme, savedId }) {
   const cfg = CLASS_CONFIG[prediction.prediction] || {};
   const rc  = { HIGH:{ bg:"#FEE2E2",text:"#991B1B",border:"#FECACA" }, MODERATE:{ bg:"#FEF9C3",text:"#854D0E",border:"#FDE68A" }, LOW:{ bg:"#DCFCE7",text:"#166534",border:"#BBF7D0" } }[prediction.risk_level] || { bg:"#DCFCE7",text:"#166534",border:"#BBF7D0" };
   return (
@@ -276,7 +288,14 @@ function ResultCard({ prediction, theme }) {
           <span style={{ fontSize:11,color:theme.textMuted }}>z_img embedding</span>
           <span style={{ fontSize:11,fontWeight:700,color:theme.accentStrong }}>256-d L2-normalised</span>
         </div>
-        <div style={{ fontSize:10,color:theme.textDim }}>Ready for multimodal fusion engine →</div>
+        {savedId ? (
+          <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center",gap:8,fontSize:10,color:theme.textDim }}>
+            <span>Saved as <b style={{ fontFamily:"monospace",color:theme.text }}>{savedId}</b> for multimodal fusion</span>
+            <Link href="/fusion" style={{ fontWeight:700,color:theme.accentStrong,textDecoration:"none" }}>Open Fusion Result →</Link>
+          </div>
+        ) : (
+          <div style={{ fontSize:10,color:theme.textDim }}>Not saved for fusion — inference did not return class scores.</div>
+        )}
       </div>
       <div style={{ marginTop:12,padding:"8px 10px",borderRadius:6,background:"#FFFDE7",border:"1px solid #F9A825",fontSize:10,color:"#5D4037",lineHeight:1.5 }}>
         ⚠ Non-diagnostic output only · Not a substitute for clinical evaluation
@@ -372,6 +391,7 @@ export default function NeuroimagingPage() {
   const [pipeline,   setPipeline]   = useState(null);
   const [error,      setError]      = useState(null);
   const [activeStep, setActiveStep] = useState(-1);
+  const [savedId,    setSavedId]    = useState(null);
 
   const t            = THEMES[active];
   const isParkinsons = active === "parkinsons";
@@ -379,18 +399,25 @@ export default function NeuroimagingPage() {
   const stepColors   = isMS ? MS_OCT_STEP_COLORS : isParkinsons ? PD_STEP_COLORS : AD_STEP_COLORS;
   const stepNames    = isMS ? MS_OCT_STEP_NAMES  : isParkinsons ? PD_STEP_NAMES  : AD_STEP_NAMES;
 
+  // Persist a successful prediction so the fusion engine can select it.
+  const saveForFusion = useCallback((prediction, scanMode, filename) => {
+    const record = toNeuroimagingResult(prediction, FUSION_CONDITION[active], SCAN_TYPE[scanMode] ?? scanMode, filename);
+    setSavedId(record ? saveNeuroimagingAssessment(record).id : null);
+  }, [active]);
+
   const switchDisease = (id) => {
+    setSavedId(null);
     setActive(id); setFile(null); setResult(null); setPipeline(null);
     setError(null); setLoading(false);
     setMode(id === "parkinsons" ? "dat" : id === "ms" ? "oct" : "dicom");
   };
 
   const handleModeChange = (m) => {
-    setMode(m); setFile(null); setResult(null); setPipeline(null); setError(null);
+    setSavedId(null); setMode(m); setFile(null); setResult(null); setPipeline(null); setError(null);
   };
 
   const handleFile = useCallback(async (f) => {
-    setFile(f); setResult(null); setPipeline(null); setError(null);
+    setFile(f); setResult(null); setPipeline(null); setError(null); setSavedId(null);
     setLoading(true); setActiveStep(0);
     try {
       if (isParkinsons && mode === "dat") {
@@ -398,40 +425,42 @@ export default function NeuroimagingPage() {
         const timer = setInterval(() => setActiveStep(s => Math.min(s+1, 3)), 1500);
         const data  = await analyzeDatPipeline(f);
         clearInterval(timer); setActiveStep(-1); setPipeline(data);
+        saveForFusion(data.prediction, mode, f.name);
       } else if (isParkinsons && mode === "nifti") {
         const data = await analyzePdMRI(f);
-        setResult(data);
+        setResult(data); saveForFusion(data, mode, f.name);
       } else if (isMS && mode === "mri") {
         const data = await analyzeMsMRI(f);
-        setResult(data);
+        setResult(data); saveForFusion(data, mode, f.name);
       } else if (mode === "dicom") {
         const timer = setInterval(() => setActiveStep(s => Math.min(s+1, 3)), 8000);
         const data  = await preprocessDICOM(f);
         clearInterval(timer); setActiveStep(-1); setPipeline(data);
+        saveForFusion(data.prediction, mode, f.name);
       } else {
         const data = await analyzeMRI(f);
-        setResult(data);
+        setResult(data); saveForFusion(data, mode, f.name);
       }
     } catch (e) {
       setError(e.message);
     } finally {
       setLoading(false); setActiveStep(-1);
     }
-  }, [mode, isParkinsons, isMS]);
+  }, [mode, isParkinsons, isMS, saveForFusion]);
 
   const handleOctFiles = useCallback(async (volFile, matFile) => {
-    setFile(volFile); setResult(null); setPipeline(null); setError(null);
+    setFile(volFile); setResult(null); setPipeline(null); setError(null); setSavedId(null);
     setLoading(true); setActiveStep(0);
     const timer = setInterval(() => setActiveStep(s => Math.min(s+1, 3)), 900);
     try {
       const data = await analyzeMsOct(volFile, matFile);
-      setResult(data);
+      setResult(data); saveForFusion(data, "oct", volFile.name);
     } catch (e) {
       setError(e.message);
     } finally {
       clearInterval(timer); setLoading(false); setActiveStep(-1);
     }
-  }, []);
+  }, [saveForFusion]);
 
   const hasPipeline = pipeline && pipeline.pipeline;
 
@@ -597,7 +626,7 @@ export default function NeuroimagingPage() {
 
             {result&&!hasPipeline&&(
               <div style={{maxWidth:520,margin:"0 auto",animation:"fadeUp 0.5s ease both"}}>
-                <ResultCard prediction={result} theme={t}/>
+                <ResultCard prediction={result} theme={t} savedId={savedId}/>
               </div>
             )}
 
@@ -625,7 +654,7 @@ export default function NeuroimagingPage() {
                 {pipeline.prediction&&!pipeline.prediction.error&&(
                   <div>
                     <div style={{fontSize:12,fontWeight:700,color:t.textMuted,letterSpacing:1,textTransform:"uppercase",marginBottom:12}}>→ Inference Result</div>
-                    <ResultCard prediction={pipeline.prediction} theme={t}/>
+                    <ResultCard prediction={pipeline.prediction} theme={t} savedId={savedId}/>
                   </div>
                 )}
                 {pipeline.prediction?.error&&(

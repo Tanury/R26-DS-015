@@ -24,6 +24,7 @@ mne>=1.6
 
 # --- Vision Encoder (neuroimaging) module -------------------------------
 nibabel
+opencv-python-headless  # DaTscan slice processing (backend/services/pd_inference.py)
 monai
 antspyx
 matplotlib

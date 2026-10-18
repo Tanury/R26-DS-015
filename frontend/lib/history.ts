@@ -5,6 +5,7 @@ import type { EegRiskReport } from "@/lib/eeg-types";
 import type {
   BiomedicalFeatures,
   HistoryItem,
+  NeuroimagingResult,
   Prediction,
   SpeechFeatures,
   VoiceAssessmentDetails,
@@ -89,6 +90,20 @@ export function saveEegAssessment(report: EegRiskReport) {
   sessionStorage.setItem(RESULT_KEY, JSON.stringify(item));
   window.dispatchEvent(new Event(HISTORY_EVENT));
   window.dispatchEvent(new Event(RESULT_EVENT));
+  return item;
+}
+
+/** Imaging results are single-condition, so they carry their own record shape. */
+export function saveNeuroimagingAssessment(result: NeuroimagingResult) {
+  const item: HistoryItem = {
+    id: `NIMG-${String(Date.now()).slice(-6)}`,
+    createdAt: new Date().toISOString(),
+    type: "Neuroimaging",
+    neuroimaging: result,
+  };
+  const history = [item, ...readHistory()].slice(0, 100);
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  window.dispatchEvent(new Event(HISTORY_EVENT));
   return item;
 }
 
