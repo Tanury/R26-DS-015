@@ -66,12 +66,38 @@ def _gemini_response_schema() -> dict[str, Any]:
     return schema
 
 
+def _describe_gemini_failure(exc: Exception) -> str:
+    """Turn a Gemini SDK error into an actionable message without leaking secrets."""
+    code = getattr(exc, "code", None)
+    status = str(getattr(exc, "status", "") or "")
+    message = str(getattr(exc, "message", "") or "")
+    if "API key" in message or "API_KEY" in str(exc):
+        return (
+            "Gemini rejected the server's API key. Set a valid GEMINI_API_KEY in "
+            "backend/.env and restart the backend."
+        )
+    if code == 403 or status == "PERMISSION_DENIED":
+        return "The Gemini API key does not have permission to use this model."
+    if code == 404 or status == "NOT_FOUND":
+        return (
+            f"Gemini model '{settings.gemini_model}' is not available. "
+            "Check GEMINI_MODEL in backend/.env."
+        )
+    if code == 429 or status == "RESOURCE_EXHAUSTED":
+        return "Gemini quota or rate limit reached. Wait a minute and try again."
+    if isinstance(code, int) and code >= 500:
+        return "Gemini is temporarily unavailable. Try again shortly."
+    return "Gemini could not analyze the audio sample."
+
+
 def extract_speech_features(
     audio_bytes: bytes, mime_type: str, recording_task: str = "reading"
 ) -> GeminiAudioAnalysis:
-    if not settings.gemini_api_key:
+    api_key = settings.gemini_api_key.strip()
+    if not api_key or api_key.lower().startswith(("replace", "your", "<")):
         raise AudioFeatureExtractionError(
-            "GEMINI_API_KEY is not configured on the server."
+            "GEMINI_API_KEY is not configured on the server. Set a real key in "
+            "backend/.env and restart the backend."
         )
 
     try:
@@ -113,9 +139,7 @@ def extract_speech_features(
         ) from exc
     except Exception as exc:
         logger.exception("gemini_audio_request_failed")
-        raise AudioFeatureExtractionError(
-            "Gemini could not analyze the audio sample."
-        ) from exc
+        raise AudioFeatureExtractionError(_describe_gemini_failure(exc)) from exc
 
     if analysis.quality_status == "unusable":
         notes = " ".join(note.strip() for note in analysis.quality_notes if note.strip())[:600]
