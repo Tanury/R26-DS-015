@@ -88,6 +88,13 @@ export type BiomedicalRecordExtraction = {
   extraction_disclaimer: string;
 };
 
+/** A supplied input's additive share (0–1) of the predicted class probability. */
+export type FactorContribution = {
+  feature: string;
+  value: number | string;
+  contribution: number;
+};
+
 export type Prediction = {
   predicted_class: string;
   confidence_score: number;
@@ -97,6 +104,8 @@ export type Prediction = {
   observed_issues: string[];
   recommendations: string[];
   disclaimer: string;
+  /** Absent on results saved before attribution was available. */
+  top_factors?: FactorContribution[];
 };
 
 export type VoiceAssessment = {

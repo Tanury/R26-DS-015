@@ -165,6 +165,92 @@ def test_dual_pipeline_output_preserves_general_response_format() -> None:
     assert risk_model.received_columns == EXPECTED_FEATURE_COLUMNS
     assert any("All 24" in issue for issue in result.observed_issues)
     assert len(result.recommendations) == 4
+    # Models without a tree forest offer no attribution.
+    assert result.top_factors == []
+
+
+def _real_model_or_skip():
+    from app.core.exceptions import ModelLoadError
+    from app.services.neurological_prediction_service import load_neurological_model
+
+    try:
+        return load_neurological_model()
+    except ModelLoadError as exc:
+        pytest.skip(f"Neurological model unavailable: {exc}")
+
+
+def test_tree_path_contributions_reconstruct_the_class_probability() -> None:
+    import pandas as pd
+
+    from app.services.neurological_prediction_service import _tree_path_contributions
+
+    assets = _real_model_or_skip()
+    frame = pd.DataFrame(
+        [[VALID_PAYLOAD[column] for column in assets.feature_columns]],
+        columns=assets.feature_columns,
+    )
+    probabilities = assets.disease_model.predict_proba(frame)[0]
+
+    for class_index, probability in enumerate(probabilities):
+        bias, _, contributions = _tree_path_contributions(
+            assets.disease_model, frame, class_index
+        )
+        assert bias + contributions.sum() == pytest.approx(probability, abs=1e-9)
+
+
+def test_top_factors_rank_supplied_inputs_for_the_predicted_class() -> None:
+    assets = _real_model_or_skip()
+    payload = {
+        **{key: None for key in VALID_PAYLOAD},
+        "age": 74,
+        "sex": "Female",
+        "cognitive_screen_score_0_30": 19,
+        "apoe_e4_count": 2,
+        "amyloid_beta_42_40_ratio": 0.05,
+        "t_tau_pg_ml": 520,
+        "p_tau181_pg_ml": 95,
+        "nfl_pg_ml": 30,
+        "gfap_pg_ml": 250,
+        "updrs_part_iii": 4,
+    }
+
+    result = predict_neurological_risk_with_assets(
+        NeurologicalRiskRequest(**payload), assets
+    )
+
+    factors = result.top_factors
+    assert 1 <= len(factors) <= 5
+    contributions = [factor.contribution for factor in factors]
+    assert contributions == sorted(contributions, reverse=True)
+    assert all(contribution > 0 for contribution in contributions)
+    supplied = {key for key, value in payload.items() if value is not None}
+    assert {factor.feature for factor in factors} <= supplied
+    for factor in factors:
+        assert factor.value == payload[factor.feature]
+    # The ranked share cannot exceed the probability it explains.
+    assert sum(contributions) <= result.confidence_score + 1e-6
+
+
+def test_top_factors_exclude_every_unsupplied_input() -> None:
+    assets = _real_model_or_skip()
+    payload = {key: None for key in VALID_PAYLOAD}
+    payload["age"] = 70
+
+    result = predict_neurological_risk_with_assets(
+        NeurologicalRiskRequest(**payload), assets
+    )
+
+    assert {factor.feature for factor in result.top_factors} <= {"age"}
+
+
+def test_top_factors_map_one_hot_and_missing_indicator_columns() -> None:
+    from app.services.neurological_prediction_service import _source_feature
+
+    values = dict.fromkeys(EXPECTED_FEATURE_COLUMNS)
+    assert _source_feature("categorical__sex_Female", values) == "sex"
+    assert _source_feature("numeric__missingindicator_updrs_part_ii", values) == "updrs_part_ii"
+    assert _source_feature("numeric__updrs_part_i", values) == "updrs_part_i"
+    assert _source_feature("numeric__unknown_column", values) is None
 
 
 def test_probability_normalization() -> None:
