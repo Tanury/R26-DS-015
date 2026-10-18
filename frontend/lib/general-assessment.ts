@@ -114,11 +114,12 @@ export function buildGeneralInterpretation(prediction: Prediction) {
   const resultMeaning = `The disease pipeline matched the 24-input record most closely to its ${selectedName} class (${confidence}% model confidence). This describes similarity to a learned synthetic-cohort pattern—not a diagnosis, prevalence estimate, or laboratory interpretation.`;
   const formula = `A separate Low/Medium/High pipeline produced the ${prediction.risk_level} band and ${riskScore}/100 score. The saved formula weights Low at 0, Medium at 50, and High at 100, then averages those class probabilities. Disease confidence and overall risk are therefore different outputs.`;
   const separation = runnerUp
-    ? `The next-closest disease class was ${diseaseName(runnerUp[0])} at ${Math.round(runnerUp[1] * 100)}%, a ${Math.round(margin * 100)}-point separation. ${margin < 0.15 ? "The narrow margin indicates a mixed disease-pattern output, so use extra caution." : "This separation is model certainty, not clinical certainty."}`
+    ? `The selected class led the next-closest disease class by ${Math.round(margin * 100)} points. ${margin < 0.15 ? "The narrow margin indicates a mixed disease-pattern output, so use extra caution." : "This separation is model certainty, not clinical certainty."}`
     : "No runner-up disease class was returned, so class separation could not be assessed.";
 
   return {
     lowerRiskHealthy: favorable,
+    selectedName,
     headline: `${selectedName} pattern · ${prediction.risk_level} risk`,
     resultMeaning,
     formula,
@@ -128,8 +129,40 @@ export function buildGeneralInterpretation(prediction: Prediction) {
   };
 }
 
+export type TopFactorRow = {
+  key: BiomedicalInputKey;
+  label: string;
+  value: string;
+  /** Percentage points this input added to the predicted class probability. */
+  points: number;
+  /** Bar length relative to the strongest factor (0–1). */
+  share: number;
+};
+
+/** Top factors ranked by the backend; unknown keys and non-positive values are dropped. */
+export function buildTopFactorRows(prediction: Prediction): TopFactorRow[] | null {
+  if (!prediction.top_factors) return null;
+  const factors = prediction.top_factors.filter(
+    (factor) => factor.feature in biomarkerDetails && factor.contribution > 0,
+  );
+  const strongest = Math.max(...factors.map((factor) => factor.contribution), 0);
+  return factors.slice(0, 5).map((factor) => {
+    const key = factor.feature as BiomedicalInputKey;
+    return {
+      key,
+      label: biomarkerDetails[key].label,
+      value: formatInputValue(key, factor.value),
+      points: Math.round(factor.contribution * 1000) / 10,
+      share: strongest > 0 ? factor.contribution / strongest : 0,
+    };
+  });
+}
+
 export function formatBiomarkerValue(key: BiomedicalInputKey, features: BiomedicalFeatures) {
-  const value = features[key];
+  return formatInputValue(key, features[key]);
+}
+
+function formatInputValue(key: BiomedicalInputKey, value: number | string | null) {
   if (value === null) return "Not supplied";
   if (typeof value === "string") return value;
   if (key === "family_history_pd" || key === "gba_variant_carrier") {

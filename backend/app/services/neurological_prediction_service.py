@@ -1,4 +1,5 @@
 import json
+import logging
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
@@ -9,9 +10,12 @@ import numpy as np
 from app.core.config import settings
 from app.core.exceptions import ModelLoadError, PredictionError
 from app.schemas.neurological_risk_request import NeurologicalRiskRequest
-from app.schemas.prediction_response import PredictionResponse
+from app.schemas.prediction_response import FactorContribution, PredictionResponse
 
 
+logger = logging.getLogger(__name__)
+
+TOP_FACTOR_LIMIT = 5
 MODEL_FILENAME = "neurological_risk_model.joblib"
 METADATA_FILENAME = "neurological_risk_model_metadata.json"
 EXPECTED_SCHEMA_VERSION = "neurological-biomedical-24-v1"
@@ -146,7 +150,99 @@ def predict_neurological_risk_with_assets(
         ),
         recommendations=_build_recommendations(disease_class, risk_class),
         disclaimer=settings.biomedical_disclaimer,
+        top_factors=_top_disease_factors(
+            assets.disease_model, model_input, disease_index, values
+        ),
     )
+
+
+def _top_disease_factors(
+    model: Any,
+    model_input: Any,
+    class_index: int,
+    values: dict[str, Any],
+    limit: int = TOP_FACTOR_LIMIT,
+) -> list[FactorContribution]:
+    """Rank supplied inputs by how much they raised the predicted class probability.
+
+    Uses tree-path decomposition: for every tree, each split on the decision
+    path moves the class probability from the parent node to the child node,
+    and that change is credited to the split feature. Averaged over the forest,
+    the bias plus all credits equals the model's probability exactly. Imputed
+    (not supplied) inputs are excluded from the ranking.
+    """
+    steps = getattr(model, "steps", None)
+    if not steps or not getattr(steps[-1][1], "estimators_", None):
+        return []
+
+    try:
+        _, transformed_names, contributions = _tree_path_contributions(
+            model, model_input, class_index
+        )
+    except Exception:
+        logger.warning("Neurological factor attribution failed.", exc_info=True)
+        return []
+
+    totals: dict[str, float] = {}
+    for name, contribution in zip(transformed_names, contributions, strict=True):
+        source = _source_feature(str(name), values)
+        if source is not None:
+            totals[source] = totals.get(source, 0.0) + float(contribution)
+
+    ranked = sorted(
+        (
+            (feature, contribution)
+            for feature, contribution in totals.items()
+            if values.get(feature) is not None and contribution > 0.0
+        ),
+        key=lambda item: item[1],
+        reverse=True,
+    )
+    return [
+        FactorContribution(
+            feature=feature,
+            value=values[feature],
+            contribution=round(contribution, 6),
+        )
+        for feature, contribution in ranked[:limit]
+    ]
+
+
+def _tree_path_contributions(
+    model: Any,
+    model_input: Any,
+    class_index: int,
+) -> tuple[float, Any, np.ndarray]:
+    """Return (bias, transformed column names, per-column contributions).
+
+    bias + contributions.sum() equals the forest's probability for class_index.
+    """
+    estimators = model.steps[-1][1].estimators_
+    transformed = np.asarray(model[:-1].transform(model_input), dtype=np.float64)
+    contributions = np.zeros(transformed.shape[1])
+    bias = 0.0
+    for estimator in estimators:
+        tree = estimator.tree_
+        node_values = tree.value[:, 0, :]
+        node_values = node_values / node_values.sum(axis=1, keepdims=True)
+        path = estimator.decision_path(transformed).indices
+        bias += float(node_values[path[0], class_index])
+        for parent, child in zip(path[:-1], path[1:]):
+            contributions[tree.feature[parent]] += (
+                node_values[child, class_index] - node_values[parent, class_index]
+            )
+    count = len(estimators)
+    return bias / count, model[:-1].get_feature_names_out(), contributions / count
+
+
+def _source_feature(transformed_name: str, values: dict[str, Any]) -> str | None:
+    """Map a fitted ColumnTransformer output column back to its request field."""
+    name = transformed_name.split("__", 1)[-1]
+    name = name.removeprefix("missingindicator_")
+    if name in values:
+        return name
+    # One-hot columns are named "<feature>_<category>".
+    return next((feature for feature in values if name.startswith(f"{feature}_")), None)
 
 
 def _validate_runtime_version(runtime_version: str, metadata: dict[str, Any]) -> None:
@@ -274,8 +370,9 @@ def _build_observed_issues(
         context.append(f"submitted UPDRS total {sum(supplied_updrs):g}")
     if context:
         issues.append(
-            "Clinical-scale context: " + " and ".join(context) + ". These values "
-            "provide context but are not a feature-attribution explanation."
+            "Clinical-scale context: " + " and ".join(context) + ". The top "
+            "influencing factors show which supplied values raised the selected "
+            "class probability most."
         )
     return issues
 
