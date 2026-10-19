@@ -8,7 +8,6 @@ import {
   Calculator,
   CheckCircle2,
   ClipboardList,
-  Info,
   Mic,
   RefreshCw,
   Scale,
@@ -481,12 +480,6 @@ export default function FusionResultPage() {
               </CardContent>
             </Card>
           </div>
-
-          <Card className="border-amber-200 bg-amber-50">
-            <CardContent className="p-6">
-              <div className="flex gap-3"><Info className="mt-0.5 size-5 shrink-0 text-amber-800" /><div><h2 className="font-bold text-amber-950">Limitations that travel with this result</h2><ul className="mt-3 space-y-2 text-sm leading-6 text-amber-950">{result.cautions.map((caution) => <li key={caution}>• {caution}</li>)}</ul></div></div>
-            </CardContent>
-          </Card>
 
           {computed && (
             <Card>
