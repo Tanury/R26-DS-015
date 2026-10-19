@@ -1,5 +1,6 @@
 import type { RiskCondition } from "@/lib/eeg-types";
 import type { AssessmentType, HistoryItem, Prediction } from "@/lib/types";
+import { voiceDemoProbabilities } from "@/lib/voice-result-guidance";
 
 export const fusionConditions = ["AD", "PD", "MS"] as const satisfies readonly RiskCondition[];
 export type FusionCondition = (typeof fusionConditions)[number];
@@ -255,7 +256,12 @@ export function buildFusionResult(
     Object.fromEntries(fusionConditions.map((condition) => [condition, score(condition)])) as Record<FusionCondition, number>;
   // The models that score every condition; only these can rank conditions against each other.
   const modalityScores: Partial<Record<CoreFusionModality, Record<FusionCondition, number>>> = {};
-  if (voice) modalityScores.Voice = scoresFor((condition) => oneVsHealthyEvidence(voice.prediction!, condition));
+  if (voice) {
+    // Use the same simulated demo scores the voice results page displays.
+    const demo = voiceDemoProbabilities(voice.id, voice.prediction!, voice.voiceDetails);
+    const demoPrediction: Prediction = { ...voice.prediction!, probabilities: demo.probabilities };
+    modalityScores.Voice = scoresFor((condition) => oneVsHealthyEvidence(demoPrediction, condition));
+  }
   if (general) modalityScores.General = scoresFor((condition) => oneVsHealthyEvidence(general.prediction!, condition));
   if (eegReport) {
     modalityScores.EEG = scoresFor((condition) =>

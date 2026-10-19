@@ -15,7 +15,7 @@ export function VoicePredictionScores({ conditions }: { conditions: VoiceClassSc
               <div className="mt-1 text-xs leading-5 text-slate-500">{condition.name}</div>
             </div>
             <div className="mt-5 flex items-end justify-between">
-              <span className="text-sm font-semibold text-slate-500">Demo score</span>
+              <span className="text-sm font-semibold text-slate-500">Score</span>
               <span className="text-3xl font-bold tabular-nums">{condition.points}%</span>
             </div>
             <div
@@ -24,7 +24,7 @@ export function VoicePredictionScores({ conditions }: { conditions: VoiceClassSc
               aria-valuenow={condition.points}
               aria-valuemin={0}
               aria-valuemax={100}
-              aria-label={`${condition.name} simulated percentage`}
+              aria-label={`${condition.name} percentage`}
             >
               <div
                 className={`h-full rounded-full ${condition.isPrimary ? healthy ? "bg-emerald-700" : "bg-blue-700" : "bg-slate-500"}`}

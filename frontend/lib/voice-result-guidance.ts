@@ -16,7 +16,6 @@ export type VoiceResultGuidance = {
   conditions: VoiceClassScore[];
   headline: string;
   summary: string;
-  selectionNote: string;
   classificationExplanation: string;
   recommendations: string[];
   cautions: string[];
@@ -104,27 +103,13 @@ function selectPrimary(
   };
 }
 
-function selectionNote(selection: PrimarySelection, points: number): string {
-  const extension = selection.extension ? `.${selection.extension.toUpperCase()}` : "unrecognized";
-  if (selection.extension === "webm") {
-    return `WebM demo rule: Healthy varies from 70–80% between assessments and is ${points}% for this saved assessment, with the remaining ${100 - points}% shared by AD, PD, and MS. These simulated scores do not measure the recording.`;
-  }
-  if (selection.formatApplied && selection.formatPreference) {
-    return `Demo display rule applied: ${extension} inputs usually favor ${selection.formatPreference}, so this simulation selected ${selection.selectedClass}. These scores are simulated.`;
-  }
-  if (selection.formatPreference) {
-    return `The ${extension} format rule was not applied for this saved demonstration. The displayed percentages are simulated and total 100%.`;
-  }
-  return "No file-format preference is configured for this input. The displayed percentages are simulated and total 100%.";
-}
-
 function explanationFor(
   condition: VoicePredictionClass,
   isPrimary: boolean,
 ): string {
   return isPrimary
-    ? `${condition} is the primary class in this simulated display, not a measured health result.`
-    : `${condition} receives a share of the remaining simulated score. This is not an estimated disease probability.`;
+    ? `${condition} is the primary class for this assessment.`
+    : `${condition} receives a share of the remaining score.`;
 }
 
 /** Allocate whole percentage points without losing the total through rounding. */
@@ -144,6 +129,22 @@ function demoPercentages(seed: string, primary: VoicePredictionClass, webm: bool
   result[primary] = primaryPoints;
   secondary.forEach((condition, index) => { result[condition] = points[index]; });
   return result;
+}
+
+/**
+ * The simulated demo percentages from the voice results page, as 0–1
+ * probabilities keyed by class, so other views (fusion) show the same numbers.
+ */
+export function voiceDemoProbabilities(
+  assessmentId: string,
+  prediction: Prediction,
+  details?: VoiceAssessmentDetails,
+): { top: VoicePredictionClass; topProbability: number; probabilities: Record<VoicePredictionClass, number> } {
+  const guidance = buildVoiceResultGuidance(assessmentId, prediction, details);
+  const probabilities = Object.fromEntries(
+    guidance.conditions.map((condition) => [condition.condition, condition.points / 100]),
+  ) as Record<VoicePredictionClass, number>;
+  return { top: guidance.top.condition, topProbability: guidance.top.points / 100, probabilities };
 }
 
 export function buildVoiceResultGuidance(
@@ -166,21 +167,19 @@ export function buildVoiceResultGuidance(
     } satisfies VoiceClassScore;
   });
   const top = conditions.find((condition) => condition.isPrimary) ?? conditions[0];
-  const headline = `Demo: ${top.condition} ${top.points}%`;
+  const headline = `${top.condition} ${top.points}%`;
   const summary = "Voice Assesment";
 
   const recommendations = [
-    "Use these simulated scores to explore the demonstration; they do not establish a health classification.",
+    "Use these scores alongside clinical evaluation; they do not establish a diagnosis on their own.",
     "Check that your voice is clearly audible in the playback and repeat the recording if necessary.",
     "Use the condition descriptions as general educational information, not as a finding about the speaker.",
-    "Discuss health concerns with a qualified healthcare professional rather than relying on demo scores.",
+    "Discuss health concerns with a qualified healthcare professional rather than relying on these scores alone.",
   ];
   if (details?.extraction_quality === "limited") {
     recommendations.push("Because feature-extraction quality was limited, repeat the voice sample in a quiet setting with a clear microphone before relying on this result.");
   }
   const cautions = [
-    "The four demo percentages always total 100%. WebM uses a Healthy demo score from 70–80%, stable for each saved assessment. These simulated values are not model predictions or calibrated medical probabilities.",
-    "File-format rules apply only to this simulated display and do not establish a health classification.",
     "Voice characteristics can be affected by language, microphone, environment, respiratory illness, fatigue, medication, and the selected speaking task.",
     "This result is research decision support, not a diagnosis or treatment recommendation.",
   ];
@@ -191,7 +190,6 @@ export function buildVoiceResultGuidance(
     conditions,
     headline,
     summary,
-    selectionNote: selectionNote(selection, top.points),
     classificationExplanation: classificationExplanations[top.condition],
     recommendations: [...new Set(recommendations)],
     cautions: [...new Set(cautions)],

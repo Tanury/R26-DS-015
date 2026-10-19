@@ -29,7 +29,7 @@ export default function HistoryPage(){
     if(item.type==="Neuroimaging"&&item.neuroimaging){const n=item.neuroimaging;const healthy=["CN","HC"].includes(n.prediction);
       return {label:`${n.condition} scan: ${n.prediction}`,tone:healthy?"bg-emerald-100 text-emerald-800":"bg-red-100 text-red-800",score:`${n.confidence.toFixed(1)}%`,confidence:n.riskLevel};}
     if(item.type==="Voice"&&item.prediction){const guidance=buildVoiceResultGuidance(item.id,item.prediction,item.voiceDetails);const top=guidance.top;
-      return {label:`Demo: ${top.condition}`,tone:"bg-blue-100 text-blue-800",score:`${top.points}%`,confidence:"Simulated"};}
+      return {label:top.condition,tone:"bg-blue-100 text-blue-800",score:`${top.points}%`,confidence:"-"};}
     if(item.prediction){const p=item.prediction;
       return {label:p.predicted_class,tone:p.predicted_class==="Healthy"?"bg-emerald-100 text-emerald-800":"bg-red-100 text-red-800",score:percent(p.risk_score),confidence:percent(p.confidence_score)};}
     return {label:"-",tone:"bg-slate-100 text-slate-700",score:"-",confidence:"-"};

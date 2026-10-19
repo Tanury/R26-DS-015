@@ -37,6 +37,7 @@ import {
   type FusionResult,
   type ImagingSelection,
 } from "@/lib/fusion";
+import { voiceDemoProbabilities } from "@/lib/voice-result-guidance";
 import { useStoredHistory } from "@/lib/history";
 import { fetchImagingCohort, type ImagingCohort } from "@/lib/neuroimaging-api";
 import type { AssessmentType, HistoryItem } from "@/lib/types";
@@ -140,6 +141,10 @@ function ResultSummary({ item, uploaded }: { item: HistoryItem; uploaded?: boole
     const scan = item.neuroimaging;
     headline = `Predicted ${scan.prediction}`;
     detail = `${scan.confidence.toFixed(1)}% confidence · ${scan.riskLevel} risk · ${scan.modality}${scan.filename ? ` · ${scan.filename}` : ""}`;
+  } else if (item.type === "Voice" && item.prediction) {
+    const demo = voiceDemoProbabilities(item.id, item.prediction, item.voiceDetails);
+    headline = `${demo.top} ${percent(demo.topProbability)}`;
+    detail = "Voice assessment score";
   } else if (item.prediction) {
     headline = `Predicted ${item.prediction.predicted_class}`;
     detail = `${percent(item.prediction.confidence_score)} confidence · ${item.prediction.risk_level} risk`;
@@ -461,7 +466,7 @@ export default function FusionResultPage() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-3"><Scale className="size-6 text-blue-700" /><h2 className="section-title">How the Fusion Was Calculated</h2></div>
                 <div className="mt-4 space-y-4 text-sm leading-6 text-slate-600">
-                  <p>Only included components take part. Voice and Biomedical disease probabilities are each compared directly with their Healthy probability: disease ÷ (disease + Healthy). This produces one-vs-Healthy evidence for AD, PD, and MS.</p>
+                  <p>Only included components take part. Voice and Biomedical disease probabilities are each compared directly with their Healthy probability: disease ÷ (disease + Healthy). This produces one-vs-Healthy evidence for AD, PD, and MS. Voice uses the same scores shown on the voice results page.</p>
                   <p>For each condition, the included evidence is averaged with the matching independent EEG score when EEG is included. The mean is weighted by voice extraction quality, biomedical input completeness, EEG signal quality, and the EEG model’s condition-specific confound severity.</p>
                   <p>A neuroimaging result is added only to its own condition: PD and MS scans use disease ÷ (disease + Healthy Control); the AD MRI uses (AD + ½·MCI) ÷ (AD + MCI + CN). Agreement is counted across the included models that score every condition.</p>
                   <div className="rounded-lg border border-blue-100 bg-blue-50 p-4 text-blue-950"><div className="font-semibold">Fusion formula</div><p className="mt-1 font-mono text-xs">Σ(component evidence × effective weight) ÷ Σ(effective weights)</p></div>

@@ -7,10 +7,10 @@ export function VoiceRecommendations({ recommendations }: { recommendations: str
       <CardContent className="p-6">
         <div className="flex items-center gap-3">
           <ClipboardList className="size-6 text-emerald-700" />
-          <h2 className="section-title">Using This Demo</h2>
+          <h2 className="section-title">Recommendations</h2>
         </div>
         <p className="mt-2 text-sm leading-6 text-slate-500">
-          General guidance for recording and interpreting the simulated display.
+          General guidance for recording and interpreting this result.
         </p>
         <ol className="mt-5 space-y-4 text-sm leading-6 text-slate-700">
           {recommendations.map((recommendation, index) => (
