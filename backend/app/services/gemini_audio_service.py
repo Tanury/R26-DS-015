@@ -7,6 +7,7 @@ from pydantic import ValidationError
 from app.core.config import settings
 from app.core.exceptions import AudioFeatureExtractionError
 from app.schemas.voice_assessment import GeminiAudioAnalysis
+from app.services.audio_preparation import prepare_browser_audio
 
 
 logger = logging.getLogger(__name__)
@@ -32,6 +33,12 @@ Set quality_status to unusable for silence, music-only audio, multiple overlappi
 speakers, severe clipping, or audio too unclear for speech analysis. Use limited when
 the estimates are possible but recording quality is weak. Include concise quality
 notes and a short transcript when speech is intelligible. Never invent patient facts.
+Natural pauses, an accent, non-English speech, or mild background noise alone are
+not reasons to reject audible single-speaker speech. Use limited if meaningful
+estimates can still be made. For sustained_vowel, a held vowel is the expected
+input; no words or transcript are required. Do not require a reading passage for
+monologue or picture_description. For unusable audio, explain the specific audible
+problem in quality_notes so the speaker can correct it.
 """.strip()
 
 
@@ -59,7 +66,9 @@ def _gemini_response_schema() -> dict[str, Any]:
     return schema
 
 
-def extract_speech_features(audio_bytes: bytes, mime_type: str) -> GeminiAudioAnalysis:
+def extract_speech_features(
+    audio_bytes: bytes, mime_type: str, recording_task: str = "reading"
+) -> GeminiAudioAnalysis:
     if not settings.gemini_api_key:
         raise AudioFeatureExtractionError(
             "GEMINI_API_KEY is not configured on the server."
@@ -73,12 +82,14 @@ def extract_speech_features(audio_bytes: bytes, mime_type: str) -> GeminiAudioAn
             "The google-genai package is required for voice analysis."
         ) from exc
 
+    audio_bytes, mime_type = prepare_browser_audio(audio_bytes, mime_type)
+
     try:
         client = genai.Client(api_key=settings.gemini_api_key)
         response = client.models.generate_content(
             model=settings.gemini_model,
             contents=[
-                EXTRACTION_PROMPT,
+                f"{EXTRACTION_PROMPT}\n\nSelected recording task: {recording_task}.",
                 types.Part.from_bytes(data=audio_bytes, mime_type=mime_type),
             ],
             config=types.GenerateContentConfig(
@@ -107,8 +118,11 @@ def extract_speech_features(audio_bytes: bytes, mime_type: str) -> GeminiAudioAn
         ) from exc
 
     if analysis.quality_status == "unusable":
+        notes = " ".join(note.strip() for note in analysis.quality_notes if note.strip())[:600]
         raise AudioFeatureExtractionError(
-            "The audio sample is not suitable for speech feature extraction."
+            "Speech extraction could not use this recording. "
+            + (f"Audio quality feedback: {notes} " if notes else "No reliable speech features could be extracted. ")
+            + "Listen to the preview, check the microphone level, and record the selected task again in a quiet room."
         )
 
     logger.info(

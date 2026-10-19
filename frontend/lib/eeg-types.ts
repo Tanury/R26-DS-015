@@ -52,6 +52,8 @@ export type EegEmbeddingSummary = {
 };
 
 export type EegExplainability = {
+  target_condition?: string | null;
+  target_output?: "independent_risk" | "four_class" | null;
   scalp_region_importance: Record<string, number>;
   band_importance: Record<string, number>;
   method: string;
@@ -84,11 +86,32 @@ export type EegRiskReport = {
   optional_four_class_prediction: FourClassPrediction | null;
   signal_quality: EegSignalQuality;
   band_power_profile: Record<string, number>;
+  waveform_preview?: {
+    sampling_rate_hz: number;
+    channels: Record<string, number[]>;
+    unit: "µV";
+    note: string;
+  } | null;
   embedding: EegEmbeddingSummary;
   explainability: EegExplainability;
   confound_disclosure: ConfoundDisclosure;
   model_summary: Record<string, string | number | null>;
   clinical_disclaimer: string;
+};
+
+export type SimilarEegSample = {
+  subject_id: string;
+  true_class: string;
+  site: string;
+  signal_quality: string;
+  band_power_profile: Record<string, number>;
+  distance: number;
+};
+
+export type SimilarEegResponse = {
+  samples: SimilarEegSample[];
+  compared_subjects: number;
+  method: string;
 };
 
 export type CohortSubject = {

@@ -1,7 +1,11 @@
 import type { EegConditionGuidance } from "@/lib/eeg-prediction-guidance";
 
-export function EegPredictionScores({ conditions }: { conditions: EegConditionGuidance[] }) {
+export function EegPredictionScores({ conditions, scoreLabel }: { conditions: EegConditionGuidance[]; scoreLabel: string }) {
   return (
+    <div>
+    {scoreLabel === "Four-class model score" && (
+      <p className="mb-4 text-sm font-semibold text-slate-600">Total across all four classes: 100%</p>
+    )}
     <div className="grid gap-5 md:grid-cols-2 2xl:grid-cols-4">
       {conditions.map((condition) => {
         const healthy = condition.condition === "Healthy";
@@ -21,26 +25,32 @@ export function EegPredictionScores({ conditions }: { conditions: EegConditionGu
               <div className="mt-1 text-xs leading-5 text-slate-500">{condition.name}</div>
             </div>
             <div className="mt-5 flex items-end justify-between">
-              <span className="text-sm font-semibold text-slate-500">Result points</span>
-              <span className="text-3xl font-bold tabular-nums">{condition.points}</span>
+              <span className="text-xs font-semibold text-slate-500">{scoreLabel}</span>
+              <span className="text-3xl font-bold tabular-nums">{condition.points === null ? "N/A" : `${condition.points}%`}</span>
             </div>
+            {condition.points !== null && (
             <div
               className="mt-2 h-3 overflow-hidden rounded-full bg-slate-200"
               role="meter"
               aria-valuenow={condition.points}
               aria-valuemin={0}
               aria-valuemax={100}
-              aria-label={`${condition.name} result points`}
+              aria-label={`${condition.name} ${scoreLabel}`}
             >
               <div
                 className={`h-full rounded-full ${condition.isPrimary ? healthy ? "bg-emerald-700" : "bg-blue-700" : "bg-slate-500"}`}
                 style={{ width: `${condition.points}%` }}
               />
             </div>
+            )}
+            {condition.riskScore !== null && scoreLabel === "Four-class model score" && (
+              <p className="mt-3 text-xs font-semibold text-slate-600">Independent risk: {(condition.riskScore * 100).toFixed(1)}%</p>
+            )}
             <p className="mt-4 text-sm leading-6 text-slate-600">{condition.explanation}</p>
           </article>
         );
       })}
+    </div>
     </div>
   );
 }

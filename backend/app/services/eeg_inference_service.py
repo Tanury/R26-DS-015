@@ -219,6 +219,8 @@ def infer(preprocessed: dict[str, Any], subject_id: str, explain: bool = True) -
                 assets.model, tensor, int(np.argmax(risk)), assets.channel_order,
                 list(assets.bands), int(tensor_np.shape[1]),
             )
+            explainability.target_condition = assets.risk_conditions[int(np.argmax(risk))]
+            explainability.target_output = "independent_risk"
         except Exception:  # explainability is a nicety, never a failure mode
             explainability = Explainability(method="occlusion unavailable for this run")
 
@@ -254,6 +256,7 @@ def infer(preprocessed: dict[str, Any], subject_id: str, explain: bool = True) -
         ),
         signal_quality=SignalQuality(**quality),
         band_power_profile=_band_power_profile(epochs, assets.sampling_rate_hz, assets.bands),
+        waveform_preview=preprocessed.get("waveform_preview"),
         embedding=EmbeddingSummary(
             dim=int(z_eeg.shape[0]),
             l2_norm=round(float(np.linalg.norm(z_eeg)), 6),

@@ -138,7 +138,7 @@ export default function EegAssessmentPage() {
       <BackButton href="/" label="Back to Assessments" />
       <PageHeader
         title="EEG Neurological Risk Assessment"
-        description="Explore assessed cohort recordings, or upload an EEGLAB recording for a full pipeline run producing three independent risk scores and a 256-D z_eeg embedding."
+        description="Upload an EEG to see the model’s suggested pattern, measured scores, a signal excerpt, similar cohort samples, and reasons for ranking each alternative."
       />
 
       {loadError && (
@@ -239,7 +239,8 @@ export default function EegAssessmentPage() {
                 <p className="mb-4 text-sm leading-6 text-slate-600">
                   Provide an EEGLAB <code>.set</code> file — and its <code>.fdt</code>{" "}
                   companion when the signal is stored separately. The recording is filtered,
-                  ICA-cleaned, epoched and scored, then discarded.
+                  ICA-cleaned, epoched and scored. The report retains a short cleaned
+                  signal excerpt for inspection; the uploaded files are discarded.
                 </p>
 
                 {files.length === 0 ? (

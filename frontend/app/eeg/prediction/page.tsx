@@ -14,6 +14,7 @@ import {
 import { AppShell } from "@/components/app-shell";
 import { BackButton } from "@/components/back-button";
 import { EegPredictionScores } from "@/components/eeg-prediction-scores";
+import { EegDecisionEvidence, EegSimilarSamples, EegWaveform } from "@/components/eeg-evidence";
 import { EegRecommendations } from "@/components/eeg-recommendations";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -58,8 +59,8 @@ export default function EegPredictionPage() {
               </div>
             </div>
             <div className="min-w-44 rounded-lg border border-slate-200 bg-slate-50 px-6 py-4 text-center">
-              <div className="mt-1 text-4xl font-bold text-blue-700">{guidance.top.condition}</div>
-              <div className="mt-1 text-sm font-semibold">{guidance.top.points} / 100 points</div>
+              <div className="mt-1 text-4xl font-bold text-blue-700">{guidance.top.isPrimary ? guidance.top.condition : "Inconclusive"}</div>
+              <div className="mt-1 text-sm font-semibold">{guidance.top.points === null ? "Score unavailable" : `${guidance.top.points}% · ${guidance.scoreLabel}`}</div>
             </div>
           </CardContent>
         </Card>
@@ -67,12 +68,16 @@ export default function EegPredictionPage() {
         <Card>
           <CardHeader>
             <h2 className="section-title">Condition Predictions</h2>
-            <p className="mt-1 text-sm leading-6 text-slate-500">All four condition patterns are shown, with the selected result emphasized by its tinted card.</p>
+            <p className="mt-1 text-sm leading-6 text-slate-500">Actual model outputs for each pattern. The highest measured score is highlighted when there is a single leader.</p>
           </CardHeader>
           <CardContent>
-            <EegPredictionScores conditions={guidance.conditions} />
+            <EegPredictionScores conditions={guidance.conditions} scoreLabel={guidance.scoreLabel} />
           </CardContent>
         </Card>
+
+        <EegDecisionEvidence report={report} />
+        <EegWaveform report={report} />
+        <EegSimilarSamples report={report} />
 
         <div className="grid gap-6 lg:grid-cols-2">
           <EegRecommendations recommendations={guidance.recommendations} />

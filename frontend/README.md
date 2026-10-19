@@ -83,7 +83,7 @@ The backend must allow the exact frontend origin through `FRONTEND_ORIGINS`. The
 | Route | Purpose | Backend dependency |
 | --- | --- | --- |
 | `/` | Dashboard and entry points | None for initial shell |
-| `/general` | Enter the exact 24 clinical/genetic/biomarker fields | `POST /neurological-risk/predict` on submit |
+| `/general` | Upload a record for Gemini-assisted entry or manually enter the exact 24 fields | `POST /neurological-risk/extract-record`, then `POST /neurological-risk/predict` |
 | `/general/results` | Display disease probabilities, independent risk, explanation, and suggestions | Browser session storage |
 | `/voice` | Record or upload audio | `POST /voice-assessments/` |
 | `/voice/results` | Display transcript, extracted features, and prediction | Browser session storage |
@@ -128,7 +128,7 @@ This storage is convenient for a prototype but is not an approved clinical recor
 
 The frontend has two API client modules:
 
-- `lib/api.ts` handles general feature and voice assessment requests.
+- `lib/api.ts` handles general record extraction, general feature, and voice assessment requests.
 - `lib/eeg-api.ts` handles model-card, cohort, report, band-reference, projection, upload, and job-polling requests.
 
 Both default to `http://127.0.0.1:8000` when `NEXT_PUBLIC_API_BASE_URL` is absent. Explicit configuration is still recommended so deployment behavior is obvious.

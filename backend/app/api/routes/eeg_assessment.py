@@ -25,6 +25,8 @@ from app.schemas.eeg_assessment import (
     EegRiskReport,
     EmbeddingVector,
     ModelCard,
+    SimilarEegRequest,
+    SimilarEegResponse,
 )
 from app.services import eeg_cohort_service as cohort
 from app.services import eeg_job_service as jobs
@@ -87,6 +89,16 @@ def cohort_index(
             offset=offset, limit=limit,
         )
     except EegBundleError as exc:
+        raise _bundle_unavailable(exc) from exc
+
+
+@router.post("/similar-samples", response_model=SimilarEegResponse)
+def similar_samples(request: SimilarEegRequest) -> SimilarEegResponse:
+    try:
+        return cohort.find_similar_samples(request)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except (EegBundleError, EegSubjectNotFoundError) as exc:
         raise _bundle_unavailable(exc) from exc
 
 
