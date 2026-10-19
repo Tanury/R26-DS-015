@@ -12,7 +12,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { submitVoiceAssessment } from "@/lib/api";
 import { saveAssessment } from "@/lib/history";
-import { createRecordedFile, selectRecordingMimeType } from "@/lib/voice-recording";
+import { convertToWav, createRecordedFile, needsWavConversion, selectRecordingMimeType } from "@/lib/voice-recording";
 
 const steps = ["Recording", "Analysis", "Prediction", "Results"];
 const passage = "The grandfather clock ticked loudly in the hallway, its brass pendulum swinging in a steady rhythm. Outside, the rain drummed softly against the glass.";
@@ -32,6 +32,7 @@ export default function VoiceAssessmentPage() {
   const [task, setTask] = useState("reading");
   const [recording, setRecording] = useState(false);
   const [starting, setStarting] = useState(false);
+  const [converting, setConverting] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [step, setStep] = useState(0);
   const [error, setError] = useState("");
@@ -62,13 +63,27 @@ export default function VoiceAssessmentPage() {
     return () => window.clearInterval(timer);
   }, [recording]);
 
-  function acceptFile(candidate: File) {
+  async function acceptFile(candidate: File) {
     setError("");
     if (!candidate.size) { setError("No audio was captured. Please record your speech again."); return; }
     if (candidate.size > 18 * 1024 * 1024) { setError("Audio files must be 18 MB or smaller."); return; }
     if (!candidate.type.startsWith("audio/")) { setError("Choose a WAV, MP3, M4A, OGG, or WebM audio file."); return; }
-    setFile(candidate);
-    setPreviewUrl(URL.createObjectURL(candidate));
+    let accepted = candidate;
+    if (needsWavConversion(candidate)) {
+      setConverting(true);
+      try {
+        accepted = await convertToWav(candidate);
+      } catch (reason) {
+        if (mountedRef.current) setError(reason instanceof Error ? reason.message : "The recording could not be converted. Upload a WAV file instead.");
+        return;
+      } finally {
+        if (mountedRef.current) setConverting(false);
+      }
+      if (!mountedRef.current) return;
+      if (accepted.size > 18 * 1024 * 1024) { setError("The converted recording is larger than 18 MB. Record a shorter sample."); return; }
+    }
+    setFile(accepted);
+    setPreviewUrl(URL.createObjectURL(accepted));
   }
 
   async function toggleRecording() {
@@ -99,7 +114,7 @@ export default function VoiceAssessmentPage() {
       };
       recorder.onstop = () => {
         try {
-          if (!failed) acceptFile(createRecordedFile(chunks, recorder.mimeType));
+          if (!failed) void acceptFile(createRecordedFile(chunks, recorder.mimeType));
         } catch (reason) {
           setError(reason instanceof Error ? reason.message : "The recording could not be saved. Please try again.");
         } finally {
@@ -165,10 +180,11 @@ export default function VoiceAssessmentPage() {
       <div className="flex flex-col items-center justify-center rounded-lg border border-slate-200 bg-slate-50 p-5 sm:p-8"><blockquote className="max-w-2xl text-center text-base italic leading-7 text-slate-600 sm:text-lg">“{passage}”</blockquote>
         {recording && <div className="mt-6 text-sm font-semibold" role="status">Recording · {recordedSeconds}s</div>}{recording && recordingStream && <MicrophoneLevel stream={recordingStream} />}
         {!file ? <div className="mt-8 flex flex-wrap justify-center gap-3"><Button size="lg" disabled={recording || starting} onClick={()=>inputRef.current?.click()}><UploadCloud className="size-5" />Upload audio</Button><Button type="button" variant={recording ? "danger" : "outline"} size="lg" disabled={starting} onClick={toggleRecording}>{recording ? <><Square className="size-5" />Stop recording</> : <><Mic className="size-5" />Record sample</>}</Button></div> : <div className="mt-8 flex w-full max-w-xl items-center gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4"><FileAudio className="size-6 shrink-0 text-blue-700" /><div className="min-w-0 flex-1"><div className="truncate text-sm font-semibold">{file.name}</div><div className="text-xs text-slate-500">{(file.size/1024/1024).toFixed(2)} MB</div></div><Button variant="ghost" size="icon" onClick={()=>{setFile(null);setPreviewUrl("");}} aria-label="Remove audio"><X className="size-5" /></Button></div>}
-        <input ref={inputRef} className="hidden" type="file" accept="audio/wav,audio/mpeg,audio/mp4,audio/x-m4a,audio/ogg,audio/webm" onChange={(event)=>{const selected=event.target.files?.[0]; if(selected) acceptFile(selected);}} />
+        <input ref={inputRef} className="hidden" type="file" accept="audio/wav,audio/mpeg,audio/mp4,audio/x-m4a,audio/ogg,audio/webm" onChange={(event)=>{const selected=event.target.files?.[0]; event.target.value=""; if(selected) void acceptFile(selected);}} />
+        {converting && <div className="mt-4 flex items-center gap-2 text-sm text-slate-600" role="status"><Loader2 className="size-4 animate-spin" />Preparing audio…</div>}
         <div className="mt-4 text-center text-xs leading-5 text-slate-500">WAV, MP3, M4A, OGG, or WebM. Maximum 18 MB. Browser recordings: 2 seconds to 5 minutes. For reading, read the full passage clearly.</div>{file && previewUrl && <div className="mt-5 w-full max-w-xl"><p className="mb-2 text-sm font-semibold">Listen before analyzing — your voice should be clearly audible.</p><audio key={previewUrl} controls src={previewUrl} className="w-full" aria-label="Voice recording preview" /></div>}
         {error && <div role="alert" className="mt-5 w-full max-w-xl rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-800">{error}</div>}
-        <Button className="mt-6 min-w-56" size="lg" disabled={!file || processing || recording || starting} onClick={analyze}>{processing ? <><Loader2 className="size-5 animate-spin" />Analyzing audio</> : "Analyze Voice Sample"}</Button>
+        <Button className="mt-6 min-w-56" size="lg" disabled={!file || processing || recording || starting || converting} onClick={analyze}>{processing ? <><Loader2 className="size-5 animate-spin" />Analyzing audio</> : "Analyze Voice Sample"}</Button>
       </div>
     </CardContent></Card>
   </AppShell>;
